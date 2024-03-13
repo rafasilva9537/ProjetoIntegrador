@@ -18,4 +18,6 @@ Aplicação web para a matéria de projeto integrador.
 <h2>Dúvidas:</h2>
 <ol>
   <li>Como será armazenado as datas. Em que formato?</li>
-</ol>
+  
+</ol>![estrutura web](https://github.com/potatoo14/ProjetoIntegrador/assets/100155926/771b6100-cb94-4cc5-8821-22e9576782b8)
+
