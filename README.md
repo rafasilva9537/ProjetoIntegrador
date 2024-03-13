@@ -15,3 +15,7 @@ Aplicação web para a matéria de projeto integrador.
   <li>Backend: Python, Framework Django, banco de dados relacional (SQL)</li>
   <li>Frontend: HTML, CSS, Figma (caso dê tempo, Javascript)</li>
 </ul>
+<h2>Dúvidas:</h2>
+<ol>
+  <li>Como será armazenado as datas. Em que formato?</li>
+</ol>
