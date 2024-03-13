@@ -9,7 +9,7 @@ Aplicação web para a matéria de projeto integrador.
   <li>Automação das datas baseado em quanto o aluno pretende estudar pra cada matéria e os dias da semana. Pode ser criado tipos de cronogramas diferentes de acordo com o aluno, mas inicialmente a gente pode colocar pensando em repetição espaçada.</li>
   <li>Cronograma será flexível, ou seja, o aluno tendo algum imprevisto, pode pedir pra que seja reorganizada as datas.</li>
   <li>Para cada aula, podemos colocar notas curtas relacionadas a elas.</li>
-  <li>Abstração do projeto: ![estrutura web](https://github.com/potatoo14/ProjetoIntegrador/assets/100155926/771b6100-cb94-4cc5-8821-22e9576782b8)</li>
+  <li>Abstração do projeto: (https://github.com/potatoo14/ProjetoIntegrador/assets/100155926/771b6100-cb94-4cc5-8821-22e9576782b8)</li>
 </ol>
   <h2>Ferramentas a serem usadas:</h2>
 <ul>
