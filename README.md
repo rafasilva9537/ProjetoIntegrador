@@ -14,7 +14,7 @@ Aplicação web para a matéria de projeto integrador.
 
 
 ## Ferramentas a serem usadas:
-- Backend: Python, Framework Django, banco de dados relacional (SQL)
+- Backend: JavaScript, NodeJS, Banco de dados relacional (SQL)
 - Frontend: HTML, CSS, Figma (caso dê tempo, Javascript)
 ## Dúvidas:
 1.  Como será armazenado as datas. Em que formato?
