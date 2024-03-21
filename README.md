@@ -7,7 +7,7 @@ O objetivo é automatizar ao máximo trabalhos manuais como cadastrar matérias 
 # Cronograma organizador de estudos
 Aplicação web para a matéria de projeto integrador.
 
-## Funções essenciais (finalizar no terceiro semestre):
+## Funções essenciais (finalizar até 16 de junho):
 - **Interface de matéria (banco de dados)**
   - Informações em sua maioria adicionadas pelo usuário. Será criada um template em branco para incluir as informações
   - Informações da matéria:
@@ -34,14 +34,14 @@ Aplicação web para a matéria de projeto integrador.
     - + Filtros por desempenho, 
     - etc (novas implementações podem ser adicionadas aqui) <br>
       **Elementos opcionais (para futura adições):**
-  - Horas que poderá estudar para o ciclo de estudos (usada na automação do ciclo) <br><br>
+  - Horas que poderá estudar para o ciclo de estudos (usada na automação do ciclo)
+    <br><br>
       
 - **Calendário (associado as matérias)**
   - Adição de matérias a partir do próprio calendário
   - Demonstrar visualmente se é aula, atividade ou revisão
   - O usuário pode arrastar uma aula para uma nova data no calendário. Mudança dinâmica de datas.
   - ADICIONEM MAIS COISAS por favor 😉
-- Abstração do projetoV1: ![Abstração do projeto](https://github.com/potatoo14/ProjetoIntegrador/assets/100155926/771b6100-cb94-4cc5-8821-22e9576782b8)
 
 ## Funções para adicionar:
 - **Automação de Cronograma**
@@ -51,30 +51,47 @@ Aplicação web para a matéria de projeto integrador.
     - O aluno tendo algum imprevisto, pode pedir pra que seja reorganizada as datas.
     - Caso não queira empurrar aulas para frente no calendário, pode apenas arrastar a matéria atrasada de forma manual.
   - Dias sem estudo: evita colocar aulas, em dias especificados pelo usuário.
+  <br><br>
+    
 - **Coleta de Datas das Matérias e Atividades do IESB**
   - `Ideia em planejamento, tudo aqui é um esboço ...`
   - Coletar automaticamente as datas das atividades Google Classrom e Blackboard para incluir no cronograma
   - Podemos utilizar o documento PDF do planejamento de estudo, levando em conta que sempre usa a mesma formatação, coletar o texto e extrair as datas e nomes das aulas para automatizar a inclusão nas matérias
   - _A ideia pode se estender para outras universidades baseado no seu padrão de organização das datas de aulas e atividades. Trabalho específico, não há necessidade de aplicar._
-- **Caderno de Notas** ~~~Me ajudem a compeltar aqui porque eu cansei 😿~~
+  <br><br>
+    
+- **Caderno de Notas** ~~Me ajudem a compeltar aqui porque eu cansei 😿~~
   - Elementos:
     - desenho (pincel) → `pode gerar uma nova aplicação completa, tipo o samsung notes ou xournal`
     - texto digitado
+      - modo livre, digita aonde quiser, sem linhas prendendo o texto
+      - modo fixo, o texto segue o padrão word/documents, limitado a linhas, margens, rodapés, etc.
       - marcação (negrito, itálico, sublinhado, parágrafo, citação, etc ...) `será melhor organizado no futuro`
     - modelos de página `(decidir se será infinito ou divido por folha A4)`
       1. Quadriculado
-      2. Folha Pautada
+      2. Folha Pautada `a digitação no teclado pode ou não acompanhar as linhas da folha`
       3. Folha Branca
     - símbolos matemáticos
+    <br><br>
+    
 - **Ciclo de Estudos**
   - `em andamento ...`
+ <br><br>
+    
 - **Sistema de Notificações**
   - `em andamento ...`
+<br><br>
 
-
-## Requisitos (ainda há dúvidas):
-- Backend: JavaScript, NodeJS, ExpressJS, Banco de dados relacional (SQL)
+## Requisitos e responsabilidades (ainda há dúvidas):
+<sub>❗ talvez seja preciso alguém transitar entre os dois ou ir completamente para o front end<sub/>
+- Backend: JavaScript, NodeJS, ExpressJS, Banco de dados relacional (SQL).
+  - [Samuel](https://github.com/potatoo14)
+  - [Rafael](https://github.com/rafasilva9537)
+  - Stefisson
+  - [Ian Miranda](https://github.com/IanSil)
 - Frontend: HTML, CSS, Javascript, React.
+  - [Pedro Henrique](https://github.com/hsousr)
+  - Davi
 
 ## Dúvidas:
 1. Como será armazenado as datas. Em que formato?
