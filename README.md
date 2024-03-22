@@ -8,6 +8,8 @@ O objetivo é automatizar ao máximo trabalhos manuais como cadastrar matérias 
 Aplicação web para a matéria de projeto integrador.
 
 ## Funções essenciais (finalizar até 16 de junho):
+- Rascunho do Desing:
+  - ![Modelo do Desing](https://github.com/potatoo14/ProjetoIntegrador/assets/100155926/b3a37016-3ccd-4d58-a88c-d573eb045ad5)
 - **Interface de matéria (banco de dados)**
   - Informações em sua maioria adicionadas pelo usuário. Será criada um template em branco para incluir as informações
   - Informações da matéria:
@@ -16,8 +18,19 @@ Aplicação web para a matéria de projeto integrador.
     - data de início - data de conclusão
     - tag (para filtrar matérias)
   - Informações de cada conteúdo:
-    - aulas/conteúdos e atividades
+    - Exemplo:
+      |Tópicos|   Status   |Desemepenho |  Data    | Revisão
+      |-------|------------|------------|----------|----------|
+      |Aula 1 |Concluído   |⭐⭐⭐⭐⭐|22/03/2024|02/04/2024|
+      |Aula 2 |Concluído   |⭐          |22/03/2024|21/03/2024|
+      |Aula 3 |Em Andamento|             |22/03/2024|         |
+      |Atv 1  |Não Iniciado|             |22/03/2024|         |
+    - tópicos
+      - aulas/conteúdos e atividades
     - datas das aula e atividades → `pensar em como será feita as atividades, no mesmo campo das aulas ou em uma página diferente`
+      - data única
+      - data início e fim
+      - datas alternadas/vários dias não seguidos (24, 27, 31, 02, etc...)
     - revisões
     - conclusão (não iniciado, em andamento, conclúido) → `talvez exista uma forma melhor, como usar o desempenho registrando a conclusão?`
     - desempenho (bom, medio, ruim)
@@ -41,6 +54,7 @@ Aplicação web para a matéria de projeto integrador.
   - Adição de matérias a partir do próprio calendário
   - Demonstrar visualmente se é aula, atividade ou revisão
   - O usuário pode arrastar uma aula para uma nova data no calendário. Mudança dinâmica de datas.
+  - Calendário por MÊS e SEMANA
   - ADICIONEM MAIS COISAS por favor 😉
 
 ## Funções para adicionar:
@@ -62,7 +76,10 @@ Aplicação web para a matéria de projeto integrador.
     
 - **Caderno de Notas** ~~Me ajudem a compeltar aqui porque eu cansei 😿~~
   - Elementos:
+    - formas geométrias
+    - setas, linhas 
     - desenho (pincel) → `pode gerar uma nova aplicação completa, tipo o samsung notes ou xournal`
+     - suavização de linhas
     - texto digitado
       - modo livre, digita aonde quiser, sem linhas prendendo o texto
       - modo fixo, o texto segue o padrão word/documents, limitado a linhas, margens, rodapés, etc.
@@ -72,13 +89,20 @@ Aplicação web para a matéria de projeto integrador.
       2. Folha Pautada `a digitação no teclado pode ou não acompanhar as linhas da folha`
       3. Folha Branca
     - símbolos matemáticos
+    - Anotações integradas a PDFs
+      - procura de texto
+      - marcação de texto
     <br><br>
     
 - **Ciclo de Estudos**
   - `em andamento ...`
- <br><br>
+<br><br>
     
 - **Sistema de Notificações**
+  - `em andamento ...`
+<br><br>
+ 
+- **Organização compartilhada**
   - `em andamento ...`
 <br><br>
 
