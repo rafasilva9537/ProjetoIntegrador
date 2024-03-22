@@ -3,6 +3,8 @@ _Quando os estudantes se preparam para organizar sua rotina de estudos hoje em d
 
 O objetivo deste projeto é implementar uma solução que diminua a complexidade na rotina de estudos dos estudantes de hoje em dia, trazendo uma aplicação multiplataforma que seja simples e eficiente e que junte todas as ferramentas necessárias para o dia-a-dia do estudante em um só lugar.
 
+**Para este semestre, será feita apenas a parte do calendário.**
+
 <br>
 <br>
 
@@ -12,19 +14,27 @@ O objetivo deste projeto é implementar uma solução que diminua a complexidade
 
 Calendário mostrando as matérias que precisam ser estudadas em cada dia, podendo ter visão de mês, semana e dia.
 <br>
-(to-do: colocar rascunho do calendário para melhor exemplificação)
+(to-do: colocar rascunho do calendário para melhor exemplificação. imagem meramente ilustrativa)
+![calendario](https://github.com/potatoo14/ProjetoIntegrador/assets/128054406/ff3ffd05-c7e6-44f5-9459-435b2b4d4f4b)
+
 
 
 ## Caderno:
-Espaço para fazer anotações dentro de cada matéria.
+Espaço para fazer anotações dentro de cada matéria. 
 <br>
-![rascunho do layout do caderno](https://github.com/potatoo14/ProjetoIntegrador/assets/100155926/b3a37016-3ccd-4d58-a88c-d573eb045ad5)
+`(os elementos da página como a barra laterias etc serão menores, esse é apenas o rascunho)`
+<br>
+<br>
+![rascunho do layout do caderno](https://github.com/potatoo14/ProjetoIntegrador/assets/128054406/968daf80-8783-4a6e-a21c-bac80b2a6867)
+
 
 
 ## Visão em tabela:
 além de ver e organizar os conteúdos no calendário, será possível uma organização em tabela.
 <br>
-(colocar imagem para exemplificar)
+(colocar imagem do rascunho. Imagem meramente ilustrativa)
+![tabela](https://github.com/potatoo14/ProjetoIntegrador/assets/128054406/19d1a081-92bf-4cde-8cf9-dbc4f399e2a8)
+
 
 <br>
 <br>
