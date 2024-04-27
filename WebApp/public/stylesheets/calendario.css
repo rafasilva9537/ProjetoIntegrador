@@ -1,5 +1,6 @@
 * {
     box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
 }
 
 ul {
@@ -10,9 +11,16 @@ div {
     size: 20px;
 }
 
+.nav_top {
+    width: 100%;
+    height: 80px;
+    left: 1px;
+    padding-left: 600px;
+    padding-top: 18px;
+}
+
 .calendario {
-    background-color: antiquewhite;
-    border: 5px solid rgb(224, 218, 210);
+    border: 5px solid;
     height: 670px;
     width: 835px;
     margin-top: 100px;
@@ -37,20 +45,44 @@ div {
 }
 
 .dias_semana li {
-    display: inline;
+    display: inline-flex;
+    justify-content: space-around;
     margin-left: 15px;
     margin-right: 30px;
 }
 
-.dias li{
+.dias li {
     list-style-type: none;
     height: 100px;
     width: 100px;
-    border: 2px solid rgb(202, 178, 145);
+    border: 2px solid;
     padding: 10px;
     margin: 1px;
-    background-color: rgb(247, 210, 161);
     display: inline-block;
     border-radius: 10px;
     border-style: outset;
+}
+
+/* cores */
+* {
+    color: white;
+}
+
+div {
+    background-color: black;
+    border-color: blueviolet;
+}
+
+.calendario {
+    background-color: black;
+    border-color: blueviolet;
+}
+
+.dias li {
+    background-color: rgb(24, 24, 24);
+    border-color: blueviolet;
+}
+
+#atual {
+    background-color: rgb(156, 60, 245);
 }
