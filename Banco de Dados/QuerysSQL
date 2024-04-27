@@ -1,0 +1,118 @@
+
+SELECT Materia.*, Tag.nome AS tag_nome FROM Materia
+INNER JOIN Materia_Tag ON Materia.id_materia = Materia_Tag.id_materia INNER JOIN Tag ON Materia_Tag.id_tag = Tag.id_tag;
+
+SELECT Topico.*, Data.data FROM Topico
+INNER JOIN Topico_Data ON Topico.id_topico = Topico_Data.id_topico INNER JOIN Data ON Topico_Data.data = Data.data;
+
+SELECT Materia.*, Topico.nome AS topico_nome, Topico.desempenho, Topico.progresso
+FROM Materia
+INNER JOIN Topico ON Materia.id_materia = Topico.id_materia;
+
+SELECT Tag.*, Materia.nome AS materia_nome, Materia.data.inicio, Materia.data.fim, Materia.origem
+FROM Tag
+INNER JOIN Materia_Tag ON Tag.id_tag = Materia_Tag.id_tag
+INNER JOIN Materia ON Materia_Tag.id_materia = Materia.id_materia;
+
+SELECT Data.data, Topico.nome AS topico_nome, Topico.desempenho, Topico.progresso
+FROM Data
+INNER JOIN Topico_Data ON Data.data = Topico_Data.data
+INNER JOIN Topico ON Topico_Data.id_topico = Topico.id_topico;
+
+SELECT *
+FROM Materia;
+
+SELECT * FROM Tag;
+
+SELECT *
+FROM Topico;
+
+SELECT *
+FROM Data;
+
+SELECT *
+FROM Materia_Tag;
+
+SELECT *
+FROM Topico_Data;
+
+SELECT *
+FROM Materia WHERE origem = '';
+ 
+SELECT * FROM Tag
+WHERE nome = '';
+
+SELECT *
+FROM Topico
+WHERE desempenho > 8;
+
+SELECT *
+FROM Data
+WHERE data BETWEEN '2024-01-01' AND '2024-12-31';
+
+SELECT *
+FROM Materia_Tag WHERE id_materia = 123;
+
+SELECT *
+FROM Topico_Data WHERE id_topico = 456;
+
+UPDATE Tag
+SET nome = 'Nova Tag' WHERE id_tag = 1;
+
+UPDATE Materia
+SET nome = 'Nova Materia' WHERE id_materia = 1;
+
+UPDATE Materia
+SET data_inicio = '2024-02-01', data_fim = '2024-10-23' WHERE id_materia = 5;
+
+UPDATE Topico
+SET nome = 'Novo Topico' WHERE id_topico = 1;
+
+UPDATE Topico
+SET desempenho = 5.0, progresso = 'finalizado' WHERE id_topico = 2;
+
+INSERT INTO Tag (nome) VALUES ('Calculo');
+
+INSERT INTO Materia (nome, data_inicio, data_fim, origem)
+VALUES ('Arquitetura de Software', '2024-09-01', '2024-12-20', 'IESB');
+
+INSERT INTO Topico (id_materia, nome, desempenho, progresso) VALUES (16, 'Calculo numerico', 9.8, 'em andamento');
+ 
+INSERT INTO Data (data) VALUES ('2024-04-27');
+
+INSERT INTO Materia_Tag (id_materia, id_tag) VALUES (1, 7);
+
+INSERT INTO Topico_Data (id_topico, data) VALUES (1, '2024-01-01');
+
+INSERT INTO Materia (nome, data_inicio, data_fim, origem) VALUES ('POO', '2025-01-15', '2025-06-20', 'IESB');
+
+INSERT INTO Topico (id_materia, nome, desempenho, progresso) VALUES (1, 'Estrutura de dados', 10, 'em andamento');
+
+INSERT INTO Materia_Tag (id_materia, id_tag) VALUES (2, 1);
+
+INSERT INTO Topico_Data (id_topico, data) VALUES (4, '2024-02-24');
+
+DELETE FROM Tag
+WHERE id_tag = 2;
+
+DELETE FROM Materia WHERE id_materia = 8;
+
+DELETE FROM Topico WHERE id_topico = 7;
+
+DELETE FROM Data WHERE data = '2024-01-01';
+
+DELETE FROM Materia_Tag
+WHERE id_materia = 1 AND id_tag = 2;
+
+DELETE FROM Topico_Data
+WHERE id_topico = 3 AND data = '2024-04-26';
+
+DELETE FROM Materia WHERE id_materia = 4;
+
+DELETE FROM Topico WHERE id_topico = 5;
+
+DELETE FROM Materia_Tag
+WHERE id_materia = 2 AND id_tag = 2;
+ 
+DELETE FROM Topico_Data
+WHERE id_topico = 7 AND data = '2025-01-23';

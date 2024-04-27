@@ -73,7 +73,7 @@ INSERT INTO Materia(nome, data_inicio) VALUES ('Linguagem C', '2024-01-23');
 --Materia_Tag
 -- Implementação de Entidade Associativa (nesse caso, os nomes devem ser únicos)
 INSERT INTO Materia_Tag VALUES ((SELECT id_materia FROM Materia WHERE nome = 'Linguagem C'),
-							   (SELECT id_tag FROM Tag WHERE nome = 'Programação'));
+(SELECT id_tag FROM Tag WHERE nome = 'Programação'));
 		
 		
 --Topicos
