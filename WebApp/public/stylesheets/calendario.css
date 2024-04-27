@@ -1,4 +1,56 @@
+* {
+    box-sizing: border-box;
+}
+
+ul {
+    list-style-type: none;
+}
+
 div {
     size: 20px;
-    background-color: beige;
+}
+
+.calendario {
+    background-color: antiquewhite;
+    border: 5px solid rgb(224, 218, 210);
+    height: 670px;
+    width: 835px;
+    margin-top: 100px;
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-bottom: 50px;
+    border-style: outset;
+    border-radius: 20px;
+}
+
+.nav_mes {
+    margin-top: 5px;
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-bottom: 5px;
+}
+
+.nav_mes li {
+    display: inline;
+    text-align: center;
+    margin-left: 10px;
+}
+
+.dias_semana li {
+    display: inline;
+    margin-left: 15px;
+    margin-right: 30px;
+}
+
+.dias li{
+    list-style-type: none;
+    height: 100px;
+    width: 100px;
+    border: 2px solid rgb(202, 178, 145);
+    padding: 10px;
+    margin: 1px;
+    background-color: rgb(247, 210, 161);
+    display: inline-block;
+    border-radius: 10px;
+    border-style: outset;
 }
