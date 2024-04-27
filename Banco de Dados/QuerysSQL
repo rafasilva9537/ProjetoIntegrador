@@ -1,4 +1,4 @@
-Querys SQL
+
 SELECT Materia.*, Tag.nome AS tag_nome FROM Materia
 INNER JOIN Materia_Tag ON Materia.id_materia = Materia_Tag.id_materia INNER JOIN Tag ON Materia_Tag.id_tag = Tag.id_tag;
 
