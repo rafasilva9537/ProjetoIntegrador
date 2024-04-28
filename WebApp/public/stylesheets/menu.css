@@ -13,7 +13,7 @@ nav.menu-lateral {
     width: 70px;
     height: 100%;
     background-color: black;
-    padding: 40px 0 40px 1%;
+    padding: 40px 0px 40px 1%;
     position: fixed;
     top: 0px;
     left: 0px;
@@ -32,7 +32,7 @@ nav.menu-lateral:not(hover){
 
 .b-expandir {
     width: 100%;
-    padding-right: 20px;
+    padding-right: 30px;
 }
 
 .b-expandir > i {
@@ -91,4 +91,13 @@ div.nome-materia ul li b.titulo{
     font-size: 40px;
 }
 
+.calendario_filtro{
+    font-size: 40px;
+    font-weight: bold;
+    padding-left: 650px;
+}
 
+.calendario_filtro a{
+    text-decoration: none;
+    color: white;
+}
