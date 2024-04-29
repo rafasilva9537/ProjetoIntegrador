@@ -1,10 +1,17 @@
-//const { Pool } = require('pg')
-import { Pool } from 'pg'
+import pg from 'pg'
+import dotenv from "dotenv"
+dotenv.config()
 
+const { Pool } = pg
+
+//coloquem suas variáveis locais do postgre no arquivo .env
+//arquivo ignorado pelo github
 const pool = new Pool({
-    host: '',
-    user: '',
-    password: '',
-    port: '',
-    database: ''
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    port: Number(process.env.DB_PORT),
+    database: process.env.DB_DATABASE
 })
+
+export default pool;
