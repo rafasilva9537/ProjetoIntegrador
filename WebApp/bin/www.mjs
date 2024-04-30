@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 
-import app from '../app.js'
+import app from '../app.mjs'
 import debug from 'debug' //CJS → const debug = require('debug')('backend:server');
 const debugServer = debug('backend:server')
 import http from 'node:http'

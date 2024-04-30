@@ -1,6 +1,6 @@
 import express from 'express';
 import path from 'node:path';
-import pool from '../services/database.js'
+import pool from '../services/database.mjs'
 import { fileURLToPath } from 'node:url';
 const __filename = fileURLToPath(import.meta.url); // get the resolved path to the file
 const __dirname = path.dirname(__filename); //pega o nome do diretório

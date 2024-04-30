@@ -8,9 +8,7 @@ const __dirname = path.dirname(__filename); //pega o nome do diretório
 // const cookieParser = require('cookie-parser');
 // const logger = require('morgan');
 
-import indexRouter from './routes/index.js'
-import usersRouter from './routes/users.js'
-import materiaRouter from './routes/materia.js'
+import materiaRouter from './routes/topicosRoute.mjs'
 
 const app = express();
 
@@ -20,9 +18,7 @@ app.use(express.urlencoded({ extended: false }));
 // app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/materia', materiaRouter);
+//alterar rota e nome de tópicos para dividir entre cada materia
+app.use('/topicos', materiaRouter);
 
-//module.exports = app;
 export default app;

@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "nodemon ./bin/www.mjs"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
