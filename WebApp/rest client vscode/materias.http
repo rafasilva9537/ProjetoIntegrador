@@ -1,0 +1,26 @@
+### GET Visualizar materias
+GET http://localhost:3000/materias
+
+
+### POST criar materia
+POST http://localhost:3000/materias
+Content-Type: application/json
+
+{
+    "nome": "Arquitetura de Software",
+    "data_inicio": "2024-04-30",
+    "data_fim": null,
+    "origem": "Alura"
+}
+
+
+### DELETE deletar materia por id
+DELETE http://localhost:3000/materias
+Content-Type: application/json
+
+{
+    "id_materia": 9
+}
+
+
+###

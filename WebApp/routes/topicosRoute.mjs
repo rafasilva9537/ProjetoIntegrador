@@ -13,8 +13,6 @@ router.get('/', async(req, res) => {
     
     try{
         const resultado = await pool.query('SELECT * FROM Topico');
-        const obj = resultado.rows;
-        console.log(obj)
         res.status(200).json(resultado.rows);
     }
     catch(error){

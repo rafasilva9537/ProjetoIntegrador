@@ -1,3 +1,8 @@
+--OBSERVAÇÕES:
+--Avaliar a necessidade de trocar o tipo DATE para TIMESTAMPTZ, pois dependendo da localidade do usuário, o dia pode ser anterior ou superior ao do Brasil
+--Em javascript, o objeto do tipo Date já está em tempo UTC
+
+
 DROP TABLE IF EXISTS Topico_Data;
 DROP TABLE IF EXISTS Topico;
 DROP TABLE IF EXISTS Data;

@@ -1,0 +1,10 @@
+### Obter tags
+GET http://localhost:3000/tags
+
+### Criar tags
+POST http://localhost:3000/tags
+Content-Type: application/json
+
+{
+    "nome": "Computação"
+}
