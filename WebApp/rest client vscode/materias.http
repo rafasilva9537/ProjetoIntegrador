@@ -7,10 +7,10 @@ POST http://localhost:3000/materias
 Content-Type: application/json
 
 {
-    "nome": "Arquitetura de Software",
-    "data_inicio": "2024-04-30",
+    "nome": "Sistema Digitais",
+    "data_inicio": "2023-07-01",
     "data_fim": null,
-    "origem": "Alura"
+    "origem": "IESB"
 }
 
 

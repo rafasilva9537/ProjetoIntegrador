@@ -16,19 +16,15 @@ router.get('/', async(req, res) => {
         res.status(200).json(resultado.rows);
     }
     catch(error){
-        return res.status(500).json({error: error.message});
+        res.status(500).json({error: error.message});
     }
 });
 
 
 
-router.put('/', async(req, res) => {
-    try{
-
-    }
-    catch(error){
-        return res.status(500).json({error: error.message})
-    }
+router.put('/', (req, res) => {
+    
 })
+
 
 export default router;
