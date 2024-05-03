@@ -3,7 +3,7 @@ import pool from '../services/database.mjs'
 //Tags
 export const obterTags = async(req, res) => {
     try{
-        const queryObterTags = `SELECT id_tag, nome FROM Tag`;
+        const queryObterTags = `SELECT nome FROM Tag`;
 
         const resultado = await pool.query(queryObterTags);
         res.status(200).json(resultado.rows);
@@ -17,7 +17,7 @@ export const criarTag = async(req, res) => {
     try{
         const queryInserirTag = {
             text: `INSERT INTO Tag(nome) VALUES($1) RETURNING *`,
-            values: [req.body.nome]
+            values: [req.body.nome_tag]
         }
 
         const resultado = await pool.query(queryInserirTag);

@@ -7,6 +7,7 @@ router.get('/', materiasController.obterMaterias);
 router.post('/', materiasController.criarMateria);
 router.delete('/', materiasController.deletarMateria);
 
-router.post('/:id/inserir-tag', materiasController.inserirTagEmMateria)
+router.post('/:id/tags', materiasController.inserirTagEmMateria);
+router.get('/:id/tags', materiasController.obterTagsDaMateria);
 
 export default router;
