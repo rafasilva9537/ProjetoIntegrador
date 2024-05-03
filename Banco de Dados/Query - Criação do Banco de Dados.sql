@@ -12,9 +12,8 @@ DROP TABLE IF EXISTS Materia;
 
 --CRIAÇÃO
 CREATE TABLE Tag(
-	id_tag INT GENERATED ALWAYS AS IDENTITY,
-	nome VARCHAR(250) UNIQUE NOT NULL,
-	PRIMARY KEY (id_tag)
+	nome VARCHAR(250),
+	PRIMARY KEY (nome)
 );
 
 CREATE TABLE Materia(
@@ -27,10 +26,11 @@ CREATE TABLE Materia(
 );
 
 CREATE TABLE Materia_Tag(
-	id_materia INT NOT NULL,
-	id_tag INT NOT NULL,
+	id_materia INT,
+	nome_tag VARCHAR(250),
 	FOREIGN KEY (id_materia) REFERENCES Materia(id_materia),
-	FOREIGN KEY (id_tag) REFERENCES Tag(id_tag)
+	FOREIGN KEY (nome_tag) REFERENCES Tag(nome),
+	PRIMARY KEY(id_materia, nome_tag)
 );
 
 CREATE TABLE Topico(
@@ -53,7 +53,8 @@ CREATE TABLE Topico_Data(
 	id_topico INT NOT NULL,
 	data DATE NOT NULL,
 	FOREIGN KEY (id_topico) REFERENCES Topico(id_topico),
-	FOREIGN KEY (data) REFERENCES Data(data)
+	FOREIGN KEY (data) REFERENCES Data(data),
+	PRIMARY KEY(id_topico, data)
 );
 
 SELECT * FROM Tag;
@@ -77,8 +78,7 @@ INSERT INTO Materia(nome, data_inicio) VALUES ('Linguagem C', '2024-01-23');
 
 --Materia_Tag
 -- Implementação de Entidade Associativa (nesse caso, os nomes devem ser únicos)
-INSERT INTO Materia_Tag VALUES ((SELECT id_materia FROM Materia WHERE nome = 'Linguagem C'),
-(SELECT id_tag FROM Tag WHERE nome = 'Programação'));
+INSERT INTO Materia_Tag(id_materia, nome_tag) VALUES (1, 'Computação'), (1, 'Programação');
 		
 		
 --Topicos
@@ -106,3 +106,7 @@ SELECT *
 FROM Topico_Data
 INNER JOIN Topico
 	ON Topico_Data.id_topico = Topico.id_topico
+	
+	
+-- Verificar existencia
+SELECT EXISTS(SELECT * FROM Tag WHERE nome = 'Matemática')
