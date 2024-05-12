@@ -11,130 +11,175 @@
   <link rel="stylesheet" href="Menu.css">
   <link rel="stylesheet" href="barra.css">
   <link rel="stylesheet" href="calendario.css">
+  <link rel="stylesheet" href="adicionar.css">
 
 </head>
 
 <body>
 
-  <nav class="menu-lateral">
+  <body>
 
-    <div class="b-expandir">
-      <i class="bi bi-list"></i>
-    </div>
-
-    <ul>
-
-      <li class="item-menu">
-        <button class="botão">
-          <span class="icone">
-            <i class="bi bi-person-circle"></i>
-          </span>
-
-          <span class="texto"> PERFIL </span>
-        </button>
-      </li>
-
-      <li class="item-menu">
-        <button class="botão">
-          <span class="icone">
-
-            <i class="bi bi-plus-square"></i>
-          </span>
-          <span class="texto"> ADICICIONAR MATERIA </span>
-        </a>
-        </button>
-      </li>
-     
-      <li class="item-menu">
-        <button class="botão">
-          <span class="icone">
-            <i class="bi bi-gear"></i>
-          </span>
-          <span class="texto"> CONFIGURAÇÕES </span>
-        </button>
-      </li>
-
-    </ul>
-
-  </nav>
-
-<div class="barra">
-
+    <nav class="menu-lateral">
   
-    <button onclick="document.getElementById('pop').showModal()">
+      <div class="b-expandir">
+        <i class="bi bi-list"></i>
+      </div>
+  
+      <ul>
+  
+        <li class="item-menu">
+          <button class="botão">
+            <span class="icone">
+              <i class="bi bi-person-circle"></i>
+            </span>
+  
+            <span class="texto"> PERFIL </span>
+          </button>
+        </li>
+  
+        <li class="item-menu">
+          <button onclick="openAddMateriaModal()" class="botão">
+            <span class="icone">
+              <i class="bi bi-plus-square"></i>
+            </span>
+            <span class="texto"> ADICIONAR MATERIA </span>
+          </button>
+        
+          <dialog class="adicionar_mat">
+        
+            <button onclick="closeAddMateriaModal()" class="fechar-modal-adicionar"> <ul class="x"><i class="bi bi-x"></i></ul> </i> </button>
+        
+            <div class="titulo-adicionar">
+              <h1 class="titulo-ad"> Adicionar Matéria </h1>
+            </div>
+        
+            <form class="form-adicionar">
+              <label class="nome-materia">Digite o nome da matéria:</label>
+              <input type="text" id="nome-materia" placeholder="Digite aqui" class="input-materia">
+              <button type="submit" class="botao-salvar">ADICIONAR</button>
+            </form>
+        
+          </dialog>
+        </li>
+        
+  
+        <li class="item-menu">
+          <button class="botão">
+            <span class="icone">
+              <i class="bi bi-gear"></i>
+            </span>
+            <span class="texto"> CONFIGURAÇÕES </span>
+          </button>
+        </li>
+  
+      </ul>
+  
+    </nav>
+  
+    <div class="barra">
+      <ul>
+        <li class="titulo">
+          <h1>MATERIA 1</h1>
+        </li>
+      </ul>
     
-      <i class="bi bi-calendar3"></i>
-
-    </button>
-
-    <dialog id="pop" class="pop-up-dialog">
-      <button onclick="document.getElementById('pop').close()">X</button>
-      <div class="calendario">
-      <div class="nav_mes">
-          <ul class="mes_escolhido">
-              <li class="previous">&#10094</li>
-              <li class="mes">Janeiro</li>
-              <li class="next">&#10095</li>
-              <li class="ano">2024</li>
-              <li class="calendario_icon">
+      <li class="calendario_filtro">
+        <button onclick="openCalendarModal()" class="dialog_button">
+          <div class="icon_calendario">
+            <i class="bi bi-calendar3"></i>
+          </div>
+        </button>
+      
+        <dialog id="pop" class="pop">
+          <div class="fechar-calendario"><button onclick="closeCalendarModal()" class="dialog_button"> <i class="bi bi-x"></i> </button></div>
+          <!-- Conteúdo do calendário -->
+  
+          <div class="calendario1">
+            <div class="nav_mes">
+              <ul class="mes_escolhido">
+                <li class="previous">&#10094;</li>
+                <li class="mes">Janeiro</li>
+                <li class="next">&#10095;</li>
+                <li class="ano">2024</li>
+                <li class="calendario_icon">
                   <i class="bi bi-calendar4"></i>
-              </li>
-          </ul>
-      </div>
-   
-  <div class="todos_dias">  
-      <div class="dias_semana">
-          <ul>
-              <li class="dom">DOMINGO</li>
-              <li class="seg">SEGUNDA</li>
-              <li class="ter">TERÇA</li>
-              <li class="quar ">QUARTA</li>
-              <li class="quint">QUINTA</li>
-              <li class="sext">SEXTA</li>
-              <li class="sab">SÁBADO</li>
-          </ul>
-      </div>
-
-      <ul class="dias">
-      <ul class="dia">
-          <li>1</li>
-          <li>2</li>
-          <li>3</li>
-          <li>4</li>
-          <li>5</li>
-          <li>6</li>
-          <li>7</li>
-          <li>8</li>
-          <li>9</li>
-          <li id="atual">10</li>
-          <li>11</li>
-          <li>12</li>
-          <li>13</li>
-          <li>14</li>
-          <li>15</li>
-          <li>16</li>
-          <li>17</li>
-          <li>18</li>
-          <li>19</li>
-          <li>20</li>
-          <li>21</li>
-          <li>22</li>
-          <li>23</li>
-          <li>24</li>
-          <li>25</li>
-          <li>26</li>
-          <li>27</li>
-          <li>28</li>
-          <li>29</li>
-          <li>30</li>
-          <li>31</li>
-      </ul>
-      </ul>
-
-  </div>
-  </dialog>
-
- </div>
+                </li>
+              </ul>
+            </div>
+  
+            <div class="calendar">
+              <div class="days">
+                  <div class="day day-name">SEG</div>
+                  <div class="day day-name">TER</div>
+                  <div class="day day-name">QUA</div>
+                  <div class="day day-name">QUI</div>
+                  <div class="day day-name">SEXT</div>
+                  <div class="day day-name">SÁB</div>
+                  <div class="day day-name">DOM</div>
+                  <div class="day"></div>
+                  <div class="day"></div>
+                  <div class="day"></div>
+                  <div class="day"></div>
+                  <div class="day">1</div>
+                  <div class="day">2</div>
+                  <div class="day">3</div>
+                  <div class="day">4</div>
+                  <div class="day">5</div>
+                  <div class="day">6</div>
+                  <div class="day">7</div>
+                  <div class="day">8</div>
+                  <div class="day">9</div>
+                  <div class="day">10</div>
+                  <div class="day">11</div>
+                  <div class="day">12</div>
+                  <div class="day">13</div>
+                  <div class="day">14</div>
+                  <div class="day">15</div>
+                  <div class="day">16</div>
+                  <div class="day">17</div>
+                  <div class="day">18</div>
+                  <div class="day">19</div>
+                  <div class="day">20</div>
+                  <div class="day">21</div>
+                  <div class="day">22</div>
+                  <div class="day">23</div>
+                  <div class="day">24</div>
+                  <div class="day">25</div>
+                  <div class="day">26</div>
+                  <div class="day">27</div>
+                  <div class="day">28</div>
+                  <div class="day">29</div>
+                  <div class="day">30</div>
+                  <div class="day">31</div>
+              </div>
+          </div>
+          </div>
+        </dialog>
+      </li>
+      
+      <script>
+        function openAddMateriaModal() {
+          var dialog = document.querySelector('.adicionar_mat');
+          dialog.showModal();
+        }
+  
+        function closeAddMateriaModal() {
+          var dialog = document.querySelector('.adicionar_mat');
+          dialog.close();
+        }
+    
+        function openCalendarModal() {
+          var dialog = document.getElementById('pop');
+          dialog.showModal();
+        }
+    
+        function closeCalendarModal() {
+          var dialog = document.getElementById('pop');
+          dialog.close();
+        }
+      </script>
+  
+  </body>
 
 </body>
 
