@@ -14,7 +14,7 @@
 }
 
 .calendario_filtro {
-    margin-right: 20px;
+    margin-left: 500px;
 }
 
 .calendario_btn {
@@ -30,3 +30,4 @@
 .pop-up-dialog{
     background-color: black;
 }
+
