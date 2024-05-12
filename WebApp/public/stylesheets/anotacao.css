@@ -1,0 +1,41 @@
+.bloco-anotacao {
+    margin-left: 40px;
+    position: fixed;
+    bottom: 20px; /* Distância de 20px do fundo da janela */
+    left: 50%; /* Centraliza horizontalmente */
+    transform: translateX(-50%); /* Ajusta a posição para a esquerda em 50% da largura do próprio elemento */
+    width: 800px; /* Largura do retângulo */
+    height: 550px; /* Altura do retângulo */
+    background-color: #f0f0f0; /* Cor de fundo */
+    border: 1px solid #000000; /* Borda sólida de 1px com cor cinza claro */
+    border-radius: 5px; /* Borda arredondada */
+    padding: 10px; 
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .notas{
+    background-color: black;
+  }
+
+  .bloco-anotacao .notas {
+    margin-top: 14px;
+    margin-left: 19px;
+    width: 95%;
+    height: 95%;
+    background-color: inherit;
+    border-radius: inherit;
+    padding: inherit;
+  }
+
+  .input-notas {
+    width: 100%;
+    height: 100%;
+    resize: none;
+    border: none;
+    background-color: transparent;
+    font-size: 16px;
+    padding: 0;
+    outline: none;
+    overflow: auto;
+  }
+  
