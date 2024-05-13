@@ -16,31 +16,33 @@
   <link rel="stylesheet" href="perfil.css">
   <link rel="stylesheet" href="anotacao.css">
   <link rel="stylesheet" href="registro.css">
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="javascripts/scripts.js"></script>
 
 </head>
 
 <body class="site-inteiro">
 
   <nav class="menu-lateral">
-  
+
     <div class="b-expandir">
       <i class="bi bi-list"></i>
     </div>
-  
+
     <ul>
-  
+
       <li class="item-menu">
         <button onclick="openperfilModal()" class="botão">
           <span class="icone">
             <i class="bi bi-person-circle"></i>
           </span>
-  
+
           <span class="texto"> PERFIL </span>
         </button>
 
         <dialog class="perfil_menu">
           <i class="bi bi-person-lines-fill"></i>
-          <h1 class="perfil-nome">PERFIL</h1> 
+          <h1 class="perfil-nome">PERFIL</h1>
           <div id="preview"></div>
           <div class="inf-user">
             <ul class="nome-user">Nome: <input type="text"></ul>
@@ -53,7 +55,7 @@
         </dialog>
 
       </li>
-  
+
       <li class="item-menu">
         <button onclick="openAddMateriaModal()" class="botão">
           <span class="icone">
@@ -61,25 +63,27 @@
           </span>
           <span class="texto"> ADICIONAR MATERIA </span>
         </button>
-      
+
         <dialog class="adicionar_mat">
-      
-          <button onclick="closeAddMateriaModal()" class="fechar-modal-adicionar"> <ul class="x"><i class="bi bi-x"></i></ul> </i> </button>
-      
+
+          <button onclick="closeAddMateriaModal()" class="fechar-modal-adicionar">
+            <ul class="x"><i class="bi bi-x"></i></ul> </i>
+          </button>
+
           <div class="titulo-adicionar">
             <h1 class="titulo-ad"> Adicionar Matéria </h1>
           </div>
-      
+
           <form class="form-adicionar">
             <label class="nome-materia">Digite o nome da matéria:</label>
             <input type="text" id="nome-materia" placeholder="Digite aqui" class="input-materia">
             <button type="submit" class="botao-salvar">ADICIONAR</button>
           </form>
-      
+
         </dialog>
       </li>
-      
-  
+
+
       <li class="item-menu">
         <button class="botão">
           <span class="icone">
@@ -88,28 +92,28 @@
           <span class="texto"> CONFIGURAÇÕES </span>
         </button>
       </li>
-  
+
     </ul>
-  
-  </nav> 
+
+  </nav>
 
 
   <div class="barra">
     <ul>
       <li class="titulo">
-        <h1>MATERIA 1   
+        <h1>MATERIA 1
           <button onclick="openregistroModal()" class="abrir-registro">
             <i class="bi bi-arrow-down-square-fill"></i>
-          </button> 
+          </button>
 
-        </h1> 
+        </h1>
         <dialog id="registro" class="registro nova-classe">
 
           <div class="barra-registro">
-          <button onclick="closeregistroModal()" class="fechar-registro">
-            <i class="bi bi-arrow-left-circle"></i>
-          </button>
-          <h1 class="nome-registro">REGISTRO</h1>
+            <button onclick="closeregistroModal()" class="fechar-registro">
+              <i class="bi bi-arrow-left-circle"></i>
+            </button>
+            <h1 class="nome-registro">REGISTRO</h1>
           </div>
 
           <table>
@@ -119,88 +123,113 @@
               <th style="font-size: 15px;">Desempenho</th>
               <th style="font-size: 15px;">Data</th>
               <th style="font-size: 15px;">Revisão</th>
-          </tr>
             </tr>
-            
+            </tr>
+
             <tr>
-              <td style="font-size: 12px;" contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
-                <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
-                <td>
-                    <span id="estrela1" class="estrela" onclick="rate(1)">&#9734;</span>
-                    <span id="estrela2" class="estrela" onclick="rate(2)">&#9734;</span>
-                    <span id="estrela3" class="estrela" onclick="rate(3)">&#9734;</span>
-                    <span id="estrela4" class="estrela" onclick="rate(4)">&#9734;</span>
-                    <span id="estrela5" class="estrela" onclick="rate(5)">&#9734;</span>
-                  </td>
-                <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
-                <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>      
+              <td style="font-size: 12px;" contenteditable='true'
+                onclick="if(this.innerHTML=='Editar') this.innerHTML=''"
+                onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
+              <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''"
+                onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
+              <td>
+                <span id="estrela1" class="estrela" onclick="rate(1)">&#9734;</span>
+                <span id="estrela2" class="estrela" onclick="rate(2)">&#9734;</span>
+                <span id="estrela3" class="estrela" onclick="rate(3)">&#9734;</span>
+                <span id="estrela4" class="estrela" onclick="rate(4)">&#9734;</span>
+                <span id="estrela5" class="estrela" onclick="rate(5)">&#9734;</span>
+              </td>
+              <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''"
+                onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
+              <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''"
+                onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
             </tr>
-    
-    
-           <tr>
-              <td style="font-size: 12px;" contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
-                <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
-                <td>
-                    <span id="estrela1" class="estrela" onclick="rate(1)">&#9734;</span>
-                    <span id="estrela2" class="estrela" onclick="rate(2)">&#9734;</span>
-                    <span id="estrela3" class="estrela" onclick="rate(3)">&#9734;</span>
-                    <span id="estrela4" class="estrela" onclick="rate(4)">&#9734;</span>
-                    <span id="estrela5" class="estrela" onclick="rate(5)">&#9734;</span>
-                  </td>
-                <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
-                <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>      
-            </tr>
-    
+
+
             <tr>
-              <td style="font-size: 12px;" contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
-                <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
-                <td>
-                    <span id="estrela1" class="estrela" onclick="rate(1)">&#9734;</span>
-                    <span id="estrela2" class="estrela" onclick="rate(2)">&#9734;</span>
-                    <span id="estrela3" class="estrela" onclick="rate(3)">&#9734;</span>
-                    <span id="estrela4" class="estrela" onclick="rate(4)">&#9734;</span>
-                    <span id="estrela5" class="estrela" onclick="rate(5)">&#9734;</span>
-                  </td>
-                <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
-                <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>      
+              <td style="font-size: 12px;" contenteditable='true'
+                onclick="if(this.innerHTML=='Editar') this.innerHTML=''"
+                onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
+              <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''"
+                onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
+              <td>
+                <span id="estrela1" class="estrela" onclick="rate(1)">&#9734;</span>
+                <span id="estrela2" class="estrela" onclick="rate(2)">&#9734;</span>
+                <span id="estrela3" class="estrela" onclick="rate(3)">&#9734;</span>
+                <span id="estrela4" class="estrela" onclick="rate(4)">&#9734;</span>
+                <span id="estrela5" class="estrela" onclick="rate(5)">&#9734;</span>
+              </td>
+              <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''"
+                onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
+              <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''"
+                onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
             </tr>
-    
+
             <tr>
-              <td style="font-size: 12px;" contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
-                <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
-                <td>
-                    <span id="estrela1" class="estrela" onclick="rate(1)">&#9734;</span>
-                    <span id="estrela2" class="estrela" onclick="rate(2)">&#9734;</span>
-                    <span id="estrela3" class="estrela" onclick="rate(3)">&#9734;</span>
-                    <span id="estrela4" class="estrela" onclick="rate(4)">&#9734;</span>
-                    <span id="estrela5" class="estrela" onclick="rate(5)">&#9734;</span>
-                  </td>
-                <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
-                <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>      
+              <td style="font-size: 12px;" contenteditable='true'
+                onclick="if(this.innerHTML=='Editar') this.innerHTML=''"
+                onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
+              <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''"
+                onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
+              <td>
+                <span id="estrela1" class="estrela" onclick="rate(1)">&#9734;</span>
+                <span id="estrela2" class="estrela" onclick="rate(2)">&#9734;</span>
+                <span id="estrela3" class="estrela" onclick="rate(3)">&#9734;</span>
+                <span id="estrela4" class="estrela" onclick="rate(4)">&#9734;</span>
+                <span id="estrela5" class="estrela" onclick="rate(5)">&#9734;</span>
+              </td>
+              <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''"
+                onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
+              <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''"
+                onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
             </tr>
-    
+
             <tr>
-              <td style="font-size: 12px;" contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
-                <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
-                <td>
-                    <span id="estrela1" class="estrela" onclick="rate(1)">&#9734;</span>
-                    <span id="estrela2" class="estrela" onclick="rate(2)">&#9734;</span>
-                    <span id="estrela3" class="estrela" onclick="rate(3)">&#9734;</span>
-                    <span id="estrela4" class="estrela" onclick="rate(4)">&#9734;</span>
-                    <span id="estrela5" class="estrela" onclick="rate(5)">&#9734;</span>
-                  </td>
-                <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
-                <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>      
+              <td style="font-size: 12px;" contenteditable='true'
+                onclick="if(this.innerHTML=='Editar') this.innerHTML=''"
+                onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
+              <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''"
+                onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
+              <td>
+                <span id="estrela1" class="estrela" onclick="rate(1)">&#9734;</span>
+                <span id="estrela2" class="estrela" onclick="rate(2)">&#9734;</span>
+                <span id="estrela3" class="estrela" onclick="rate(3)">&#9734;</span>
+                <span id="estrela4" class="estrela" onclick="rate(4)">&#9734;</span>
+                <span id="estrela5" class="estrela" onclick="rate(5)">&#9734;</span>
+              </td>
+              <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''"
+                onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
+              <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''"
+                onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
             </tr>
-            
-        </table>
+
+            <tr>
+              <td style="font-size: 12px;" contenteditable='true'
+                onclick="if(this.innerHTML=='Editar') this.innerHTML=''"
+                onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
+              <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''"
+                onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
+              <td>
+                <span id="estrela1" class="estrela" onclick="rate(1)">&#9734;</span>
+                <span id="estrela2" class="estrela" onclick="rate(2)">&#9734;</span>
+                <span id="estrela3" class="estrela" onclick="rate(3)">&#9734;</span>
+                <span id="estrela4" class="estrela" onclick="rate(4)">&#9734;</span>
+                <span id="estrela5" class="estrela" onclick="rate(5)">&#9734;</span>
+              </td>
+              <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''"
+                onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
+              <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''"
+                onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
+            </tr>
+
+          </table>
 
         </dialog>
-        
+
       </li>
     </ul>
-  
-  
+
+
     <!--ANOTAÇÕES-->
     <div class="bloco-anotacao">
 
@@ -218,9 +247,10 @@
           <i class="bi bi-calendar3"></i>
         </div>
       </button>
-    
+
       <dialog id="pop" class="pop">
-        <div class="fechar-calendario"><button onclick="closeCalendarModal()" class="dialog_button"> <i class="bi bi-x"></i> </button></div>
+        <div class="fechar-calendario"><button onclick="closeCalendarModal()" class="dialog_button"> <i
+              class="bi bi-x"></i> </button></div>
         <!-- Conteúdo do calendário -->
 
         <div class="calendario1">
@@ -238,64 +268,64 @@
 
           <div class="calendar">
             <div class="days">
-                <div class="day day-name">SEG</div>
-                <div class="day day-name">TER</div>
-                <div class="day day-name">QUA</div>
-                <div class="day day-name">QUI</div>
-                <div class="day day-name">SEXT</div>
-                <div class="day day-name">SÁB</div>
-                <div class="day day-name">DOM</div>
-                <div class="day"></div>
-                <div class="day"></div>
-                <div class="day"></div>
-                <div class="day"></div>
-                <div class="day">1</div>
-                <div class="day">2</div>
-                <div class="day">3</div>
-                <div class="day">4</div>
-                <div class="day">5</div>
-                <div class="day">6</div>
-                <div class="day">7</div>
-                <div class="day">8</div>
-                <div class="day">9</div>
-                <div class="day">10</div>
-                <div class="day">11</div>
-                <div class="day">12</div>
-                <div class="day">13</div>
-                <div class="day">14</div>
-                <div class="day">15</div>
-                <div class="day">16</div>
-                <div class="day">17</div>
-                <div class="day">18</div>
-                <div class="day">19</div>
-                <div class="day">20</div>
-                <div class="day">21</div>
-                <div class="day">22</div>
-                <div class="day">23</div>
-                <div class="day">24</div>
-                <div class="day">25</div>
-                <div class="day">26</div>
-                <div class="day">27</div>
-                <div class="day">28</div>
-                <div class="day">29</div>
-                <div class="day">30</div>
-                <div class="day">31</div>
+              <div class="day day-name">SEG</div>
+              <div class="day day-name">TER</div>
+              <div class="day day-name">QUA</div>
+              <div class="day day-name">QUI</div>
+              <div class="day day-name">SEXT</div>
+              <div class="day day-name">SÁB</div>
+              <div class="day day-name">DOM</div>
+              <div class="day"></div>
+              <div class="day"></div>
+              <div class="day"></div>
+              <div class="day"></div>
+              <div class="day">1</div>
+              <div class="day">2</div>
+              <div class="day">3</div>
+              <div class="day">4</div>
+              <div class="day">5</div>
+              <div class="day">6</div>
+              <div class="day">7</div>
+              <div class="day">8</div>
+              <div class="day">9</div>
+              <div class="day">10</div>
+              <div class="day">11</div>
+              <div class="day">12</div>
+              <div class="day">13</div>
+              <div class="day">14</div>
+              <div class="day">15</div>
+              <div class="day">16</div>
+              <div class="day">17</div>
+              <div class="day">18</div>
+              <div class="day">19</div>
+              <div class="day">20</div>
+              <div class="day">21</div>
+              <div class="day">22</div>
+              <div class="day">23</div>
+              <div class="day">24</div>
+              <div class="day">25</div>
+              <div class="day">26</div>
+              <div class="day">27</div>
+              <div class="day">28</div>
+              <div class="day">29</div>
+              <div class="day">30</div>
+              <div class="day">31</div>
             </div>
-        </div>
+          </div>
         </div>
       </dialog>
     </li>
-    
+
     <script>
 
-      function openperfilModal(){
+      function openperfilModal() {
         var dialog = document.querySelector('.perfil_menu')
         dialog.showModal();
       }
 
       function closeperfilModal() {
-       var dialog = document.querySelector('.perfil_menu');
-       dialog.close();
+        var dialog = document.querySelector('.perfil_menu');
+        dialog.close();
       }
 
       function openAddMateriaModal() {
@@ -307,31 +337,31 @@
         var dialog = document.querySelector('.adicionar_mat');
         dialog.close();
       }
-  
+
       function openCalendarModal() {
         var dialog = document.getElementById('pop');
         dialog.showModal();
       }
-  
+
       function closeCalendarModal() {
         var dialog = document.getElementById('pop');
         dialog.close();
       }
 
       function openregistroModal() {
-    var dialog = document.getElementById('registro');
-    dialog.showModal();
-  }
+        var dialog = document.getElementById('registro');
+        dialog.showModal();
+      }
 
-  function closeregistroModal() {
-    var dialog = document.getElementById('registro');
-    dialog.close();
-  }
+      function closeregistroModal() {
+        var dialog = document.getElementById('registro');
+        dialog.close();
+      }
 
       function rate(starNumber1) {
         for (let i = 1; i <= 5; i++) {
           let estrela = document.getElementById('estrela' + i);
-          estrela.innerHTML = i <= starNumber1 ? '&#9733;' : '&#9734;'; 
+          estrela.innerHTML = i <= starNumber1 ? '&#9733;' : '&#9734;';
         }
       }
 
