@@ -45,50 +45,88 @@ export const deletarMateria = async(req, res) => {
     }
 }
 
-export const inserirTagEmMateria = async(req, res) => {
-    try{
-        if(!req.params.id){
-            res.status(500).json({error: "Insira id da matéria existe"});
-            return;
-        }
-        if(!req.body.nome_tag){
-            res.status(500).json({error: "Insira tag"});
-            return;
-        }
+export const atualizarMateria = async (req, res) => {
+    try {
+        const queryAtualizarMateria = {
+        text: `UPDATE Materia
+                SET nome = $1, data_inicio = $2, data_fim = $3, origem = $4
+                WHERE id_materia = $5
+                RETURNING *`,
+        values: [
+            req.body.nome,
+            req.body.data_inicio,
+            req.body.data_fim,
+            req.body.origem,
+            req.body.id_materia,
+        ],
+        };
 
-        //FINALIZAR query
-        const tagExisteObjeto = await pool.query({});
-
-        const queryInserirTagEmMateria = {
-            text: `INSERT INTO Materia_Tag(id_materia, nome_tag) VALUES ($1, $2) RETURNING *`,
-            values: [req.params.id, req.body.nome_tag]
-        }
-
-        const resultado = await pool.query(queryInserirTagEmMateria);
+        const resultado = await pool.query(queryAtualizarMateria);
         res.status(200).json(resultado.rows[0]);
-    }
-    catch(error){
-        res.status(500).json({error: error.message});
+    } catch (error) {
+        res.status(500).json({ error: error.message });
     }
 }
 
-export const obterTagsDaMateria = async(req, res) => {
-    try{
-        const queryTagsDaMateria = {
-            text: `SELECT nome_tag FROM Materia_Tag WHERE id_materia = $1`,
-            values: [req.params.id]
-        }
 
-        const resultado = await pool.query(queryTagsDaMateria);
-        let tags = [];
-
-        resultado.rows.forEach((tag) => {
-            tags.push(tag.nome_tag);
-        })
-
-        res.status(200).send(tags);
+//Datas de Início e Fim da Matéria
+//SelecionarDatas
+export const obterDatas = async (req, res) => {
+    try {
+      const queryTodasDatas = 'SELECT DISTINCT data_inicio, data_fim FROM Materia';
+  
+      const resultado = await pool.query(queryTodasDatas);
+      res.status(200).json(resultado.rows);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
     }
-    catch(error){
-        res.status(500).json({error: error.message});
+}
+  
+export const criarData = async (req, res) => {
+    try {
+      const queryCriarData = {
+        text: `INSERT INTO Materia(data_inicio, data_fim) VALUES ($1, $2) RETURNING *`,
+        values: [req.body.data_inicio, req.body.data_fim]
+      }
+  
+      const resultado = await pool.query(queryCriarData);
+      res.status(200).json(resultado.rows[0]);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+}
+
+export const atualizarData = async (req, res) => {
+    try {
+      const queryAtualizarData = {
+        text: `UPDATE Materia
+               SET data_inicio = $1, data_fim = $2
+               WHERE id_materia = $3
+               RETURNING *`,
+        values: [
+          req.body.data_inicio,
+          req.body.data_fim,
+          req.body.id_materia,
+        ],
+      };
+  
+      const resultado = await pool.query(queryAtualizarData);
+      res.status(200).json(resultado.rows[0]);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+}
+  
+export const deletarData = async (req, res) => {
+    try {
+      const queryDeletarData = {
+        text: `DELETE FROM Materia WHERE id_materia = $1 RETURNING data_inicio, data_fim`,
+        values: [req.body.id_materia]
+      }
+  
+      const resultado = await pool.query(queryDeletarData);
+      res.status(200).json(resultado.rows[0]);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
     }
 }
