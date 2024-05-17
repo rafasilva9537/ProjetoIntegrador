@@ -1,6 +1,6 @@
+//Requests de Matéria
 ### GET Visualizar materias
 GET http://localhost:3000/materias
-
 
 ### POST criar materia
 POST http://localhost:3000/materias
@@ -12,18 +12,18 @@ Content-Type: application/json
     "origem": "IESB"
 }
 
-
 ### DELETE deletar materia por id
 DELETE http://localhost:3000/materias
 Content-Type: application/json
+
 {
-    "id_materia": 9
+    "id_materia": 3
 }
 
 
+//Requests de Tags relacionada a Matéria
 ### tag da materia
 GET http://localhost:3000/materias/1/tags
-
 
 ### inserir tag na materia
 POST http://localhost:3000/materias/2/tags
@@ -32,5 +32,4 @@ Content-Type: application/json
 {
     "nome_tag": "Matemática"
 }
-
 ###
