@@ -1,4 +1,4 @@
 ### Obter Tópicos da Matéria
-GET http://localhost:3000/materias/2/topicos
+GET http://localhost:3000/materias/1/topicos
 
 ### 

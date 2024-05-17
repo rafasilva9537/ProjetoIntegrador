@@ -1,0 +1,2 @@
+### Visualizar conexões entre matérias
+GET http://localhost:3000/conexoes-materias

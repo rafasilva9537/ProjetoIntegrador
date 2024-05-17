@@ -9,7 +9,8 @@ const __dirname = path.dirname(__filename); //pega o nome do diretório
 
 import topicosRoute from './routes/topicosRoute.mjs'
 import materiasRoute from './routes/materiasRoute.mjs'
-import tagsRoutes from './routes/tagsRoute.mjs'
+import tagsRoute from './routes/tagsRoute.mjs'
+import conexoesMateriasRoute from './routes/conexoesMateriasRoute.mjs'
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //alterar rota e nome de tópicos para dividir entre cada materia
 app.use('/topicos', topicosRoute);
 app.use('/materias', materiasRoute);
-app.use('/tags', tagsRoutes);
+app.use('/tags', tagsRoute);
+app.use('/conexoes-materias', conexoesMateriasRoute)
 
 export default app;
