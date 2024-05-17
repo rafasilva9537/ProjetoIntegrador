@@ -1,3 +1,5 @@
+--COPIE TUDO!!!
+
 --OBSERVAÇÕES:
 --Avaliar a necessidade de trocar o tipo DATE para TIMESTAMPTZ, pois dependendo da localidade do usuário, o dia pode ser anterior ou superior ao do Brasil
 --Em javascript, o objeto do tipo Date já está em tempo UTC
@@ -57,56 +59,38 @@ CREATE TABLE Topico_Data(
 	PRIMARY KEY(id_topico, data)
 );
 
-SELECT * FROM Tag;
-SELECT * FROM Materia;
-SELECT * FROM Materia_Tag;
-SELECT * FROM Topico;
-SELECT * FROM Data;
-SELECT * FROM Topico_Data; 
 
 
-
---Testes
+--Inserções
 --Tags
-INSERT INTO Tag(nome) VALUES ('Matemática'),('Programação');
-INSERT INTO Tag(nome) VALUES ('Português'),('Química');
+INSERT INTO Tag(nome) VALUES ('Matemática'),('Programação'),('Português'),('Química'),('Web'), ('Computação');
 
 
 --Matérias
-INSERT INTO Materia(nome, data_inicio) VALUES ('Linguagem C', '2024-01-23');
-
-
---Materia_Tag
--- Implementação de Entidade Associativa (nesse caso, os nomes devem ser únicos)
-INSERT INTO Materia_Tag(id_materia, nome_tag) VALUES (1, 'Computação'), (1, 'Programação');
-		
-		
---Topicos
---DELETE FROM Topico WHERE id_materia = 2;
-INSERT INTO Topico(id_materia, nome, desempenho, progresso) 
-VALUES((SELECT id_materia FROM Materia WHERE nome = 'Linguagem C'), 'Tipo de Variáveis', 7.3, 'não iniciado');
-
-/*INSERT INTO Topico(id_materia, nome, desempenho, progresso)
-VALUES(2, 'Matrizes', -33, 'iniciado'); --violação de restrição*/
+INSERT INTO Materia(nome, data_inicio, data_fim, origem)
+VALUES ('Linguagem C', '2024-01-23', null, 'Alura'), ('Cálculo 2', '2024-01-29', null, 'IESB'), ('WebDesign', '2024-01-13', '2024-02-13', 'Alura');
 
 
 -- Datas
 INSERT INTO Data VALUES ('2024-04-23'), ('2024-04-24'), ('2024-04-25');
 
 
+--Materia_Tag
+-- Implementação de Entidade Associativa (nesse caso, os nomes devem ser únicos)
+INSERT INTO Materia_Tag(id_materia, nome_tag) VALUES (1, 'Computação'), (1, 'Programação');
+
+
+--Topicos
+-- Linguagem C
+INSERT INTO Topico(id_materia, nome, desempenho, progresso) 
+VALUES (1, 'Tipo de Variáveis', 7.3, 'em andamento'), (2, 'Funções', 8, 'não iniciado');
+--Cálculo 2
+INSERT INTO Topico(id_materia, nome, desempenho, progresso)
+VALUES (2, 'Derivada Parcial', 9, 'não iniciado');
+
+
 -- Topico_Data
 -- Veja que a implementação permite adicionar mais de uma data para um tópico
-INSERT INTO Topico_Data VALUES((SELECT id_topico FROM Topico WHERE nome = 'Tipo de Variáveis'), '2024-04-23');
-INSERT INTO Topico_Data VALUES((SELECT id_topico FROM Topico WHERE nome = 'Tipo de Variáveis'), '2024-04-24');
-
-
--- Juntando tabelas
--- Como data já é primary key, não é preciso fazer join com tabela Data, tabela Topico_Data já guarda o valor
-SELECT * 
-FROM Topico_Data
-INNER JOIN Topico
-	ON Topico_Data.id_topico = Topico.id_topico
-	
-	
--- Verificar existencia
-SELECT EXISTS(SELECT * FROM Tag WHERE nome = 'Matemática')
+-- Tópicos de Linguagem C e Cálculo 2
+INSERT INTO Topico_Data VALUES(1, '2024-04-23'), (1, '2024-04-24');
+INSERT INTO Topico_Data VALUES(2, '2024-04-25');

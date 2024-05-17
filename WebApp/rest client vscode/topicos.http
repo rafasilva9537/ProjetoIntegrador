@@ -1,2 +1,4 @@
-#GET
-GET http://localhost:3000/topicos
+### Obter Tópicos da Matéria
+GET http://localhost:3000/materias/2/topicos
+
+### 

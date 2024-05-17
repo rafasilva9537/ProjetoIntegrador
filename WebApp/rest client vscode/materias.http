@@ -1,10 +1,11 @@
-//Requests de Matéria
+//Requests de Matérias Gerais
 ### GET Visualizar materias
 GET http://localhost:3000/materias
 
 ### POST criar materia
 POST http://localhost:3000/materias
 Content-Type: application/json
+
 {
     "nome": "Sistema Digitais",
     "data_inicio": "2023-07-01",
@@ -21,15 +22,19 @@ Content-Type: application/json
 }
 
 
-//Requests de Tags relacionada a Matéria
+
+//Requests Relaciona a Materia Específica
+### Visualizar matéria
+GET http://localhost:3000/materias/2
+
 ### tag da materia
 GET http://localhost:3000/materias/1/tags
 
-### inserir tag na materia
+### Inserir tag na materia
 POST http://localhost:3000/materias/2/tags
 Content-Type: application/json
 
 {
-    "nome_tag": "Matemática"
+    "nome_tag": "Cálculo"
 }
 ###

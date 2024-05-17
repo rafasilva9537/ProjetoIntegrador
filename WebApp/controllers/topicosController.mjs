@@ -3,10 +3,33 @@ import pool from "../services/database.mjs";
 //SelecionarTopico
 export const obterTopicos = async (req, res) => {
     try {
-      const queryTodosTopicos = 'SELECT id_topico, nome, descricao, id_materia FROM Topico';
-  
-      const resultado = await pool.query(queryTodosTopicos);
-      res.status(200).json(resultado.rows);
+      console.log("Topicos")
+      const queryTodosTopicos = {
+        text: `SELECT id_topico, nome, desempenho, id_materia 
+        FROM Topico 
+        WHERE id_materia = $1`,
+        values: [req.params.id]
+      }
+
+      const queryDatasDeTopicos = {
+        text: `SELECT id_topico, data FROM Topico_Data`
+      }
+
+      const topicos = await pool.query(queryTodosTopicos);
+      const datas_topicos = await pool.query(queryDatasDeTopicos);
+
+      //MELHORAR, COMPLEXIDADE ESTÁ BEM RUIM AINDA → (i*j) loops
+      //Possível uso de estrutura de dados?
+      topicos.rows.forEach((topico) => {
+        topico.datas = [];
+        datas_topicos.rows.forEach((data) => {
+          if(data.id_topico === topico.id_topico) topico.datas.push(data.data);
+          console.log(topico)
+          console.log(data.data);
+        })
+      })
+
+      res.status(200).json(topicos.rows);
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
@@ -55,15 +78,34 @@ export const atualizarTopico = async (req, res) => {
   
 //DeletarTopico
 export const deletarTopico = async (req, res) => {
-    try {
-      const queryDeletarTopico = {
-        text: `DELETE FROM Topico WHERE id_topico = $1 RETURNING *`,
-        values: [req.body.id_topico]
-      }
-  
-      const resultado = await pool.query(queryDeletarTopico);
-      res.status(200).json(resultado.rows[0]);
-    } catch (error) {
-      res.status(500).json({ error: error.message });
+  try {
+    const queryDeletarTopico = {
+      text: `DELETE FROM Topico WHERE id_topico = $1 RETURNING *`,
+      values: [req.body.id_topico]
     }
+
+    const resultado = await pool.query(queryDeletarTopico);
+    res.status(200).json(resultado.rows[0]);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
+
+export const inserirDataEmTopico = async(req, res) => {
+  try{
+    const dataExiste = await pool.query(`SELECT EXISTS (SELECT data FROM Data WHERE data = $1)`, [req.body.data]);
+    if(!dataExiste.rows[0].data){
+      console.log("Data não existe");
+      await pool.query(`INSERT INTO Data(data) VALUES($1)`, [req.body.data]);
+    }
+
+    const queryInserirData = {
+      text: `INSERT INTO Topico_Data(id_topico, data) VALUES($1, $2)`,
+      values: [req.params.id_topico, req.body.data]
+    }
+
+    await pool.query(queryInserirData);
+  } catch {
+    res.status(500).json({ error: error.message })
+  }
 }

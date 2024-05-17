@@ -41,9 +41,23 @@ export const inserirTagEmMateria = async(req, res) => {
             return;
         }
   
-        //FINALIZAR query
-        const tagExisteObjeto = await pool.query({});
-  
+
+        const queryTagExiste = {
+            text: `SELECT EXISTS (SELECT nome FROM Tag WHERE nome = $1)`,
+            values: [req.body.nome_tag]
+        }
+        const tagExiste = await pool.query(queryTagExiste);
+        console.log(`Existe? ${tagExiste.rows[0]}`);
+        
+        if(!tagExiste.rows[0].exists){
+            //criando Tag que não existe
+            const queryInserirTag = {
+                text: `INSERT INTO Tag(nome) VALUES($1) RETURNING *`,
+                values: [req.body.nome_tag]
+            }
+            const tagCriada = await pool.query(queryInserirTag);
+        }
+
         const queryInserirTagEmMateria = {
             text: `INSERT INTO Materia_Tag(id_materia, nome_tag) VALUES ($1, $2) RETURNING *`,
             values: [req.params.id, req.body.nome_tag]

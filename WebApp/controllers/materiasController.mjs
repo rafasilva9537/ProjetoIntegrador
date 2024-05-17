@@ -2,16 +2,50 @@ import { query } from 'express';
 import pool from '../services/database.mjs'
 
 //Materias
-export const obterMaterias = async(req, res) => {
-    try{
-        const queryTodasMaterias = 'SELECT id_materia, nome, data_inicio, data_fim, origem FROM Materia';
+export const obterTodasMaterias = async(req, res) => {
+  try{
+      const queryTodasMaterias = 'SELECT id_materia, nome, data_inicio, data_fim, origem FROM Materia';
 
-        const resultado = await pool.query(queryTodasMaterias);
-        res.status(200).json(resultado.rows);
+      const resultado = await pool.query(queryTodasMaterias);
+      res.status(200).json(resultado.rows);
+  }
+  catch(error){
+      res.status(500).json({error: error.message});
+  }
+}
+
+
+//Materia Específica
+export const obterMateria = async(req, res) => {
+  try{
+    console.log("Entrando em obterMateria. Materia ID:", req.params.id);
+
+    const queryMateria = {
+      text: `SELECT id_materia, nome, data_inicio, data_fim, origem 
+              FROM Materia
+              WHERE id_materia = $1`,
+      values: [req.params.id]
+    };
+
+    const queryTagsDaMateria = {
+      text: `SELECT nome_tag FROM Materia_Tag WHERE id_materia = $1`,
+      values: [req.params.id]
     }
-    catch(error){
-        res.status(500).json({error: error.message});
-    }
+
+    const materia = await pool.query(queryMateria);
+    const tagsObjeto = await pool.query(queryTagsDaMateria);
+
+    const tags = [];
+    tagsObjeto.rows.forEach((tag) => {
+        tags.push(tag.nome_tag);
+    })
+    materia.rows[0].tags = tags;
+    
+    res.status(200).json(materia.rows[0]);
+  }
+  catch(error){
+    res.status(500).json({error: error.message});
+  }
 }
 
 export const criarMateria = async(req, res) => {
