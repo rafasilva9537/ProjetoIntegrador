@@ -5,25 +5,20 @@ function materiaParaGrafo(){
 }
 
 export const visualizarConexoes = async(req, res) => {
-    console.log("Comece a implementar o grafo aqui ...");
+  console.log("Comece a implementar o grafo aqui ...");
 
-    try{
-      const queryTagsAssociadas = `
-      SELECT DISTINCT Materia_Tag.nome_tag
+  try{
+    const queryAgruparMateriasPorTag = `
+      SELECT Materia_Tag.nome_tag, ARRAY_AGG(Materia.nome) AS materias
       FROM Materia
       LEFT JOIN Materia_Tag
-          ON Materia.id_materia = Materia_Tag.id_materia`
-      const tagsAssociadas = await pool.query(queryTagsAssociadas);
-
-      const queryMateriasTags = `
-      SELECT Materia.id_materia, Materia.nome, Materia_Tag.nome_tag
-      FROM Materia
-      LEFT JOIN Materia_Tag
-          ON Materia.id_materia = Materia_Tag.id_materia`
-      const materiasTags = await pool.query(queryMateriasTags);
+        ON Materia.id_materia = Materia_Tag.id_materia
+      GROUP BY Materia_Tag.nome_tag
+      `
+      const resultado = await pool.query(queryAgruparMateriasPorTag);
       
-      res.status(200).json(tagsAssociadas.rows);
-      }
+      res.status(200).json(resultado.rows);
+      } 
       catch(error){
         res.status(500).json({error: error.message});
       }
