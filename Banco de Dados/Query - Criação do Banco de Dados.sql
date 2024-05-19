@@ -63,12 +63,17 @@ CREATE TABLE Topico_Data(
 
 --Inserções
 --Tags
-INSERT INTO Tag(nome) VALUES ('Matemática'),('Programação'),('Português'),('Química'),('Web'), ('Computação');
+INSERT INTO Tag(nome) VALUES ('Matemática'),('Programação'),('Português'),('Química'),('Web'), ('Computação'), ('Hardware');
 
 
 --Matérias
-INSERT INTO Materia(nome, data_inicio, data_fim, origem)
-VALUES ('Linguagem C', '2024-01-23', null, 'Alura'), ('Cálculo 2', '2024-01-29', null, 'IESB'), ('WebDesign', '2024-01-13', '2024-02-13', 'Alura');
+INSERT INTO Materia(nome, data_inicio, data_fim, origem) VALUES 
+('Linguagem C', '2024-01-23', null, 'Alura'), 
+('Cálculo 2', '2024-01-29', null, 'IESB'), 
+('Estrutura de Dados', '2024-01-13', '2024-02-13', 'Alura'),
+('Arquitetura de Computadores', null, null, null), 
+('Sistemas Digitais', '2024-01-29', null, 'IESB'), 
+('WebDesign', '2024-01-13', '2024-02-13', 'Alura');
 
 
 -- Datas
@@ -77,7 +82,13 @@ INSERT INTO Data VALUES ('2024-04-23'), ('2024-04-24'), ('2024-04-25');
 
 --Materia_Tag
 -- Implementação de Entidade Associativa (nesse caso, os nomes devem ser únicos)
-INSERT INTO Materia_Tag(id_materia, nome_tag) VALUES (1, 'Computação'), (1, 'Programação');
+INSERT INTO Materia_Tag(id_materia, nome_tag) VALUES 
+(1, 'Computação'), (1, 'Programação'), 
+(2, 'Matemática'), 
+(3, 'Computação'), (3, 'Programação'), 
+(4, 'Computação'),(4, 'Hardware'),
+(5, 'Hardware');
+-- 6 não tem tag 
 
 
 --Topicos
