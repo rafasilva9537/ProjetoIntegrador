@@ -83,11 +83,7 @@ function removerNoPorId(noId, grafo){
     const no = encontrarNoPorId(noId, grafo);
     if(!no) null;
 
-    for (const [noOrigem=key] of grafo){
-        //deletando conexoes
-        let index = grafo.get(noOrigem).indexOf(no);
-        if(index != -1) grafo.get(noOrigem).splice(index, 1);
-    }
+    this.grafo.get(nosDelecao)[indexDelecao]
 
     grafo.delete(no);
     return no;
