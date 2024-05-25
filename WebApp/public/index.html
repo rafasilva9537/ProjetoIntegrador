@@ -4,309 +4,252 @@
 
 <head>
 
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="./stylesheets/Menu.css">
-  <link rel="stylesheet" href="./stylesheets/barra.css">
-  <link rel="stylesheet" href="./stylesheets/calendario.css">
-  <link rel="stylesheet" href="./stylesheets/adicionar.css">
-  <link rel="stylesheet" href="./stylesheets/anotações.css">
-  <link rel="stylesheet" href="./stylesheets/perfil.css">
-  <link rel="stylesheet" href="./stylesheets/anotacao.css">
-  <link rel="stylesheet" href="./stylesheets/registro.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site de Estudos</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="./stylesheets/Menu.css">
+     <link rel="stylesheet" href="./stylesheets/barra.css">
+     <link rel="stylesheet" href="./stylesheets/calendario.css">
+     <link rel="stylesheet" href="./stylesheets/adicionar.css">
+     <link rel="stylesheet" href="./stylesheets/anotações.css">
+     <link rel="stylesheet" href="./stylesheets/perfil.css">
+      <link rel="stylesheet" href="./stylesheets/anotacao.css">
+     <link rel="stylesheet" href="./stylesheets/registro.css">
 
 </head>
 
-<body class="site-inteiro">
+<body>
+    
+    <nav class="menu-lateral">
+  
+        <div class="b-expandir">
+          <i class="bi bi-list"></i>
+        </div>
+      
+        <ul>
+      
+            <li class="item-menu">
+                <button onclick="openperfilModal()" class="botão">
+                    <span class="icone">
+                        <i class="bi bi-person-circle"></i>
+                    </span>
+                    <span class="texto"> PERFIL </span>
+                </button>
+    
+                <dialog class="perfil_menu">
+                    <i class="bi bi-person-lines-fill"></i>
+                    <h1 class="perfil-nome">PERFIL</h1> 
+                    <div id="preview"></div>
+                    <div class="inf-user">
+                        <ul class="nome-user">Nome: <input type="text"></ul>
+                        <ul class="data-user">Data de nascimento: </ul>
+                        <ul class="curso-user">Curso: <input type="text"></ul>
+                    </div>
+                    <div class="botoes">
+                    <button onclick="closeperfilModal()" class="salvar_perfil"> SALVAR </button>
+                    </div>
+                </dialog>
+    
+            </li>
+      
+            <li class="item-menu">
+                <button onclick="openAddMateriaModal()" class="botão">
+                    <span class="icone">
+                        <i class="bi bi-plus-square"></i>
+                    </span>
+                    <span class="texto"> ADICIONAR MATERIA </span>
+                </button>
+          
+                <dialog class="adicionar_mat">
+                    <button onclick="closeAddMateriaModal()" class="fechar-modal-adicionar"> 
+                    <i class="bi bi-x"></i>
+                    </button>
+                    <div class="titulo-adicionar">
+                        <h1 class="titulo-ad"> Adicionar Matéria </h1>
+                    </div>
+                    <form class="form-adicionar">
+                        <label class="nome-materia">Digite o nome da matéria:</label>
+                        <input type="text" id="nome-materia" placeholder="Digite aqui" class="input-materia">
+                        <button type="submit" class="botao-salvar">ADICIONAR</button>
+                    </form>
+                </dialog>
 
-  <nav class="menu-lateral">
-  
-    <div class="b-expandir">
-      <i class="bi bi-list"></i>
-    </div>
-  
-    <ul>
-  
-      <li class="item-menu">
-        <button onclick="openperfilModal()" class="botão">
-          <span class="icone">
-            <i class="bi bi-person-circle"></i>
-          </span>
-  
-          <span class="texto"> PERFIL </span>
+            </li>
+          
+        </ul>
+      
+    </nav>
+
+    <nav class="barra">
+
+        <section>
+
+            <div>
+                <span class="titulo">
+                    MATERIA 1 
+                </span>     
+
+                
+        </section>
+        <!--ANOTAÇÕES-->
+        <section class="bloco-anotacao">
+
+            <div class="notas">
+                <textarea class="input-notas" placeholder="Digite suas anotações aqui..."></textarea>
+            </div>
+
+        </section>
+
+        <button onclick="openCalendarModal()" class="dialog_button">
+            <i class="bi bi-calendar3"></i>
+        </button>
+        
+        <section class="calendario">
+            
+            <dialog id="pop" class="pop">
+
+                <div class="fechar-calendario">
+                    <button onclick="closeCalendarModal()" class="dialog_button"> <i class="bi bi-x"></i> </button>
+                </div>
+                <div class="cabecalho">
+                  
+                <button id="btnAnterior"> &lt; </button>
+                <h2 id="mesAno"></h2>
+                <button id="btnProximo"> &gt; </button>
+                
+                </div>
+        
+                    <div class="dias-semana">
+                    <div class="dia-semana">Dom</div>
+                    <div class="dia-semana">Seg</div>
+                    <div class="dia-semana">Ter</div>
+                    <div class="dia-semana">Qua</div>
+                    <div class="dia-semana">Qui</div>
+                    <div class="dia-semana">Sex</div>
+                    <div class="dia-semana">Sáb</div>
+                </div>
+                <div class="dias"></div>
+                
+            </div>
+
+                <dialog id="popup" class="popup">
+                    <div>
+
+                        <div class="fundo-infs">
+                            <p id="infoDia"></p>
+                        
+                        <button id="salvar-Popup"> <i class="bi bi-hand-thumbs-up-fill"></i> </button>
+                        <button id="cancelar-Popup"> <i class="bi bi-hand-thumbs-down-fill"></i> </button>
+                    
+                </dialog>
+            
+            </dialog>
+
+        </section>
+
+        <button onclick="openregistroModal()" class="abrir-registro">
+            <i class="bi bi-arrow-left-short"></i>
         </button>
 
-        <dialog class="perfil_menu">
-          <i class="bi bi-person-lines-fill"></i>
-          <h1 class="perfil-nome">PERFIL</h1> 
-          <div id="preview"></div>
-          <div class="inf-user">
-            <ul class="nome-user">Nome: <input type="text"></ul>
-            <ul class="data-user">Data de nascimento: </ul>
-            <ul class="curso-user">Curso: <input type="text"></ul>
-          </div>
-          <div class="botoes">
-            <button onclick="closeperfilModal()" class="salvar_perfil">SALVAR</button>
-          </div>
-        </dialog>
+        <!--REGISTRO-->
+        <dialog id="registro">
 
-      </li>
-  
-      <li class="item-menu">
-        <button onclick="openAddMateriaModal()" class="botão">
-          <span class="icone">
-            <i class="bi bi-plus-square"></i>
-          </span>
-          <span class="texto"> ADICIONAR MATERIA </span>
-        </button>
-      
-        <dialog class="adicionar_mat">
-      
-          <button onclick="closeAddMateriaModal()" class="fechar-modal-adicionar"> <ul class="x"><i class="bi bi-x"></i></ul> </i> </button>
-      
-          <div class="titulo-adicionar">
-            <h1 class="titulo-ad"> Adicionar Matéria </h1>
-          </div>
-      
-          <form class="form-adicionar">
-            <label class="nome-materia">Digite o nome da matéria:</label>
-            <input type="text" id="nome-materia" placeholder="Digite aqui" class="input-materia">
-            <button type="submit" class="botao-salvar">ADICIONAR</button>
-          </form>
-      
-        </dialog>
-      </li>
-      
-  
-      <li class="item-menu">
-        <button class="botão">
-          <span class="icone">
-            <i class="bi bi-gear"></i>
-          </span>
-          <span class="texto"> CONFIGURAÇÕES </span>
-        </button>
-      </li>
-  
-    </ul>
-  
-  </nav> 
-
-
-  <div class="barra">
-    <ul>
-      <li class="titulo">
-        <h1>MATERIA 1   
-          <button onclick="openregistroModal()" class="abrir-registro">
-            <i class="bi bi-arrow-down-square-fill"></i>
-          </button> 
-
-        </h1> 
-        <dialog id="registro" class="registro nova-classe">
-
-          <div class="barra-registro">
-          <button onclick="closeregistroModal()" class="fechar-registro">
+            <div class="barra-registro">
+            <button onclick="closeregistroModal()" class="fechar-registro">
             <i class="bi bi-arrow-left-circle"></i>
-          </button>
-          <h1 class="nome-registro">REGISTRO</h1>
-          </div>
+            </button>
+            <h1 class="nome-registro">REGISTRO</h1>
+            </div>
 
-          <table>
+            <table>
             <tr>
-              <th style="font-size: 15px;">Tópicos</th>
-              <th style="font-size: 15px;">Status</th>
-              <th style="font-size: 15px;">Desempenho</th>
-              <th style="font-size: 15px;">Data</th>
-              <th style="font-size: 15px;">Revisão</th>
+                <th style="font-size: 15px;">Tópicos</th>
+                <th style="font-size: 15px;">Status</th>
+                <th style="font-size: 15px;">Desempenho</th>
+                <th style="font-size: 15px;">Data</th>
+                <th style="font-size: 15px;">Revisão</th>
+            </tr>
+            </tr>
+          
+            <tr>
+                <td style="font-size: 12px;" contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
+                <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
+                <td>
+                    <span id="estrela1" class="estrela" onclick="rate(1)">&#9734;</span>
+                    <span id="estrela2" class="estrela" onclick="rate(2)">&#9734;</span>
+                    <span id="estrela3" class="estrela" onclick="rate(3)">&#9734;</span>
+                    <span id="estrela4" class="estrela" onclick="rate(4)">&#9734;</span>
+                    <span id="estrela5" class="estrela" onclick="rate(5)">&#9734;</span>
+                </td>
+                <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
+                <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>      
+            </tr>
+  
+  
+            <tr>
+                <td style="font-size: 12px;" contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
+                <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
+                <td>
+                    <span id="estrela1" class="estrela" onclick="rate(1)">&#9734;</span>
+                    <span id="estrela2" class="estrela" onclick="rate(2)">&#9734;</span>
+                    <span id="estrela3" class="estrela" onclick="rate(3)">&#9734;</span>
+                    <span id="estrela4" class="estrela" onclick="rate(4)">&#9734;</span>
+                    <span id="estrela5" class="estrela" onclick="rate(5)">&#9734;</span>
+                    </td>
+                <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
+                <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>      
+            </tr>
+  
+            <tr>
+                <td style="font-size: 12px;" contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
+                 <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
+                <td>
+                  <span id="estrela1" class="estrela" onclick="rate(1)">&#9734;</span>
+                  <span id="estrela2" class="estrela" onclick="rate(2)">&#9734;</span>
+                  <span id="estrela3" class="estrela" onclick="rate(3)">&#9734;</span>
+                  <span id="estrela4" class="estrela" onclick="rate(4)">&#9734;</span>
+                  <span id="estrela5" class="estrela" onclick="rate(5)">&#9734;</span>
+                </td>
+              <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
+              <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>      
           </tr>
-            </tr>
-            
-            <tr>
-              <td style="font-size: 12px;" contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
-                <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
-                <td>
-                    <span id="estrela1-1" class="estrela" onclick="rate(1, 1)">&#9734;</span>
-                    <span id="estrela2-1" class="estrela" onclick="rate(2, 1)">&#9734;</span>
-                    <span id="estrela3-1" class="estrela" onclick="rate(3, 1)">&#9734;</span>
-                    <span id="estrela4-1" class="estrela" onclick="rate(4, 1)">&#9734;</span>
-                    <span id="estrela5-1" class="estrela" onclick="rate(5, 1)">&#9734;</span>
-                    <span id="estrela6-1" class="estrela" onclick="rate(6, 1)">&#9734;</span>
-                  </td>
-                <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
-                <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>      
-            </tr>
+  
+          <tr>
+            <td style="font-size: 12px;" contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
+              <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
+              <td>
+                  <span id="estrela1" class="estrela" onclick="rate(1)">&#9734;</span>
+                  <span id="estrela2" class="estrela" onclick="rate(2)">&#9734;</span>
+                  <span id="estrela3" class="estrela" onclick="rate(3)">&#9734;</span>
+                  <span id="estrela4" class="estrela" onclick="rate(4)">&#9734;</span>
+                  <span id="estrela5" class="estrela" onclick="rate(5)">&#9734;</span>
+                </td>
+              <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
+              <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>      
+          </tr>
+  
+          <tr>
+            <td style="font-size: 12px;" contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
+              <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
+              <td>
+                  <span id="estrela1" class="estrela" onclick="rate(1)">&#9734;</span>
+                  <span id="estrela2" class="estrela" onclick="rate(2)">&#9734;</span>
+                  <span id="estrela3" class="estrela" onclick="rate(3)">&#9734;</span>
+                  <span id="estrela4" class="estrela" onclick="rate(4)">&#9734;</span>
+                  <span id="estrela5" class="estrela" onclick="rate(5)">&#9734;</span>
+                </td>
+              <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
+              <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>      
+          </tr>
           
-          
-            <tr>
-              <td style="font-size: 12px;" contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
-                <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
-                <td>
-                    <span id="estrela1-2" class="estrela" onclick="rate(1, 2)">&#9734;</span>
-                    <span id="estrela2-2" class="estrela" onclick="rate(2, 2)">&#9734;</span>
-                    <span id="estrela3-2" class="estrela" onclick="rate(3, 2)">&#9734;</span>
-                    <span id="estrela4-2" class="estrela" onclick="rate(4, 2)">&#9734;</span>
-                    <span id="estrela5-2" class="estrela" onclick="rate(5, 2)">&#9734;</span>
-                    <span id="estrela6-2" class="estrela" onclick="rate(6, 2)">&#9734;</span>
-                  </td>
-                <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
-                <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>      
-            </tr>
+      </table>
 
-            
-        </table>
+      </dialog>
 
-        </dialog>
-        
-      </li>
-    </ul>
-  
-  
-    <!--ANOTAÇÕES-->
-    <div class="bloco-anotacao">
+    </nav>
 
-      <div class="notas">
-
-        <textarea class="input-notas" placeholder="Digite suas anotações aqui..."></textarea>
-
-      </div>
-
-    </div>
-
-    <li class="calendario_filtro">
-      <button onclick="openCalendarModal()" class="dialog_button">
-        <div class="icon_calendario">
-          <i class="bi bi-calendar3"></i>
-        </div>
-      </button>
-    
-      <dialog id="pop" class="pop">
-
-    <!--CONTEUDO DO CALENDARIO-->
-
-    <div class="calendario">
-      <div class="fechar-calendario">
-        <button onclick="closeCalendarModal()" class="dialog_button"> <i class="bi bi-x"></i> </button>
-    </div>
-        <div class="cabecalho">
-          
-            <button id="btnAnterior"> &lt; </button>
-            <h2 id="mesAno"></h2>
-            <button id="btnProximo"> &gt; </button>
-        </div>
-
-        <div class="dias-semana">
-            <div class="dia-semana">Dom</div>
-            <div class="dia-semana">Seg</div>
-            <div class="dia-semana">Ter</div>
-            <div class="dia-semana">Qua</div>
-            <div class="dia-semana">Qui</div>
-            <div class="dia-semana">Sex</div>
-            <div class="dia-semana">Sáb</div>
-        </div>
-        <div class="dias"></div>
-        
-    </div>
-    
-</dialog>
-
-    </li>
-    
-    <script>
-
-      function openperfilModal(){
-        var dialog = document.querySelector('.perfil_menu')
-        dialog.showModal();
-      }
-
-      function closeperfilModal() {
-       var dialog = document.querySelector('.perfil_menu');
-       dialog.close();
-      }
-
-      function openAddMateriaModal() {
-        var dialog = document.querySelector('.adicionar_mat');
-        dialog.showModal();
-      }
-
-      function closeAddMateriaModal() {
-        var dialog = document.querySelector('.adicionar_mat');
-        dialog.close();
-      }
-  
-      function openCalendarModal() {
-        var dialog = document.getElementById('pop');
-        dialog.showModal();
-      }
-  
-      function closeCalendarModal() {
-        var dialog = document.getElementById('pop');
-        dialog.close();
-      }
-
-      function openregistroModal() {
-    var dialog = document.getElementById('registro');
-    dialog.showModal();
-  }
-
-  function closeregistroModal() {
-    var dialog = document.getElementById('registro');
-    dialog.close();
-  }
-
-  function rate(starNumber, rowNumber) {
-    for (let i = 1; i <= 6; i++) {
-      let estrela = document.getElementById('estrela' + i + '-' + rowNumber);
-      estrela.innerHTML = i <= starNumber ? '&#9733;' : '&#9734;'; 
-    }
-  }
-
-
-      //Lógica do calendario:
-      
-      const btnAnterior = document.getElementById('btnAnterior');
-const btnProximo = document.getElementById('btnProximo');
-const mesAnoElemento = document.getElementById('mesAno');
-const diasElemento = document.querySelector('.dias');
-
-let dataAtual = new Date();
-
-function renderizarCalendario() {
-  const primeiroDiaDoMes = new Date(dataAtual.getFullYear(), dataAtual.getMonth(), 1);
-  const ultimoDiaDoMes = new Date(dataAtual.getFullYear(), dataAtual.getMonth() + 1, 0);
-  const diasNoMes = ultimoDiaDoMes.getDate();
-  const primeiroDiaDaSemana = primeiroDiaDoMes.getDay();
-
-  mesAnoElemento.textContent = `${dataAtual.toLocaleString('pt-BR', { month: 'long' })} ${dataAtual.getFullYear()}`;
-
-  diasElemento.innerHTML = '';
-
-  for (let i = 0; i < primeiroDiaDaSemana; i++) {
-    const elementoDia = document.createElement('div');
-    elementoDia.classList.add('dia');
-    diasElemento.appendChild(elementoDia);
-  }
-
-  for (let i = 1; i <= diasNoMes; i++) {
-    const elementoDia = document.createElement('div');
-    elementoDia.classList.add('dia');
-    elementoDia.textContent = i;
-    diasElemento.appendChild(elementoDia);
-  }
-}
-
-btnAnterior.addEventListener('click', () => {
-  dataAtual.setMonth(dataAtual.getMonth() - 1);
-  renderizarCalendario();
-});
-
-btnProximo.addEventListener('click', () => {
-  dataAtual.setMonth(dataAtual.getMonth() + 1);
-  renderizarCalendario();
-});
-
-renderizarCalendario();
-
-    </script>
+    <script src="index.js"></script>
 
 </body>
 
