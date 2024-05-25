@@ -159,3 +159,10 @@ cancelarPopup.addEventListener('click', function() {
 salvarPopup.addEventListener('click', function() {
     popup.close();
 });
+
+function rate(starNumber, rowNumber) {
+    for (let i = 1; i <= 6; i++) {
+      let estrela = document.getElementById('estrela' + i + '-' + rowNumber);
+      estrela.innerHTML = i <= starNumber ? '&#9733;' : '&#9734;'; 
+    }
+  }
