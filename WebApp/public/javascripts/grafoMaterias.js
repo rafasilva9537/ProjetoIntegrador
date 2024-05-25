@@ -20,7 +20,8 @@ class Grafo {
             return;
         }
         if(noA === noB) {
-            console.error("Nó não deve ser referenciar a si mesmo");
+            //Inora nós que se referenciam a si mesmos, solução para criação de nós sem conexão
+            //console.error("Nó não deve ser referenciar a si mesmo");
             return;
         }
 
@@ -95,22 +96,41 @@ function comparaArrayDeTags(materiaA, materiaB){
 }
 
 function criarListaDeArestas(listaMaterias){
+    //Por que criar arestas que se referenciam a si mesmo?
+    //Para que, na criação do grafo, ele não precise percorrer todas as matérias apenas para verificar se o nó tem aresta ou não. Em resumo, permite que nós sejam criados mesmo sem conexão.
+
     const listaArestas = [];
 
     for (let i = 0; i < listaMaterias.length; i++){
         let materia = listaMaterias[i];
-        if(materia.tags[0] === null) continue;
+        //let criouAresta = false;
         
-        for(let j = i+1; j < listaMaterias.length; j++){
+        for(let j = i; j < listaMaterias.length; j++){
             let materiaComparada = listaMaterias[j];
-            if(materiaComparada.tags[0] === null) continue;
+            if(materiaComparada.tags[0] === null) {
+                listaArestas.push([materia, materia]); //criando aresta com ele mesmo
+                continue;
+            };
             
             let compartilhamTag = comparaArrayDeTags(materia, materiaComparada);
-            if(compartilhamTag) listaArestas.push([materia, materiaComparada]);
+
+            if(compartilhamTag) {
+                listaArestas.push([materia, materiaComparada]);
+                //criouAresta = true;
+            }
         }
+
+        //if(criouAresta === false) listaArestas.push([materia, materia]);
     }
 
     return listaArestas;
+}
+
+function arestasPorId(listsaArestas){
+    listsaArestas.forEach((aresta) => {
+        const [ materiaA, materiaB ] = aresta;
+        console.log(`[${materiaA.id}, ${materiaB.id}]`)
+    });
 }
 
 //como grafo é feito por referencias, é necessário apenas as arestas
@@ -176,26 +196,128 @@ const listaMaterias = [
         ]
     }
 ]
-const arestas = criarListaDeArestas(listaMaterias);
-const grafoTeste = construirGrafo(arestas);
 
+const arestas = criarListaDeArestas(listaMaterias);
+export const grafoMaterias = construirGrafo(arestas);
 //console.log(arestas);
+arestasPorId(arestas);
+grafoMaterias.visualizarPorId();
 //const grafoMaterias = construirGrafo(arestas);
 //console.log(grafoMaterias);
-//grafoMaterias.visualizarPorId();
 //grafoMaterias.deletarAresta(grafoMaterias.obterNoPorId(4), grafoMaterias.obterNoPorId(5))
-
 //console.log("Apos deleção")
 //grafoMaterias.deletarNo(grafoMaterias.obterNoPorId(4));
 //grafoMaterias.visualizarPorId();
 
 
 
+function converterGrafo(grafo) {
+    const nodes = Array.from(grafo.keys()).map(materia => ({
+        id: materia.id,
+        name: materia.nome
+    }));
 
-/*//////////////////
---------------------
-IMPLEMENTAÇÃO VISUAL
---------------------
-*///////////////////
+    const links = [];
+    grafo.forEach((value, key) => {
+        value.forEach(target => {
+            links.push({
+                source: key.id,
+                target: target.id
+            });
+        });
+    });
+
+    return { nodes, links };
+}
+
+const { nodes, links } = converterGrafo(grafoMaterias.grafo);
+console.log(links)
+
 // Converter o map em nodes e links?
 // Função para converter o Map em arrays de nodes e links
+const width = 928;
+const height = 680;
+
+// Especifica a escala de cor
+const color = d3.scaleOrdinal(d3.schemeCategory10);
+
+// The force simulation mutates links and nodes, so create a copy
+// so that re-evaluating this cell produces the same result.
+//const links = data.links.map(d => ({...d}));
+//const nodes = data.nodes.map(d => ({...d}));
+
+// Cria uma simulação com diversas forças (repulsão, distância, etc)
+const simulation = d3.forceSimulation(nodes)
+    .force("link", d3.forceLink(links).id(d => d.id).distance(250))
+    .force("charge", d3.forceManyBody().strength(-200))
+    .force("x", d3.forceX())
+    .force("y", d3.forceY());
+
+// Cria o container SVG
+const svg = d3.select("body").append("svg") //não funcionava com d3.create("svg"), descobrir o movito
+    .attr("width", width)
+    .attr("height", height)
+    .attr("viewBox", [-width / 2, -height / 2, width, height])
+    .attr("style", "max-width: 100%; height: auto;");
+
+// Adiciona uma linha para cada aresta e um círculo para cada nó
+const link = svg.append("g")
+    .attr("class", "links")
+    .selectAll("line")
+    .data(links)
+    .join("line")
+    .attr("stroke-width", d => Math.sqrt(d.value));
+
+const node = svg.append("g")
+    .attr("class", "nodes")
+    .selectAll("g")
+    .data(nodes)
+    .join("g")
+
+node.append("circle")
+    .attr("r", 12)
+    .attr("fill", d => color(d.group));
+
+node.append("text")
+    .text(d => d.name)
+    .attr("x", 6)
+    .attr("y", 3)
+
+// Add a drag behavior.
+node.call(d3.drag()
+    .on("start", dragstarted)
+    .on("drag", dragged)
+    .on("end", dragended));
+
+// Set the position attributes of links and nodes each time the simulation ticks.
+simulation.on("tick", () => {
+link
+    .attr("x1", d => d.source.x)
+    .attr("y1", d => d.source.y)
+    .attr("x2", d => d.target.x)
+    .attr("y2", d => d.target.y);
+
+node
+    .attr("transform", d => `translate(${d.x},${d.y})`);
+});
+
+// Reheat the simulation when drag starts, and fix the subject position.
+function dragstarted(event) {
+if (!event.active) simulation.alphaTarget(0.3).restart();
+event.subject.fx = event.subject.x;
+event.subject.fy = event.subject.y;
+}
+
+// Update the subject (dragged node) position during drag.
+function dragged(event) {
+event.subject.fx = event.x;
+event.subject.fy = event.y;
+}
+
+// Restore the target alpha so the simulation cools after dragging ends.
+// Unfix the subject position now that it’s no longer being dragged.
+function dragended(event) {
+if (!event.active) simulation.alphaTarget(0);
+event.subject.fx = null;
+event.subject.fy = null;
+}

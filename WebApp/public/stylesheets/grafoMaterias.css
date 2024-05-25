@@ -11,4 +11,6 @@
 .nodes text {
     font: 10px sans-serif;
     text-anchor: middle;
+    font-weight: 700;
+    font-size:.9em
 }
