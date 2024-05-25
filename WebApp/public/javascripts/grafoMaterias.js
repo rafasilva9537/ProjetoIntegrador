@@ -235,8 +235,8 @@ console.log(links)
 
 // Converter o map em nodes e links?
 // Função para converter o Map em arrays de nodes e links
-const width = 928;
-const height = 680;
+const width = window.innerWidth;
+const height = window.innerHeight;
 
 // Especifica a escala de cor
 const color = d3.scaleOrdinal(d3.schemeCategory10);
@@ -276,12 +276,13 @@ const node = svg.append("g")
 
 node.append("circle")
     .attr("r", 12)
-    .attr("fill", d => color(d.group));
+    .attr("fill", "purple") //.attr("fill", d => color(d.group));
 
 node.append("text")
     .text(d => d.name)
     .attr("x", 6)
     .attr("y", 3)
+    .attr("fill", "white")
 
 // Add a drag behavior.
 node.call(d3.drag()
