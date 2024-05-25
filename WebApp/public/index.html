@@ -16,6 +16,8 @@
      <link rel="stylesheet" href="./stylesheets/perfil.css">
       <link rel="stylesheet" href="./stylesheets/anotacao.css">
      <link rel="stylesheet" href="./stylesheets/registro.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+     <script src="javascripts/scripts.js"></script>
 
 </head>
 
@@ -154,98 +156,80 @@
 
         <!--REGISTRO-->
         <dialog id="registro">
-
             <div class="barra-registro">
             <button onclick="closeregistroModal()" class="fechar-registro">
             <i class="bi bi-arrow-left-circle"></i>
             </button>
             <h1 class="nome-registro">REGISTRO</h1>
             </div>
-
             <table>
-            <tr>
-                <th style="font-size: 15px;">Tópicos</th>
-                <th style="font-size: 15px;">Status</th>
-                <th style="font-size: 15px;">Desempenho</th>
-                <th style="font-size: 15px;">Data</th>
-                <th style="font-size: 15px;">Revisão</th>
-            </tr>
-            </tr>
-          
-            <tr>
-                <td style="font-size: 12px;" contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
-                <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
-                <td>
-                    <span id="estrela1" class="estrela" onclick="rate(1)">&#9734;</span>
-                    <span id="estrela2" class="estrela" onclick="rate(2)">&#9734;</span>
-                    <span id="estrela3" class="estrela" onclick="rate(3)">&#9734;</span>
-                    <span id="estrela4" class="estrela" onclick="rate(4)">&#9734;</span>
-                    <span id="estrela5" class="estrela" onclick="rate(5)">&#9734;</span>
-                </td>
-                <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
-                <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>      
-            </tr>
-  
-  
-            <tr>
-                <td style="font-size: 12px;" contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
-                <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
-                <td>
-                    <span id="estrela1" class="estrela" onclick="rate(1)">&#9734;</span>
-                    <span id="estrela2" class="estrela" onclick="rate(2)">&#9734;</span>
-                    <span id="estrela3" class="estrela" onclick="rate(3)">&#9734;</span>
-                    <span id="estrela4" class="estrela" onclick="rate(4)">&#9734;</span>
-                    <span id="estrela5" class="estrela" onclick="rate(5)">&#9734;</span>
+                <tr>
+                    <td contenteditable="true">Editar</td>
+                    <td contenteditable="true">Editar</td>
+                    <td>
+                        <span id="estrela1-3" class="estrela" onclick="rate(1, 3)">&#9734;</span>
+                        <span id="estrela2-3" class="estrela" onclick="rate(2, 3)">&#9734;</span>
+                        <span id="estrela3-3" class="estrela" onclick="rate(3, 3)">&#9734;</span>
+                        <span id="estrela4-3" class="estrela" onclick="rate(4, 3)">&#9734;</span>
+                        <span id="estrela5-3" class="estrela" onclick="rate(5, 3)">&#9734;</span>
                     </td>
-                <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
-                <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>      
-            </tr>
-  
-            <tr>
-                <td style="font-size: 12px;" contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
-                 <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
-                <td>
-                  <span id="estrela1" class="estrela" onclick="rate(1)">&#9734;</span>
-                  <span id="estrela2" class="estrela" onclick="rate(2)">&#9734;</span>
-                  <span id="estrela3" class="estrela" onclick="rate(3)">&#9734;</span>
-                  <span id="estrela4" class="estrela" onclick="rate(4)">&#9734;</span>
-                  <span id="estrela5" class="estrela" onclick="rate(5)">&#9734;</span>
-                </td>
-              <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
-              <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>      
-          </tr>
-  
-          <tr>
-            <td style="font-size: 12px;" contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
-              <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
-              <td>
-                  <span id="estrela1" class="estrela" onclick="rate(1)">&#9734;</span>
-                  <span id="estrela2" class="estrela" onclick="rate(2)">&#9734;</span>
-                  <span id="estrela3" class="estrela" onclick="rate(3)">&#9734;</span>
-                  <span id="estrela4" class="estrela" onclick="rate(4)">&#9734;</span>
-                  <span id="estrela5" class="estrela" onclick="rate(5)">&#9734;</span>
-                </td>
-              <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
-              <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>      
-          </tr>
-  
-          <tr>
-            <td style="font-size: 12px;" contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
-              <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
-              <td>
-                  <span id="estrela1" class="estrela" onclick="rate(1)">&#9734;</span>
-                  <span id="estrela2" class="estrela" onclick="rate(2)">&#9734;</span>
-                  <span id="estrela3" class="estrela" onclick="rate(3)">&#9734;</span>
-                  <span id="estrela4" class="estrela" onclick="rate(4)">&#9734;</span>
-                  <span id="estrela5" class="estrela" onclick="rate(5)">&#9734;</span>
-                </td>
-              <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>
-              <td contenteditable='true' onclick="if(this.innerHTML=='Editar') this.innerHTML=''" onblur="if(this.innerHTML=='') this.innerHTML='Editar'">Editar</td>      
-          </tr>
-          
-      </table>
-
-      </dialog>
+                    <td contenteditable="true">Editar</td>
+                    <td contenteditable="true">Editar</td>
+                </tr>
+                <tr>
+                    <td contenteditable="true">Editar</td>
+                    <td contenteditable="true">Editar</td>
+                    <td>
+                        <span id="estrela1-4" class="estrela" onclick="rate(1, 4)">&#9734;</span>
+                        <span id="estrela2-4" class="estrela" onclick="rate(2, 4)">&#9734;</span>
+                        <span id="estrela3-4" class="estrela" onclick="rate(3, 4)">&#9734;</span>
+                        <span id="estrela4-4" class="estrela" onclick="rate(4, 4)">&#9734;</span>
+                        <span id="estrela5-4" class="estrela" onclick="rate(5, 4)">&#9734;</span>
+                    </td>
+                    <td contenteditable="true">Editar</td>
+                    <td contenteditable="true">Editar</td>
+                </tr>
+                <tr>
+                    <td contenteditable="true">Editar</td>
+                    <td contenteditable="true">Editar</td>
+                    <td>
+                        <span id="estrela1-5" class="estrela" onclick="rate(1, 5)">&#9734;</span>
+                        <span id="estrela2-5" class="estrela" onclick="rate(2, 5)">&#9734;</span>
+                        <span id="estrela3-5" class="estrela" onclick="rate(3, 5)">&#9734;</span>
+                        <span id="estrela4-5" class="estrela" onclick="rate(4, 5)">&#9734;</span>
+                        <span id="estrela5-5" class="estrela" onclick="rate(5, 5)">&#9734;</span>
+                    </td>
+                    <td contenteditable="true">Editar</td>
+                    <td contenteditable="true">Editar</td>
+                </tr>
+                <tr>
+                    <td contenteditable="true">Editar</td>
+                    <td contenteditable="true">Editar</td>
+                    <td>
+                        <span id="estrela1-6" class="estrela" onclick="rate(1, 6)">&#9734;</span>
+                        <span id="estrela2-6" class="estrela" onclick="rate(2, 6)">&#9734;</span>
+                        <span id="estrela3-6" class="estrela" onclick="rate(3, 6)">&#9734;</span>
+                        <span id="estrela4-6" class="estrela" onclick="rate(4, 6)">&#9734;</span>
+                        <span id="estrela5-6" class="estrela" onclick="rate(5, 6)">&#9734;</span>
+                    </td>
+                    <td contenteditable="true">Editar</td>
+                    <td contenteditable="true">Editar</td>
+                </tr>
+                <tr>
+                    <td contenteditable="true">Editar</td>
+                    <td contenteditable="true">Editar</td>
+                    <td>
+                        <span id="estrela1-7" class="estrela" onclick="rate(1, 7)">&#9734;</span>
+                        <span id="estrela2-7" class="estrela" onclick="rate(2, 7)">&#9734;</span>
+                        <span id="estrela3-7" class="estrela" onclick="rate(3, 7)">&#9734;</span>
+                        <span id="estrela4-7" class="estrela" onclick="rate(4, 7)">&#9734;</span>
+                        <span id="estrela5-7" class="estrela" onclick="rate(5, 7)">&#9734;</span>
+                    </td>
+                    <td contenteditable="true">Editar</td>
+                    <td contenteditable="true">Editar</td>
+                </tr>
+            </table>
+        </dialog>
 
     </nav>
 
