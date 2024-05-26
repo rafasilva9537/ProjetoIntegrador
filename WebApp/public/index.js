@@ -95,10 +95,13 @@ function rate(starNumber1) {
 }
 
 //calendário
+
 const btnAnterior = document.getElementById('btnAnterior');
 const btnProximo = document.getElementById('btnProximo');
 const mesAnoElemento = document.getElementById('mesAno');
 const diasElemento = document.querySelector('.dias');
+const popup = document.getElementById('popup');
+const infoDia = document.getElementById('infoDia');
 
 let dataAtual = new Date();
 
@@ -122,6 +125,10 @@ function renderizarCalendario() {
         const elementoDia = document.createElement('div');
         elementoDia.classList.add('dia');
         elementoDia.textContent = i;
+        elementoDia.addEventListener('click', () => {
+            infoDia.textContent = 'Dia: ' + i;
+            popup.showModal();
+        });
         diasElemento.appendChild(elementoDia);
     }
 }
@@ -134,30 +141,6 @@ btnAnterior.addEventListener('click', () => {
 btnProximo.addEventListener('click', () => {
     dataAtual.setMonth(dataAtual.getMonth() + 1);
     renderizarCalendario();
-});
-
-renderizarCalendario();
-
-const dias = document.querySelectorAll('.dia');
-const popup = document.getElementById('popup');
-const infoDia = document.getElementById('infoDia');
-const cancelarPopup = document.getElementById('cancelar-Popup');
-const salvarPopup = document.getElementById('salvar-Popup');
-
-dias.forEach(dia => {
-    dia.addEventListener('click', function() {
-        const diaClicado = dia.textContent;
-        infoDia.textContent = 'Dia: ' + diaClicado;
-        popup.showModal();
-    });
-});
-
-cancelarPopup.addEventListener('click', function() {
-    popup.close();
-});
-
-salvarPopup.addEventListener('click', function() {
-    popup.close();
 });
 
 function rate(starNumber, rowNumber) {
