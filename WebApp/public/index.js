@@ -2,6 +2,16 @@ const formAdicionar = document.querySelector('.form-adicionar');
 const menuLateral = document.querySelector('nav.menu-lateral ul');
 const titulo = document.querySelector('.titulo');
 
+//lista 
+axios.get('/materias')
+    .then((response) => {
+        const dadosMaterias = response.data
+        console.log(dadosMaterias);
+    }, (error) => {
+        console.log(error);
+    }
+);
+
 formAdicionar.addEventListener('submit', function(event) {
     event.preventDefault();
 
@@ -42,6 +52,21 @@ formAdicionar.addEventListener('submit', function(event) {
 
         document.getElementById('nome-materia').value = "";
         closeAddMateriaModal();
+
+        //enviando dados da MATÉRIA para o backend
+        axios.post('/materias', {
+            nome: nomeMateria,
+            data_inicio: null,
+            data_fim: null,
+            origem: null
+        })
+            .then((response) => {
+                console.log(response);
+            }, (error) => {
+                console.log(error);
+            }
+        );
+
     } else {
         alert("Por favor, digite um nome para a matéria.");
     }

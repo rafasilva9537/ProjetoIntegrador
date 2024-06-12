@@ -1,5 +1,9 @@
 // script que vai rodar com o ../index.js
 
+//comentei aqui pra não ficar criando matéria a todo momento
+//toda vez que eu dou reload na página principal, o método POST é chamado
+//pode descomentar se precisar usar em algo
+/*
 axios.get('http://localhost:3000/materias')
   .then((response) => {
     console.log(response.data);
@@ -20,3 +24,4 @@ axios.post('/materias', {
   }, (error) => {
     console.log(error);
   });
+*/

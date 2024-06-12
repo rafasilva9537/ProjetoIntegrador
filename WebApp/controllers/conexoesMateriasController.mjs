@@ -1,5 +1,4 @@
 import pool from '../services/database.mjs';
-import axios from 'axios';
 
 export const visualizarConexoes = async(req, res, next) => {
   console.log("Comece a implementar o grafo aqui ...");
