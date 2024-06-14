@@ -2,24 +2,54 @@ const formAdicionar = document.querySelector('.form-adicionar');
 const menuLateral = document.querySelector('nav.menu-lateral ul');
 const titulo = document.querySelector('.titulo');
 
-//lista 
-axios.get('/materias')
-    .then((response) => {
-        const dadosMaterias = response.data
-        console.log(dadosMaterias);
-    }, (error) => {
-        console.log(error);
+const dadosMaterias = [
+    {
+        "id_materia": 1,
+        "nome": "Linguagem C",
+        "data_inicio": "2024-01-23T03:00:00.000Z",
+        "data_fim": null,
+        "origem": "Alura"
+    },
+    {
+        "id_materia": 2,
+        "nome": "Cálculo 2",
+        "data_inicio": "2024-01-29T03:00:00.000Z",
+        "data_fim": null,
+        "origem": "IESB"
+    },
+    {
+        "id_materia": 3,
+        "nome": "Estrutura de Dados",
+        "data_inicio": "2024-01-13T03:00:00.000Z",
+        "data_fim": "2024-02-13T03:00:00.000Z",
+        "origem": "Alura"
+    },
+    {
+        "id_materia": 4,
+        "nome": "Arquitetura de Computadores",
+        "data_inicio": null,
+        "data_fim": null,
+        "origem": null
+    },
+    {
+        "id_materia": 5,
+        "nome": "Sistemas Digitais",
+        "data_inicio": "2024-01-29T03:00:00.000Z",
+        "data_fim": null,
+        "origem": "IESB"
+    },
+    {
+        "id_materia": 6,
+        "nome": "WebDesign",
+        "data_inicio": "2024-01-13T03:00:00.000Z",
+        "data_fim": "2024-02-13T03:00:00.000Z",
+        "origem": "Alura"
     }
-);
+];
 
-formAdicionar.addEventListener('submit', function(event) {
-    event.preventDefault();
-
-    const nomeMateria = document.getElementById('nome-materia').value.trim();
-
-    if (nomeMateria !== "") {
-        
-        const novoItemMenu = document.createElement('li');
+for(const materia of dadosMaterias){
+    console.log(materia.nome)
+    const novoItemMenu = document.createElement('li');
         novoItemMenu.classList.add('item-menu');
 
         const novoBotao = document.createElement('button');
@@ -29,7 +59,7 @@ formAdicionar.addEventListener('submit', function(event) {
         icone.classList.add('bi', 'bi-backpack2', 'icone');
 
         const spanTexto = document.createElement('span');
-        spanTexto.textContent = nomeMateria;
+        spanTexto.textContent = materia.nome;
 
         const iconeLixeira = document.createElement('i');
         iconeLixeira.classList.add('bi', 'bi-trash-fill', 'icone-lixeira');
@@ -42,13 +72,21 @@ formAdicionar.addEventListener('submit', function(event) {
         novoBotao.appendChild(iconeLixeira);
 
         novoBotao.addEventListener('click', function() {
-            titulo.textContent = nomeMateria;
+            titulo.textContent = materia.nome;
         });
 
         novoItemMenu.appendChild(novoBotao);
         menuLateral.appendChild(novoItemMenu);
 
-        titulo.textContent = nomeMateria;
+        titulo.textContent = materia.nome;
+}
+
+formAdicionar.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const nomeMateria = document.getElementById('nome-materia').value.trim();
+
+    if (nomeMateria !== "") {
 
         document.getElementById('nome-materia').value = "";
         closeAddMateriaModal();
@@ -66,6 +104,61 @@ formAdicionar.addEventListener('submit', function(event) {
                 console.log(error);
             }
         );
+
+    } else {
+        alert("Por favor, digite um nome para a matéria.");
+    }
+});
+
+function renderizarMenuLateral() {
+    for (const materia of dadosMaterias) {
+        const novoItemMenu = document.createElement('li');
+        novoItemMenu.classList.add('item-menu');
+
+        const novoBotao = document.createElement('button');
+        novoBotao.classList.add('botão');
+
+        const icone = document.createElement('i');
+        icone.classList.add('bi', 'bi-backpack2', 'icone');
+
+        const spanTexto = document.createElement('span');
+        spanTexto.textContent = materia.nome;
+
+        const iconeLixeira = document.createElement('i');
+        iconeLixeira.classList.add('bi', 'bi-trash-fill', 'icone-lixeira');
+        iconeLixeira.addEventListener('click', function () {
+            novoItemMenu.remove();
+        });
+
+        novoBotao.appendChild(icone);
+        novoBotao.appendChild(spanTexto);
+        novoBotao.appendChild(iconeLixeira);
+
+        novoBotao.addEventListener('click', function () {
+            titulo.textContent = materia.nome;
+        });
+
+        novoItemMenu.appendChild(novoBotao);
+        menuLateral.appendChild(novoItemMenu);
+
+        titulo.textContent = materia.nome;
+    }
+}
+
+renderizarMenuLateral();
+
+formAdicionar.addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const nomeMateria = document.getElementById('nome-materia').value.trim();
+
+    if (nomeMateria !== "") {
+
+        document.getElementById('nome-materia').value = "";
+
+        closeAddMateriaModal();
+
+        console.log("Enviando nova matéria para o backend:", nomeMateria);
 
     } else {
         alert("Por favor, digite um nome para a matéria.");
@@ -111,15 +204,6 @@ function closeregistroModal() {
     var dialog = document.getElementById('registro');
     dialog.close();
 }
-
-function rate(starNumber1) {
-    for (let i = 1; i <= 5; i++) {
-        let estrela = document.getElementById('estrela' + i);
-        estrela.innerHTML = i <= starNumber1 ? '&#9733;' : '&#9734;'; 
-    }
-}
-
-//calendário
 
 const btnAnterior = document.getElementById('btnAnterior');
 const btnProximo = document.getElementById('btnProximo');
@@ -168,9 +252,4 @@ btnProximo.addEventListener('click', () => {
     renderizarCalendario();
 });
 
-function rate(starNumber, rowNumber) {
-    for (let i = 1; i <= 6; i++) {
-      let estrela = document.getElementById('estrela' + i + '-' + rowNumber);
-      estrela.innerHTML = i <= starNumber ? '&#9733;' : '&#9734;'; 
-    }
-  }
+renderizarCalendario();
