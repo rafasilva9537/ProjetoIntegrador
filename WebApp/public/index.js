@@ -47,69 +47,6 @@ const dadosMaterias = [
     }
 ];
 
-for(const materia of dadosMaterias){
-    console.log(materia.nome)
-    const novoItemMenu = document.createElement('li');
-        novoItemMenu.classList.add('item-menu');
-
-        const novoBotao = document.createElement('button');
-        novoBotao.classList.add('botão');
-
-        const icone = document.createElement('i');
-        icone.classList.add('bi', 'bi-backpack2', 'icone');
-
-        const spanTexto = document.createElement('span');
-        spanTexto.textContent = materia.nome;
-
-        const iconeLixeira = document.createElement('i');
-        iconeLixeira.classList.add('bi', 'bi-trash-fill', 'icone-lixeira');
-        iconeLixeira.addEventListener('click', function() { 
-            novoItemMenu.remove();
-        });
-
-        novoBotao.appendChild(icone);
-        novoBotao.appendChild(spanTexto);
-        novoBotao.appendChild(iconeLixeira);
-
-        novoBotao.addEventListener('click', function() {
-            titulo.textContent = materia.nome;
-        });
-
-        novoItemMenu.appendChild(novoBotao);
-        menuLateral.appendChild(novoItemMenu);
-
-        titulo.textContent = materia.nome;
-}
-
-formAdicionar.addEventListener('submit', function(event) {
-    event.preventDefault();
-
-    const nomeMateria = document.getElementById('nome-materia').value.trim();
-
-    if (nomeMateria !== "") {
-
-        document.getElementById('nome-materia').value = "";
-        closeAddMateriaModal();
-
-        //enviando dados da MATÉRIA para o backend
-        axios.post('/materias', {
-            nome: nomeMateria,
-            data_inicio: null,
-            data_fim: null,
-            origem: null
-        })
-            .then((response) => {
-                console.log(response);
-            }, (error) => {
-                console.log(error);
-            }
-        );
-
-    } else {
-        alert("Por favor, digite um nome para a matéria.");
-    }
-});
-
 function renderizarMenuLateral() {
     for (const materia of dadosMaterias) {
         const novoItemMenu = document.createElement('li');
@@ -140,8 +77,6 @@ function renderizarMenuLateral() {
 
         novoItemMenu.appendChild(novoBotao);
         menuLateral.appendChild(novoItemMenu);
-
-        titulo.textContent = materia.nome;
     }
 }
 
@@ -253,3 +188,11 @@ btnProximo.addEventListener('click', () => {
 });
 
 renderizarCalendario();
+
+document.getElementById('cancelar-Popup').addEventListener('click', function () {
+    popup.close();
+});
+
+document.getElementById('salvar-Popup').addEventListener('click', function () {
+    popup.close();
+});
