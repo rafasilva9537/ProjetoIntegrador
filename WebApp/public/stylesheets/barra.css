@@ -1,34 +1,40 @@
-.barra {
+.bloco-anotacao {
+    margin-left: 40px;
+    position: fixed;
+    top: 20%;
+    left: 55%; 
+    transform: translateX(-50%);
+    width: 800px; 
+    height: 250px;
+    background-color: white; 
+    border: 1px solid black; 
+    border-radius: 5px; 
+    padding: 10px; 
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .notas{
+    background-color: black;
+  }
+
+  .bloco-anotacao .notas {
+    margin-top: 14px;
+    margin-left: 19px;
+    width: 95%;
+    height: 95%;
+    background-color: inherit;
+    border-radius: inherit;
+    padding: inherit;
+  }
+
+  .input-notas {
     width: 100%;
-    height: 100px;
-    background-color: black;
-    display: flex;
-    justify-content: space-between; 
-    align-items: center;
-}
-
-.titulo{
-    color: white;
-    margin: 0;
-    margin-left: 700px;
-    font-size: 40px;
-}
-
-.dialog_button{
-    text-decoration: white;
-    text-decoration: none;
+    height: 100%;
+    resize: none;
     border: none;
-    font-size: 60px;
-    cursor: pointer;
-    background-color: black;
-    color: white;
-    margin-left: 3%;
-}
-
-.pop-up-dialog{
-    background-color: black;
-}
-
-.bi bi-arrow-down-square-fill{
-    font-weight: bold;
-}
+    background-color: transparent;
+    font-size: 16px;
+    padding: 0;
+    outline: none;
+    overflow: auto;
+  }
