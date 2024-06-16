@@ -9,37 +9,42 @@
     <title>Site de Estudos</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="./stylesheets/Menu.css">
-     <link rel="stylesheet" href="./stylesheets/barra.css">
-     <link rel="stylesheet" href="./stylesheets/calendario.css">
-     <link rel="stylesheet" href="./stylesheets/adicionar.css">
-     <link rel="stylesheet" href="./stylesheets/anotações.css">
-     <link rel="stylesheet" href="./stylesheets/perfil.css">
-      <link rel="stylesheet" href="./stylesheets/anotacao.css">
-     <link rel="stylesheet" href="./stylesheets/registro.css">
+    <link rel="stylesheet" href="./stylesheets/barra.css">
+    <link rel="stylesheet" href="./stylesheets/calendario.css">
+    <link rel="stylesheet" href="./stylesheets/adicionar.css">
+    <link rel="stylesheet" href="./stylesheets/anotações.css">
+    <link rel="stylesheet" href="./stylesheets/perfil.css">
+    <link rel="stylesheet" href="./stylesheets/anotacao.css">
+    <link rel="stylesheet" href="./stylesheets/registro.css">
+    <link rel="stylesheet" href="./stylesheets/tags.css">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-     <script src="javascripts/scripts.js"></script>
+    <script src="javascripts/scripts.js"></script>
 
 </head>
 
 <body>
-    
+
     <nav class="menu-lateral">
-  
+
         <div class="b-expandir">
-          <i class="bi bi-list"></i>
+            <i class="bi bi-list"></i>
         </div>
-      
+
         <ul>
-      
+
             <li class="item-menu">
+
                 <button onclick="openperfilModal()" class="botão">
+
                     <span class="icone">
                         <i class="bi bi-person-circle"></i>
                     </span>
                     <span class="texto"> PERFIL </span>
+
                 </button>
-    
+
                 <dialog class="perfil_menu">
+
                     <i class="bi bi-person-lines-fill"></i>
                     <h1 class="perfil-nome">PERFIL</h1> 
                     <div id="preview"></div>
@@ -49,24 +54,28 @@
                         <ul class="curso-user">Curso: <input type="text"></ul>
                     </div>
                     <div class="botoes">
-                    <button onclick="closeperfilModal()" class="salvar_perfil"> SALVAR </button>
+                        <button onclick="closeperfilModal()" class="salvar_perfil"> SALVAR </button>
                     </div>
+
                 </dialog>
-    
+
             </li>
-      
+
             <li class="item-menu">
+
                 <button onclick="openAddMateriaModal()" class="botão">
                     <span class="icone">
                         <i class="bi bi-plus-square"></i>
                     </span>
                     <span class="texto"> ADICIONAR MATERIA </span>
                 </button>
-          
+
                 <dialog class="adicionar_mat">
+
                     <button onclick="closeAddMateriaModal()" class="fechar-modal-adicionar"> 
-                    <i class="bi bi-x"></i>
+                        <i class="bi bi-x"></i>
                     </button>
+
                     <div class="titulo-adicionar">
                         <h1 class="titulo-ad"> Adicionar Matéria </h1>
                     </div>
@@ -75,12 +84,13 @@
                         <input type="text" id="nome-materia" placeholder="Digite aqui" class="input-materia">
                         <button type="submit" class="botao-salvar">ADICIONAR</button>
                     </form>
+
                 </dialog>
 
             </li>
-          
+
         </ul>
-      
+
     </nav>
 
     <nav class="barra">
@@ -91,9 +101,10 @@
                 <span class="titulo">
                     MATERIA 1 
                 </span>     
+            </div>
 
-                
         </section>
+
         <!--ANOTAÇÕES-->
         <section class="bloco-anotacao">
 
@@ -103,26 +114,48 @@
 
         </section>
 
+        <section class="hashtag">
+
+            <div class="tags">
+
+                <button class="add-tag-button" onclick="openAddTagModal()">Adicionar Tag</button>
+
+            </div>
+
+            <dialog id="addTagModal">
+
+                <form id="addTagForm">
+                    <label for="tagName">Nome da Tag:</label>
+                    <input type="text" id="tagName" name="tagName" required>
+                    <div>
+                        <button type="submit">Adicionar</button>
+                        <button type="button" onclick="closeAddTagModal()">Cancelar</button>
+                    </div>
+                </form>
+    
+            </dialog>
+
+        </section>
+
         <button onclick="openCalendarModal()" class="dialog_button">
             <i class="bi bi-calendar3"></i>
         </button>
-        
+
         <section class="calendario">
-            
+
             <dialog id="pop" class="pop">
 
                 <div class="fechar-calendario">
                     <button onclick="closeCalendarModal()" class="dialog_button"> <i class="bi bi-x"></i> </button>
                 </div>
+
                 <div class="cabecalho">
-                  
-                <button id="btnAnterior"> &lt; </button>
-                <h2 id="mesAno"></h2>
-                <button id="btnProximo"> &gt; </button>
-                
+                    <button id="btnAnterior"> &lt; </button>
+                    <h2 id="mesAno"></h2>
+                    <button id="btnProximo"> &gt; </button>
                 </div>
-        
-                    <div class="dias-semana">
+
+                <div class="dias-semana">
                     <div class="dia-semana">Dom</div>
                     <div class="dia-semana">Seg</div>
                     <div class="dia-semana">Ter</div>
@@ -131,21 +164,19 @@
                     <div class="dia-semana">Sex</div>
                     <div class="dia-semana">Sáb</div>
                 </div>
-                <div class="dias"></div>
-                
-            </div>
 
-                <dialog id="popup" class="popup">
-                    <div>
+                <div onclick="openinfsdia()" class="dias"></div>
 
-                        <div class="fundo-infs">
-                            <p id="infoDia"></p>
-                        
-                        <button id="salvar-Popup"> <i class="bi bi-hand-thumbs-up-fill"></i> </button>
-                        <button id="cancelar-Popup"> <i class="bi bi-hand-thumbs-down-fill"></i> </button>
-                    
-                </dialog>
-            
+            </dialog>
+
+            <dialog id="popup" class="popup">
+
+                <div class="fundo-infs">
+                    <p id="infoDia"></p>
+                    <button id="salvar-Popup"> <i class="bi bi-hand-thumbs-up-fill"></i> </button>
+                    <button id="cancelar-Popup"> <i class="bi bi-hand-thumbs-down-fill"></i> </button>
+                </div>
+
             </dialog>
 
         </section>
@@ -189,16 +220,15 @@
                     <td contenteditable="true">Editar</td>
                     <td contenteditable="true">Editar</td>
                 </tr>
-          
-            
-               
+                
             </table>
+            
         </dialog>
 
-    </nav>
+    </nav>    
 
-    <script src="index.js"></script>
+        <script src="index.js"></script>
 
-</body>
-
+    </body>
+    
 </html>
