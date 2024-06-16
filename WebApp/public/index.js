@@ -196,3 +196,65 @@ document.getElementById('cancelar-Popup').addEventListener('click', function () 
 document.getElementById('salvar-Popup').addEventListener('click', function () {
     popup.close();
 });
+
+//Parte do Davi:
+
+function rate(starNumber, rowNumber) {
+    for (let i = 1; i <= 6; i++) {
+      let estrela = document.getElementById('estrela' + i + '-' + rowNumber);
+      estrela.innerHTML = i <= starNumber ? '&#9733;' : '&#9734;'; 
+    }
+  }
+
+//tags:
+
+const tagsContainer = document.querySelector('.tags');
+
+function openAddTagModal() {
+    const dialog = document.getElementById('addTagModal');
+    dialog.showModal();
+}
+
+function closeAddTagModal() {
+    const dialog = document.getElementById('addTagModal');
+    dialog.close();
+}
+
+document.getElementById('addTagForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const tagName = document.getElementById('tagName').value.trim();
+    if (tagName !== "") {
+
+        const newTagButton = document.createElement('button');
+        newTagButton.textContent = '#' + tagName;
+        newTagButton.classList.add('tag-button');
+        newTagButton.type = "button";
+
+        newTagButton.addEventListener('click', function() {
+            console.log("Tag clicada:", tagName);
+        });
+
+        tagsContainer.appendChild(newTagButton);
+
+        document.getElementById('tagName').value = "";
+
+        closeAddTagModal();
+    }
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    const style = document.createElement('style');
+    style.innerHTML = `
+        .tag-button {
+            margin: 5px;
+            padding: 5px 10px;
+            background-color: #800080;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    `;
+    document.head.appendChild(style);
+});
