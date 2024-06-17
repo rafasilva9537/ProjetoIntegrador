@@ -16,6 +16,14 @@ INNER JOIN Topico
 INNER JOIN Materia
 	ON Materia.id_materia = Topico.id_materia
 
+SELECT Topico_Data.id_topico, ARRAY_AGG(Topico_Data.data), Topico.nome, Topico.desempenho, Topico.progresso, Materia.nome
+FROM Topico_Data
+INNER JOIN Topico
+	ON Topico_Data.id_topico = Topico.id_topico
+INNER JOIN Materia
+	ON Materia.id_materia = Topico.id_materia
+GROUP BY Topico_Data.id_topico, Materia.id_materia, Topico.nome, Topico.desempenho, Topico.progresso, Materia.nome
+
 -- Agrupando tags em uma Matéria
 SELECT Materia.id_materia AS id, Materia.nome, ARRAY_AGG(Materia_Tag.nome_tag) AS tags
 FROM Materia
