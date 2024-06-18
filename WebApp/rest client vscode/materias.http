@@ -18,7 +18,7 @@ DELETE http://localhost:3000/materias
 Content-Type: application/json
 
 {
-    "id_materia": 3
+    "id_materia": 35
 }
 
 

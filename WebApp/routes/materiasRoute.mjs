@@ -16,7 +16,6 @@ router.get('/:id', materiasController.obterMateria);
 
 router.post('/:id/tags', tagsController.inserirTagEmMateria);
 router.get('/:id/tags', tagsController.obterTagsDaMateria);
-
 router.get('/:id/topicos', topicosController.obterTopicos);
 
 export default router;

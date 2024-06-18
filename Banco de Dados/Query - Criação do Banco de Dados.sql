@@ -30,7 +30,7 @@ CREATE TABLE Materia(
 CREATE TABLE Materia_Tag(
 	id_materia INT,
 	nome_tag VARCHAR(250),
-	FOREIGN KEY (id_materia) REFERENCES Materia(id_materia),
+	FOREIGN KEY (id_materia) REFERENCES Materia(id_materia) ON DELETE CASCADE,
 	FOREIGN KEY (nome_tag) REFERENCES Tag(nome),
 	PRIMARY KEY(id_materia, nome_tag)
 );
@@ -43,7 +43,7 @@ CREATE TABLE Topico(
 	desempenho NUMERIC(3,1) CHECK(desempenho >= 0 and desempenho <= 10),
 	progresso VARCHAR CHECK(progresso IN('não iniciado', 'em andamento', 'finalizado')), -- delimita as três opções
 	PRIMARY KEY(id_topico),
-	FOREIGN KEY(id_materia) REFERENCES Materia(id_materia)
+	FOREIGN KEY(id_materia) REFERENCES Materia(id_materia) ON DELETE CASCADE
 );
 
 CREATE TABLE Data(
@@ -54,7 +54,7 @@ CREATE TABLE Data(
 CREATE TABLE Topico_Data(
 	id_topico INT NOT NULL,
 	data DATE NOT NULL,
-	FOREIGN KEY (id_topico) REFERENCES Topico(id_topico),
+	FOREIGN KEY (id_topico) REFERENCES Topico(id_topico) ON DELETE CASCADE,
 	FOREIGN KEY (data) REFERENCES Data(data),
 	PRIMARY KEY(id_topico, data)
 );

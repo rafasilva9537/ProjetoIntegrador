@@ -73,3 +73,10 @@ FROM Materia
 LEFT JOIN Materia_Tag
     ON Materia.id_materia = Materia_Tag.id_materia
 GROUP BY Materia_Tag.nome_tag;
+
+-- Tags
+DELETE FROM Materia_Tag WHERE id_materia = 2 AND nome_tag = 'Cálculo' RETURNING *;
+
+SELECT EXISTS (SELECT * FROM Materia_Tag WHERE id_materia = 1)
+
+SELECT * FROM Materia

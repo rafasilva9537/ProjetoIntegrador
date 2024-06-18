@@ -3,13 +3,104 @@ const menuLateral = document.querySelector('nav.menu-lateral ul');
 const titulo = document.querySelector('.titulo');
 
 //lista
-async function obterMaterias() {
+async function obterMateriasBackEnd() {
     try {
       const response = await axios.get('/materias');
       return response.data;
     } catch (error) {
       console.error(error);
     }
+}
+
+async function criarMateriaBackEnd(nomeMateria) {
+    //enviando dados da MATÉRIA para o backend
+    try{
+        const response = await axios.post('/materias', {
+            nome: nomeMateria,
+            data_inicio: null,
+            data_fim: null,
+            origem: null
+        });
+        
+        return response.data;
+    } catch(error){
+        console.log(error)
+    }
+}
+
+async function renderizarMateria(nomeMateria, idMateria) {
+    try {
+        const responseMateria = await axios.get(`/materias/${idMateria}`);
+        const responseTags = await axios.get(`/materias/${idMateria}/tags`);
+
+        const tags = responseTags.data;
+        const materia = responseMateria.data;
+        
+        titulo.textContent = nomeMateria;
+        titulo.id = "titulo-" + materia.id_materia;
+
+        //renderizar tags
+        const tagsContainer = document.querySelector('.tags')
+        tagsContainer.innerHTML = '<button class="add-tag-button" onclick="openAddTagModal()">Adicionar Tag</button>';
+
+        for (const tag of tags){ 
+            const newTagButton = document.createElement('button');
+            newTagButton.textContent = '#' + tag;
+            newTagButton.classList.add('tag-button');
+            newTagButton.type = "button";
+    
+            newTagButton.addEventListener('click', function() {
+                console.log("Tag clicada:", tag);
+            });
+    
+            tagsContainer.appendChild(newTagButton);
+        }
+      } catch (error) {
+        console.error(error);
+    }
+}
+
+function renderizarMateriaMenuLateral(materia){
+    const novoItemMenu = document.createElement('li');
+    novoItemMenu.classList.add('item-menu');
+
+    const novoBotao = document.createElement('button');
+    novoBotao.classList.add('botão');
+    novoBotao.id = "materia-lateral-" + materia.id_materia;
+
+    const icone = document.createElement('i');
+    icone.classList.add('bi', 'bi-backpack2', 'icone');
+
+    const spanTexto = document.createElement('span');
+    spanTexto.textContent = materia.nome;
+
+    const iconeLixeira = document.createElement('i');
+    iconeLixeira.classList.add('bi', 'bi-trash-fill', 'icone-lixeira');
+    iconeLixeira.addEventListener('click', async function (event) {
+        //evita que event listener do elemento pai seja acionado
+        event.stopPropagation();
+        try{
+            //diferente do POST e PUT, argumento do DELETE precisa ser passado com {data: }
+            const response = await axios.delete("/materias", {data: {id_materia: materia.id_materia}});
+            console.log(`Materia com Id: ${materia.id_materia} e Nome: ${materia.nome} DELETADA`);
+            console.log(response);
+        } catch(error){
+            console.log(error);
+        }
+        
+        novoItemMenu.remove();
+    });
+
+    novoBotao.appendChild(icone);
+    novoBotao.appendChild(spanTexto);
+    novoBotao.appendChild(iconeLixeira);
+
+    novoBotao.addEventListener('click', function (event) {
+        renderizarMateria(materia.nome, materia.id_materia);
+    });
+
+    novoItemMenu.appendChild(novoBotao);
+    menuLateral.appendChild(novoItemMenu);
 }
 
 async function renderizarMenuLateral() {
@@ -58,99 +149,28 @@ async function renderizarMenuLateral() {
         }
     ];*/
     //Comente a linha abaixo e descomente acima para usar os dados das matérias
-    const dadosMaterias = await obterMaterias();
-    console.log(dadosMaterias);
+    const dadosMaterias = await obterMateriasBackEnd();
 
     for (const materia of dadosMaterias) {
-        const novoItemMenu = document.createElement('li');
-        novoItemMenu.classList.add('item-menu');
-
-        const novoBotao = document.createElement('button');
-        novoBotao.classList.add('botão');
-        novoBotao.id = materia.id_materia;
-
-        const icone = document.createElement('i');
-        icone.classList.add('bi', 'bi-backpack2', 'icone');
-
-        const spanTexto = document.createElement('span');
-        spanTexto.textContent = materia.nome;
-
-        const iconeLixeira = document.createElement('i');
-        iconeLixeira.classList.add('bi', 'bi-trash-fill', 'icone-lixeira');
-        iconeLixeira.addEventListener('click', function () {
-            novoItemMenu.remove();
-        });
-
-        novoBotao.appendChild(icone);
-        novoBotao.appendChild(spanTexto);
-        novoBotao.appendChild(iconeLixeira);
-
-        novoBotao.addEventListener('click', function () {
-            titulo.textContent = materia.nome;
-        });
-
-        novoItemMenu.appendChild(novoBotao);
-        menuLateral.appendChild(novoItemMenu);
+        renderizarMateriaMenuLateral(materia);
     }
 }
 
 renderizarMenuLateral();
+//renderizarMateria();
 
-formAdicionar.addEventListener('submit', function (event) {
+//adicionando matéria
+formAdicionar.addEventListener('submit', async function (event) {
     event.preventDefault();
 
     const nomeMateria = document.getElementById('nome-materia').value.trim();
 
     if (nomeMateria !== "") {
-        const novoItemMenu = document.createElement('li');
-        novoItemMenu.classList.add('item-menu');
-
-        const novoBotao = document.createElement('button');
-        novoBotao.classList.add('botão');
-
-        const icone = document.createElement('i');
-        icone.classList.add('bi', 'bi-backpack2', 'icone');
-
-        const spanTexto = document.createElement('span');
-        spanTexto.textContent = nomeMateria;
-
-        const iconeLixeira = document.createElement('i');
-        iconeLixeira.classList.add('bi', 'bi-trash-fill', 'icone-lixeira');
-        //deleção da matéria
-        iconeLixeira.addEventListener('click', function() { 
-            console.log("Item removido");
-            novoItemMenu.remove();
-        });
-
-        novoBotao.appendChild(icone);
-        novoBotao.appendChild(spanTexto);
-        novoBotao.appendChild(iconeLixeira);
-
-        novoBotao.addEventListener('click', function() {
-            titulo.textContent = nomeMateria;
-        });
-
-        novoItemMenu.appendChild(novoBotao);
-        menuLateral.appendChild(novoItemMenu);
-
-        titulo.textContent = nomeMateria;
+        const materiaCriada = await criarMateriaBackEnd(nomeMateria);
+        renderizarMateriaMenuLateral(materiaCriada);
 
         document.getElementById('nome-materia').value = "";
         closeAddMateriaModal();
-
-        //enviando dados da MATÉRIA para o backend
-        axios.post('/materias', {
-            nome: nomeMateria,
-            data_inicio: null,
-            data_fim: null,
-            origem: null
-        })
-            .then((response) => {
-                console.log(response);
-            }, (error) => {
-                console.log(error);
-            }
-        );
     } else {
         alert("Por favor, digite um nome para a matéria.");
     }
@@ -276,12 +296,22 @@ function closeAddTagModal() {
     dialog.close();
 }
 
-document.getElementById('addTagForm').addEventListener('submit', function(event) {
+document.getElementById('addTagForm').addEventListener('submit', async function(event) {
     event.preventDefault();
 
     const tagName = document.getElementById('tagName').value.trim();
     if (tagName !== "") {
 
+        try{
+            const materiaId = (titulo.id).slice(7);
+            await axios.post(`/materias/${materiaId}/tags`, {nome_tag: tagName});
+
+            console.log(materiaId);
+            console.log("Tag Adicionada");
+        } catch(error){
+            console.log(error);
+        }
+        
         const newTagButton = document.createElement('button');
         newTagButton.textContent = '#' + tagName;
         newTagButton.classList.add('tag-button');

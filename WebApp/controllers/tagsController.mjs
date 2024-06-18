@@ -71,23 +71,38 @@ export const inserirTagEmMateria = async(req, res) => {
     }
   }
   
-  export const obterTagsDaMateria = async(req, res) => {
-    try{
+export const obterTagsDaMateria = async (req, res) => {
+    try {
         const queryTagsDaMateria = {
             text: `SELECT nome_tag FROM Materia_Tag WHERE id_materia = $1`,
             values: [req.params.id]
         }
-  
+
         const resultado = await pool.query(queryTagsDaMateria);
         let tags = [];
-  
+
         resultado.rows.forEach((tag) => {
             tags.push(tag.nome_tag);
         })
-  
+
         res.status(200).send(tags);
     }
-    catch(error){
+    catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+}
+
+export const deletarTagDaMateria = async (req, res) => {
+    try{
+        const queryDeletarTags = {
+            text: `DELETE FROM Materia_Tag WHERE id_materia = $1 AND nome_tag = $2 RETURNING *;`,
+            values: [req.params.id, req.body.nome_tag]
+        }
+        const resultado = await pool.query(queryDeletarTags);
+
+        res.status(200).json(resultado.rows[0]);
+    }
+    catch (error){
         res.status(500).json({error: error.message});
     }
-  }
+}

@@ -3,7 +3,7 @@ import path from 'node:path';
 import pool from '../services/database.mjs'
 import * as topicosController from '../controllers/topicosController.mjs'
 import { fileURLToPath } from 'node:url';
-const __filename = fileURLToPath(import.meta.url); // get the resolved path to the file
+const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename); //pega o nome do diretório
 
 const router = express.Router();
@@ -13,7 +13,7 @@ router.get('/', topicosController.obterTopicos);
 
 
 //Tópico específico
-router.put('/', )
+//router.put('/', )
 
 
 export default router;

@@ -149,7 +149,16 @@ function construirGrafo(listaArestas){
     return novoGrafo;
 }
 
-const listaMaterias = [
+async function obterMateriasBackEnd(){
+    try{
+        const response = await axios.get("conexoes-materias");
+        return response.data;
+    } catch(error){
+        console.log(error);
+    }
+}
+
+/*const listaMaterias = [
     {
         "id": 4,
         "nome": "Arquitetura de Computadores",
@@ -195,7 +204,9 @@ const listaMaterias = [
             "Hardware"
         ]
     }
-]
+]*/
+
+const listaMaterias = await obterMateriasBackEnd();
 
 const arestas = criarListaDeArestas(listaMaterias);
 export const grafoMaterias = construirGrafo(arestas);
