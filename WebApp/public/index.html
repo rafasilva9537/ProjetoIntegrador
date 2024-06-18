@@ -193,34 +193,20 @@
             </button>
             <h1 class="nome-registro">REGISTRO</h1>
             </div>
+            
             <table>
-                <tr>
-                    <td contenteditable="true">Editar</td>
-                    <td contenteditable="true">Editar</td>
-                    <td>
-                        <span id="estrela1-3" class="estrela" onclick="rate(1, 3)">&#9734;</span>
-                        <span id="estrela2-3" class="estrela" onclick="rate(2, 3)">&#9734;</span>
-                        <span id="estrela3-3" class="estrela" onclick="rate(3, 3)">&#9734;</span>
-                        <span id="estrela4-3" class="estrela" onclick="rate(4, 3)">&#9734;</span>
-                        <span id="estrela5-3" class="estrela" onclick="rate(5, 3)">&#9734;</span>
-                    </td>
-                    <td contenteditable="true">Editar</td>
-                    <td contenteditable="true">Editar</td>
-                </tr>
-                <tr>
-                    <td contenteditable="true">Editar</td>
-                    <td contenteditable="true">Editar</td>
-                    <td>
-                        <span id="estrela1-4" class="estrela" onclick="rate(1, 4)">&#9734;</span>
-                        <span id="estrela2-4" class="estrela" onclick="rate(2, 4)">&#9734;</span>
-                        <span id="estrela3-4" class="estrela" onclick="rate(3, 4)">&#9734;</span>
-                        <span id="estrela4-4" class="estrela" onclick="rate(4, 4)">&#9734;</span>
-                        <span id="estrela5-4" class="estrela" onclick="rate(5, 4)">&#9734;</span>
-                    </td>
-                    <td contenteditable="true">Editar</td>
-                    <td contenteditable="true">Editar</td>
-                </tr>
                 
+            <div class="b-registro">
+                <button onclick="closeregistroModal()" class="fechar-registro"> X </button>
+                <h1 class="titulo-registro">REGISTRO</h1>
+            </div>
+
+            <table id="myTable" border="1">
+                <!-- As linhas podem ser adicionadas dinamicamente -->
+              </table>
+            
+              <button onclick="addRow()">Adicionar Linha</button>
+            
             </table>
             
         </dialog>
