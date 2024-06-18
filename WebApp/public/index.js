@@ -2,58 +2,72 @@ const formAdicionar = document.querySelector('.form-adicionar');
 const menuLateral = document.querySelector('nav.menu-lateral ul');
 const titulo = document.querySelector('.titulo');
 
-const dadosMaterias = [
-    {
-        "id_materia": 1,
-        "nome": "Linguagem C",
-        "data_inicio": "2024-01-23T03:00:00.000Z",
-        "data_fim": null,
-        "origem": "Alura"
-    },
-    {
-        "id_materia": 2,
-        "nome": "Cálculo 2",
-        "data_inicio": "2024-01-29T03:00:00.000Z",
-        "data_fim": null,
-        "origem": "IESB"
-    },
-    {
-        "id_materia": 3,
-        "nome": "Estrutura de Dados",
-        "data_inicio": "2024-01-13T03:00:00.000Z",
-        "data_fim": "2024-02-13T03:00:00.000Z",
-        "origem": "Alura"
-    },
-    {
-        "id_materia": 4,
-        "nome": "Arquitetura de Computadores",
-        "data_inicio": null,
-        "data_fim": null,
-        "origem": null
-    },
-    {
-        "id_materia": 5,
-        "nome": "Sistemas Digitais",
-        "data_inicio": "2024-01-29T03:00:00.000Z",
-        "data_fim": null,
-        "origem": "IESB"
-    },
-    {
-        "id_materia": 6,
-        "nome": "WebDesign",
-        "data_inicio": "2024-01-13T03:00:00.000Z",
-        "data_fim": "2024-02-13T03:00:00.000Z",
-        "origem": "Alura"
+//lista
+async function obterMaterias() {
+    try {
+      const response = await axios.get('/materias');
+      return response.data;
+    } catch (error) {
+      console.error(error);
     }
-];
+}
 
-function renderizarMenuLateral() {
+async function renderizarMenuLateral() {
+    /*const dadosMaterias = [
+        {
+            "id_materia": 1,
+            "nome": "Linguagem C",
+            "data_inicio": "2024-01-23T03:00:00.000Z",
+            "data_fim": null,
+            "origem": "Alura"
+        },
+        {
+            "id_materia": 2,
+            "nome": "Cálculo 2",
+            "data_inicio": "2024-01-29T03:00:00.000Z",
+            "data_fim": null,
+            "origem": "IESB"
+        },
+        {
+            "id_materia": 3,
+            "nome": "Estrutura de Dados",
+            "data_inicio": "2024-01-13T03:00:00.000Z",
+            "data_fim": "2024-02-13T03:00:00.000Z",
+            "origem": "Alura"
+        },
+        {
+            "id_materia": 4,
+            "nome": "Arquitetura de Computadores",
+            "data_inicio": null,
+            "data_fim": null,
+            "origem": null
+        },
+        {
+            "id_materia": 5,
+            "nome": "Sistemas Digitais",
+            "data_inicio": "2024-01-29T03:00:00.000Z",
+            "data_fim": null,
+            "origem": "IESB"
+        },
+        {
+            "id_materia": 6,
+            "nome": "WebDesign",
+            "data_inicio": "2024-01-13T03:00:00.000Z",
+            "data_fim": "2024-02-13T03:00:00.000Z",
+            "origem": "Alura"
+        }
+    ];*/
+    //Comente a linha abaixo e descomente acima para usar os dados das matérias
+    const dadosMaterias = await obterMaterias();
+    console.log(dadosMaterias);
+
     for (const materia of dadosMaterias) {
         const novoItemMenu = document.createElement('li');
         novoItemMenu.classList.add('item-menu');
 
         const novoBotao = document.createElement('button');
         novoBotao.classList.add('botão');
+        novoBotao.id = materia.id_materia;
 
         const icone = document.createElement('i');
         icone.classList.add('bi', 'bi-backpack2', 'icone');
@@ -88,13 +102,55 @@ formAdicionar.addEventListener('submit', function (event) {
     const nomeMateria = document.getElementById('nome-materia').value.trim();
 
     if (nomeMateria !== "") {
+        const novoItemMenu = document.createElement('li');
+        novoItemMenu.classList.add('item-menu');
+
+        const novoBotao = document.createElement('button');
+        novoBotao.classList.add('botão');
+
+        const icone = document.createElement('i');
+        icone.classList.add('bi', 'bi-backpack2', 'icone');
+
+        const spanTexto = document.createElement('span');
+        spanTexto.textContent = nomeMateria;
+
+        const iconeLixeira = document.createElement('i');
+        iconeLixeira.classList.add('bi', 'bi-trash-fill', 'icone-lixeira');
+        //deleção da matéria
+        iconeLixeira.addEventListener('click', function() { 
+            console.log("Item removido");
+            novoItemMenu.remove();
+        });
+
+        novoBotao.appendChild(icone);
+        novoBotao.appendChild(spanTexto);
+        novoBotao.appendChild(iconeLixeira);
+
+        novoBotao.addEventListener('click', function() {
+            titulo.textContent = nomeMateria;
+        });
+
+        novoItemMenu.appendChild(novoBotao);
+        menuLateral.appendChild(novoItemMenu);
+
+        titulo.textContent = nomeMateria;
 
         document.getElementById('nome-materia').value = "";
-
         closeAddMateriaModal();
 
-        console.log("Enviando nova matéria para o backend:", nomeMateria);
-
+        //enviando dados da MATÉRIA para o backend
+        axios.post('/materias', {
+            nome: nomeMateria,
+            data_inicio: null,
+            data_fim: null,
+            origem: null
+        })
+            .then((response) => {
+                console.log(response);
+            }, (error) => {
+                console.log(error);
+            }
+        );
     } else {
         alert("Por favor, digite um nome para a matéria.");
     }
