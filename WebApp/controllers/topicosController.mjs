@@ -5,7 +5,7 @@ export const obterTopicos = async (req, res) => {
     try {
       console.log("Topicos")
       const queryTodosTopicos = {
-        text: `SELECT id_topico, nome, desempenho, id_materia 
+        text: `SELECT id_topico, nome, progresso, desempenho, id_materia 
         FROM Topico 
         WHERE id_materia = $1`,
         values: [req.params.id]
@@ -24,10 +24,8 @@ export const obterTopicos = async (req, res) => {
         topico.datas = [];
         datas_topicos.rows.forEach((data) => {
           if(data.id_topico === topico.id_topico) topico.datas.push(data.data);
-          console.log(topico)
-          console.log(data.data);
         })
-      })
+      });
 
       res.status(200).json(topicos.rows);
     } catch (error) {
@@ -40,8 +38,8 @@ export const obterTopicos = async (req, res) => {
 export const criarTopico = async (req, res) => {
     try {
       const queryCriarTopico = {
-        text: `INSERT INTO Topico(nome, descricao, id_materia) VALUES ($1, $2, $3) RETURNING *`,
-        values: [req.body.nome, req.body.descricao, req.body.id_materia]
+        text: `INSERT INTO Topico(id_materia, nome, desempenho, progresso)  VALUES ($1, $2, $3) RETURNING *`,
+        values: [req.body.id_materia, req.body.nome, "não iniciado", ]
       }
   
       const resultado = await pool.query(queryCriarTopico);

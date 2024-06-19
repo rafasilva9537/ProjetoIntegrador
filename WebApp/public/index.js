@@ -55,6 +55,9 @@ async function renderizarMateria(nomeMateria, idMateria) {
     
             tagsContainer.appendChild(newTagButton);
         }
+
+        //renderiza tabela de tópicos
+        createTable();
       } catch (error) {
         console.error(error);
     }
@@ -277,167 +280,181 @@ document.getElementById('salvar-Popup').addEventListener('click', function () {
 
 //Parte do Davi:
 
-const dadosTopicos = [
-    {
-      "id_topico": 2,
-      "nome": "Funções",
-      "progresso": "Em andamento",
-      "performance": "8.0",
-      "id_materia": 2,
-      "datas": [
-        "2024-04-25T03:00:00.000Z"
-      ]
-    },
-    {
-      "id_topico": 3,
-      "nome": "Derivada Parcial",
-      "progresso": "Não iniciado",
-      "performance": "9.0",
-      "id_materia": 2,
-      "datas": []
-    },
-    {
-      "id_topico": 4,
-      "nome": "Estrutura de dados",
-      "progresso": "Finalizado",
-      "performance": "9.0",
-      "id_materia": 2,
-      "datas": []
+async function obterTopicosBackEnd(idMateria){
+    try{
+        console.log("idMateria: " + idMateria)
+        const response = await axios.get(`materias/${idMateria}/topicos`);
+        return response.data;
+    } catch(error){
+        console.log(error);
     }
-  ]
-    
-  function createTable() {
+}
+
+async function createTable() {
+    /* const dadosTopicos = [
+        {
+            "id_topico": 2,
+            "nome": "Funções",
+            "progresso": "Em andamento",
+            "performance": "8.0",
+            "id_materia": 2,
+            "datas": [
+                "2024-04-25T03:00:00.000Z"
+            ]
+        },
+        {
+            "id_topico": 3,
+            "nome": "Derivada Parcial",
+            "progresso": "Não iniciado",
+            "performance": "9.0",
+            "id_materia": 2,
+            "datas": []
+        },
+        {
+            "id_topico": 4,
+            "nome": "Estrutura de dados",
+            "progresso": "Finalizado",
+            "performance": "9.0",
+            "id_materia": 2,
+            "datas": []
+        }
+    ] */
+
+    const materiaId = (titulo.id).slice(7);
+    const dadosTopicos = await obterTopicosBackEnd(materiaId);
+    console.log(dadosTopicos);
+
+    const table = document.getElementById("myTable");
+    //apagar tabela para chamar outra, senão dados da tabela antiga se mesclam com dados da nova
+    table.innerHTML = "";
+
     for (const topico of dadosTopicos) {
-      let table = document.getElementById("myTable");
-      let row = table.insertRow(-1); // Insere no final da tabela
-      let currentRowId = topico.id_topico; // Guarda o ID atual da linha
-      row.id = currentRowId; // Atribui um ID único
+        let row = table.insertRow(-1); // Insere no final da tabela
+        let currentRowId = topico.id_topico; // Guarda o ID atual da linha
+        row.id = currentRowId; // Atribui um ID único
 
-      // Primeira célula com input de texto
-      let cell1 = row.insertCell(0);
-      cell1.innerHTML = "<input type='text' />";
-      //cell1.contentEditable = 'true';
+        // Primeira célula com input de texto
+        let cell1 = row.insertCell(0);
+        cell1.innerHTML = "<input type='text' />";
+        //cell1.contentEditable = 'true';
 
-      // Segunda célula com input de texto
-      let cell2 = row.insertCell(1);
-      cell2.innerHTML = "<input type='text' />";
+        // Segunda célula com input de texto
+        let cell2 = row.insertCell(1);
+        cell2.innerHTML = "<input type='text' />";
 
-      // Terceira célula com classificação por estrelas
-      let cell3 = row.insertCell(2);
-      for (let j = 1; j <= 6; j++) { // Até 6 estrelas
-        let estrela = document.createElement('span');
-        estrela.id = 'estrela' + j + '-' + currentRowId;
-        estrela.className = 'estrela';
-        estrela.innerHTML = '☆';
-        estrela.onclick = function () { rate(j, currentRowId, topico); };
-        cell3.appendChild(estrela);
-      }
+        // Terceira célula com classificação por estrelas
+        let cell3 = row.insertCell(2);
+        for (let j = 1; j <= 6; j++) { // Até 6 estrelas
+            let estrela = document.createElement('span');
+            estrela.id = 'estrela' + j + '-' + currentRowId;
+            estrela.className = 'estrela';
+            estrela.innerHTML = '☆';
+            estrela.onclick = function () { rate(j, currentRowId, topico); };
+            cell3.appendChild(estrela);
+        }
 
-      // Quarta célula com input de texto
-      let cell4 = row.insertCell(3);
-      cell4.innerHTML = "<input type='text' />";
+        // Quarta célula com input de texto
+        let cell4 = row.insertCell(3);
+        cell4.innerHTML = "<input type='text' />";
 
-      // Adiciona botão de remover na última célula
-      let updateCell = row.insertCell(4);
-      updateCell.innerHTML = "<button onclick='updateRow(this)'>Atualizar</button>";
-      let removeCell = row.insertCell(5);
-      removeCell.innerHTML = "<button onclick='removeRow(this)'>Remover</button>";
+        // Adiciona botão de remover na última célula
+        let updateCell = row.insertCell(4);
+        updateCell.innerHTML = "<button onclick='updateRow(this)'>Atualizar</button>";
+        let removeCell = row.insertCell(5);
+        removeCell.innerHTML = "<button onclick='removeRow(this)'>Remover</button>";
 
-      //cell1.textContent = ;
-      cell1.innerHTML = `<input type='text' value='${topico.nome}'/>`;
-      cell2.innerHTML = `<input type='text' value='${topico.progresso}'/>`;
-      if(!topico.datas[0]){
-        cell4.innerHTML = `<input type='text' value=''/>`;
-      }
-      else{
-        cell4.innerHTML = `<input type='text' value='${topico.datas[0]}'/>`
-      }
-      //console.log(cell1.childNodes[0].value);
+        //cell1.textContent = ;
+        cell1.innerHTML = `<input type='text' value='${topico.nome}'/>`;
+        cell2.innerHTML = `<input type='text' value='${topico.progresso}'/>`;
+        if (!topico.datas[0]) {
+            cell4.innerHTML = `<input type='text' value=''/>`;
+        }
+        else {
+            cell4.innerHTML = `<input type='text' value='${topico.datas[0]}'/>`
+        }
+        //console.log(cell1.childNodes[0].value);
     }
-  }
+}
 
+// Contador global para IDs da linha
+let rowIdCounter = 1;
 
-  createTable();
-
-  // Contador global para IDs da linha
-  let rowIdCounter = 1;
-
-  //Adicionar nova linha com classificação por estrelas na terceira coluna
-  //obs: o (-1),(0),(1),(2); (-1)insere no final, (0)inicio e (1)após a primeira celula
-  function addRow() {
-    const topico =       {
-      "nome": null,
-      "progresso": null,
-      "performance": null,
-      "id_materia": 2,
-      "datas": []
+//Adicionar nova linha com classificação por estrelas na terceira coluna
+//obs: o (-1),(0),(1),(2); (-1)insere no final, (0)inicio e (1)após a primeira celula
+function addRow() {
+    const topico = {
+        "nome": null,
+        "progresso": null,
+        "performance": 0,
+        "id_materia": 2,
+        "datas": []
     }
 
     let table = document.getElementById("myTable");
-      let row = table.insertRow(-1); // Insere no final da tabela
-      let currentRowId = topico.id_topico; // Guarda o ID atual da linha
-      row.id = currentRowId; // Atribui um ID único
+    let row = table.insertRow(-1); // Insere no final da tabela
+    let currentRowId = topico.id_topico; // Guarda o ID atual da linha
+    row.id = currentRowId; // Atribui um ID único
 
-      // Primeira célula com input de texto
-      let cell1 = row.insertCell(0);
-      cell1.innerHTML = "<input type='text' />";
-      //cell1.contentEditable = 'true';
+    // Primeira célula com input de texto
+    let cell1 = row.insertCell(0);
+    cell1.innerHTML = "<input type='text' />";
+    //cell1.contentEditable = 'true';
 
-      // Segunda célula com input de texto
-      let cell2 = row.insertCell(1);
-      cell2.innerHTML = "<input type='text' />";
+    // Segunda célula com input de texto
+    let cell2 = row.insertCell(1);
+    cell2.innerHTML = "<input type='text' />";
 
-      // Terceira célula com classificação por estrelas
-      let cell3 = row.insertCell(2);
-      for (let j = 1; j <= 6; j++) { // Até 6 estrelas
+    // Terceira célula com classificação por estrelas
+    let cell3 = row.insertCell(2);
+    for (let j = 1; j <= 6; j++) { // Até 6 estrelas
         let estrela = document.createElement('span');
         estrela.id = 'estrela' + j + '-' + currentRowId;
         estrela.className = 'estrela';
         estrela.innerHTML = '☆';
         estrela.onclick = function () { rate(j, currentRowId, topico); };
         cell3.appendChild(estrela);
-      }
+    }
 
-      // Quarta célula com input de texto
-      let cell4 = row.insertCell(3);
-      cell4.innerHTML = "<input type='text' />";
+    // Quarta célula com input de texto
+    let cell4 = row.insertCell(3);
+    cell4.innerHTML = "<input type='text' />";
 
-      // Adiciona botão de remover na última célula
-      let updateCell = row.insertCell(4);
-      updateCell.innerHTML = "<button onclick='updateRow(this)'>Atualizar</button>";
-      let removeCell = row.insertCell(5);
-      removeCell.innerHTML = "<button onclick='removeRow(this)'>Remover</button>";
+    // Adiciona botão de remover na última célula
+    let updateCell = row.insertCell(4);
+    updateCell.innerHTML = "<button onclick='updateRow(this)'>Atualizar</button>";
+    let removeCell = row.insertCell(5);
+    removeCell.innerHTML = "<button onclick='removeRow(this)'>Remover</button>";
 
-      //cell1.textContent = ;
-      cell1.innerHTML = `<input type='text' value=''/>`;
-      cell2.innerHTML = `<input type='text' value='Não iniciado'/>`;
-      if(!topico.datas[0]){
+    //cell1.textContent = ;
+    cell1.innerHTML = `<input type='text' value=''/>`;
+    cell2.innerHTML = `<input type='text' value='Não iniciado'/>`;
+    if (!topico.datas[0]) {
         cell4.innerHTML = `<input type='text' value=''/>`;
-      }
-      else{
+    }
+    else {
         cell4.innerHTML = `<input type='text' value='${topico.datas[0]}'/>`
-      }
-  }
+    }
+}
 
-  // Função para editar célula
-  function editCell(cell) {
+// Função para editar célula
+function editCell(cell) {
     let currentText = cell.innerHTML;
     cell.innerHTML = "<input type='text' value='" + currentText + "'/>";
     cell.firstChild.focus();
     cell.firstChild.onblur = function () {
-      cell.innerHTML = this.value;
+        cell.innerHTML = this.value;
     };
-  }
+}
 
-  // Função para remover linha
-  function removeRow(button) {
+// Função para remover linha
+function removeRow(button) {
 
     let row = button.parentNode.parentNode;
     console.log(row.id)
     document.getElementById("myTable").deleteRow(row.rowIndex);
-  }
+}
 
-  function updateRow(button) {
+function updateRow(button) {
     let row = button.parentNode.parentNode;
     console.log(row.id)
     console.log(row.childNodes[0].childNodes[0].value);
@@ -445,23 +462,23 @@ const dadosTopicos = [
     console.log(row.childNodes[3].childNodes[0].value);
 
     //document.getElementById("myTable").deleteRow(row.rowIndex);
-  }
+}
 
-  // Função para atualizar classificação por estrelas
-  function rate(starNumber, rowNumber, topico) {
+// Função para atualizar classificação por estrelas
+function rate(starNumber, rowNumber, topico) {
     for (let i = 1; i <= 6; i++) {
-      let estrela = document.getElementById('estrela' + i + '-' + rowNumber);
-      estrela.innerHTML = i <= starNumber ? '★' : '☆';
+        let estrela = document.getElementById('estrela' + i + '-' + rowNumber);
+        estrela.innerHTML = i <= starNumber ? '★' : '☆';
     }
-    
-    let performance = (starNumber / 6) * 100; 
+
+    let performance = (starNumber / 6) * 100;
     let performanceId = 'performance' + rowNumber;
     console.log(performanceId + ': ' + performance);
-    
+
     //IMPLEMENTAR QUERY DO BANDO DO BANCO DE DADOS
     topico.performance = Math.floor(performance);
     console.log(topico)
-  }
+}
 
 //tags:
 
