@@ -24,6 +24,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/topicos', topicosRoute);
 app.use('/materias', materiasRoute);
 app.use('/tags', tagsRoute);
-app.use('/conexoes-materias', conexoesMateriasRoute)
+app.use('/conexoes-materias', conexoesMateriasRoute);
 
 export default app;

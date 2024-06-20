@@ -10,10 +10,15 @@ const router = express.Router();
 
 router.get('/', conexoesMateriasController.visualizarConexoes);
 
-/*
+
+//router.use(express.json());
+//router.use(express.urlencoded({ extended: false }));
+//router.use(express.static(path.join(__dirname, '../public'), { index: 'grafoMaterias.html'}));
+
 router.use(express.json());
 router.use(express.urlencoded({ extended: false }));
-router.use(express.static(path.join(__dirname, '../public'), { index: 'grafoMaterias.html'}));
-*/
+// app.use(cookieParser());
+router.use(express.static(path.join(__dirname, 'public')));
+
 
 export default router;

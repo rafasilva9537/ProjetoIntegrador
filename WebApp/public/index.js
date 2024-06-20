@@ -296,7 +296,7 @@ async function createTable() {
             "id_topico": 2,
             "nome": "Funções",
             "progresso": "Em andamento",
-            "performance": "8.0",
+            "desempenho": "8.0",
             "id_materia": 2,
             "datas": [
                 "2024-04-25T03:00:00.000Z"
@@ -306,7 +306,7 @@ async function createTable() {
             "id_topico": 3,
             "nome": "Derivada Parcial",
             "progresso": "Não iniciado",
-            "performance": "9.0",
+            "desempenho": "9.0",
             "id_materia": 2,
             "datas": []
         },
@@ -314,7 +314,7 @@ async function createTable() {
             "id_topico": 4,
             "nome": "Estrutura de dados",
             "progresso": "Finalizado",
-            "performance": "9.0",
+            "desempenho": "9.0",
             "id_materia": 2,
             "datas": []
         }
@@ -322,7 +322,6 @@ async function createTable() {
 
     const materiaId = (titulo.id).slice(7);
     const dadosTopicos = await obterTopicosBackEnd(materiaId);
-    console.log(dadosTopicos);
 
     const table = document.getElementById("myTable");
     //apagar tabela para chamar outra, senão dados da tabela antiga se mesclam com dados da nova
@@ -364,8 +363,15 @@ async function createTable() {
         removeCell.innerHTML = "<button onclick='removeRow(this)'>Remover</button>";
 
         //cell1.textContent = ;
-        cell1.innerHTML = `<input type='text' value='${topico.nome}'/>`;
+        if (!topico.nome){
+            cell1.innerHTML = `<input type='text''/>`;
+        }
+        else{
+            cell1.innerHTML = `<input type='text' value='${topico.nome}'/>`;
+        }
+
         cell2.innerHTML = `<input type='text' value='${topico.progresso}'/>`;
+
         if (!topico.datas[0]) {
             cell4.innerHTML = `<input type='text' value=''/>`;
         }
@@ -376,19 +382,48 @@ async function createTable() {
     }
 }
 
+async function criaTopicoBackEnd(idMateria){
+    try{
+        const response = await axios.post(`/materias/${idMateria}/topicos`, 
+            {
+                "nome": null,
+                "progresso": "não iniciado",
+                "desempenho": 0,
+                "id_materia": idMateria,
+            }
+        );
+        return response.data;
+    } catch(error){
+        console.log(error);
+    }
+}
+
+async function obterTopicoDeMateriaBackEnd(){
+    try{
+        const response = await axios.post(`/materias/`)
+    } catch(error){
+        console.log(error);
+    }
+}
 // Contador global para IDs da linha
 let rowIdCounter = 1;
 
 //Adicionar nova linha com classificação por estrelas na terceira coluna
 //obs: o (-1),(0),(1),(2); (-1)insere no final, (0)inicio e (1)após a primeira celula
-function addRow() {
-    const topico = {
+async function addRow() {
+
+    /*const topico = {
         "nome": null,
         "progresso": null,
-        "performance": 0,
+        "desempenho": 0,
         "id_materia": 2,
         "datas": []
-    }
+    }*/
+
+    const materiaId = (titulo.id).slice(7);
+    const topicoAuxiliar = await criaTopicoBackEnd(materiaId);
+    const topico = await obterTopicosBackEnd(topicoAuxiliar.id_materia);
+    console.log("Topico criado:", topico);
 
     let table = document.getElementById("myTable");
     let row = table.insertRow(-1); // Insere no final da tabela
@@ -426,8 +461,15 @@ function addRow() {
     removeCell.innerHTML = "<button onclick='removeRow(this)'>Remover</button>";
 
     //cell1.textContent = ;
-    cell1.innerHTML = `<input type='text' value=''/>`;
+    if (!topico.nome){
+        cell1.innerHTML = `<input type='text''/>`;
+    }
+    else{
+        cell1.innerHTML = `<input type='text' value='${topico.nome}'/>`;
+    }
+
     cell2.innerHTML = `<input type='text' value='Não iniciado'/>`;
+    
     if (!topico.datas[0]) {
         cell4.innerHTML = `<input type='text' value=''/>`;
     }
@@ -454,14 +496,30 @@ function removeRow(button) {
     document.getElementById("myTable").deleteRow(row.rowIndex);
 }
 
-function updateRow(button) {
+async function updateRow(button) {
+    aw
+
     let row = button.parentNode.parentNode;
     console.log(row.id)
     console.log(row.childNodes[0].childNodes[0].value);
     console.log(row.childNodes[1].childNodes[0].value);
     console.log(row.childNodes[3].childNodes[0].value);
 
-    //document.getElementById("myTable").deleteRow(row.rowIndex);
+    if (!topico.nome){
+        cell1.innerHTML = `<input type='text''/>`;
+    }
+    else{
+        cell1.innerHTML = `<input type='text' value='${topico.nome}'/>`;
+    }
+
+    cell2.innerHTML = `<input type='text' value='Não iniciado'/>`;
+    
+    if (!topico.datas[0]) {
+        cell4.innerHTML = `<input type='text' value=''/>`;
+    }
+    else {
+        cell4.innerHTML = `<input type='text' value='${topico.datas[0]}'/>`
+    }
 }
 
 // Função para atualizar classificação por estrelas
@@ -471,12 +529,12 @@ function rate(starNumber, rowNumber, topico) {
         estrela.innerHTML = i <= starNumber ? '★' : '☆';
     }
 
-    let performance = (starNumber / 6) * 100;
-    let performanceId = 'performance' + rowNumber;
-    console.log(performanceId + ': ' + performance);
+    let desempenho = (starNumber / 6) * 100;
+    let desempenhoId = 'desempenho' + rowNumber;
+    console.log(desempenhoId + ': ' + desempenho);
 
     //IMPLEMENTAR QUERY DO BANDO DO BANCO DE DADOS
-    topico.performance = Math.floor(performance);
+    topico.desempenho = Math.floor(desempenho);
     console.log(topico)
 }
 

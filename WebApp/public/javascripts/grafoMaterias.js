@@ -61,7 +61,7 @@ class Grafo {
             this.grafo.get(nosDelecao).splice(indexDelecao, 1);
         }
 
-        //this.grafo.delete(no);
+        this.grafo.delete(no);
     }
 
     obterNoPorId(id){

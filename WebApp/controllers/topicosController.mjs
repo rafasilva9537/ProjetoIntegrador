@@ -27,6 +27,7 @@ export const obterTopicos = async (req, res) => {
         })
       });
 
+      console.log(topicos.rows);
       res.status(200).json(topicos.rows);
     } catch (error) {
       res.status(500).json({ error: error.message });
@@ -38,10 +39,10 @@ export const obterTopicos = async (req, res) => {
 export const criarTopico = async (req, res) => {
     try {
       const queryCriarTopico = {
-        text: `INSERT INTO Topico(id_materia, nome, desempenho, progresso)  VALUES ($1, $2, $3) RETURNING *`,
-        values: [req.body.id_materia, req.body.nome, "não iniciado", ]
+        text: `INSERT INTO Topico(id_materia, nome, desempenho, progresso)  VALUES ($1, $2, $3, $4) RETURNING *`,
+        values: [req.body.id_materia, req.body.nome, req.body.desempenho, req.body.progresso]
       }
-  
+      console.log();
       const resultado = await pool.query(queryCriarTopico);
       res.status(200).json(resultado.rows[0]);
     } catch (error) {
