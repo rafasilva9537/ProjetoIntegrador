@@ -81,8 +81,8 @@ export const atualizarTopico = async (req, res) => {
 export const deletarTopico = async (req, res) => {
   try {
     const queryDeletarTopico = {
-      text: `DELETE FROM Topico WHERE id_topico = $1 RETURNING *`,
-      values: [req.body.id_topico]
+      text: `DELETE FROM Topico WHERE id_topico = $1 AND id_materia = $2 RETURNING *`,
+      values: [req.body.id_topico, req.body.id_materia]
     }
 
     const resultado = await pool.query(queryDeletarTopico);

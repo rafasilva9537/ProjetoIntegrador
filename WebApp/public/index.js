@@ -1,4 +1,4 @@
-const formAdicionar = document.querySelector('.form-adicionar');
+const formAdicionar = document.querySelector('.botao-salvar');
 const menuLateral = document.querySelector('nav.menu-lateral ul');
 const titulo = document.querySelector('.titulo');
 
@@ -163,10 +163,11 @@ renderizarMenuLateral();
 //renderizarMateria();
 
 //adicionando matéria
-formAdicionar.addEventListener('submit', async function (event) {
+formAdicionar.addEventListener('click', async function (event) {
     event.preventDefault();
 
     const nomeMateria = document.getElementById('nome-materia').value.trim();
+    console.log(nomeMateria);
 
     if (nomeMateria !== "") {
         const materiaCriada = await criarMateriaBackEnd(nomeMateria);
@@ -452,22 +453,8 @@ async function addRow() {
     removeCell.innerHTML = "<button onclick='removeRow(this)'>Remover</button>";
 
     //cell1.textContent = ;
-    if (!topico.nome){
-        cell1.innerHTML = `<input type='text''/>`;
-    }
-    else{
-        cell1.innerHTML = `<input type='text' value='${topico.nome}'/>`;
-    }
-
-    cell2.innerHTML = `<input type='text' value='Não iniciado'/>`;
-    
-    topico.datas = []
-    if (!topico.datas[0]) {
-        cell4.innerHTML = `<input type='text' value=''/>`;
-    }
-    else {
-        cell4.innerHTML = `<input type='text' value='${topico.datas[0]}'/>`
-    }
+    cell1.innerHTML = `<input type='text''/>`
+    cell2.innerHTML = `<input type='text' value='não iniciado'/>`;cell4.innerHTML = `<input type='text' value=''/>`;
 }
 
 // Função para editar célula
@@ -480,10 +467,20 @@ function editCell(cell) {
     };
 }
 
-// Função para remover linha
-function removeRow(button) {
 
-    let row = button.parentNode.parentNode;
+// Função para remover linha
+async function removeRow(button) {
+    try{
+        await axios.delete(`/materias/${idMateria}/topicos`,
+            {
+
+            }
+        );
+    } catch(error){
+        console.log(error)
+    }
+
+    const row = button.parentNode.parentNode;
     console.log(row.id)
     document.getElementById("myTable").deleteRow(row.rowIndex);
 }
