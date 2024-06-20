@@ -40,7 +40,7 @@ async function renderizarMateria(nomeMateria, idMateria) {
         titulo.id = "titulo-" + materia.id_materia;
 
         //renderizar tags
-        const tagsContainer = document.querySelector('.tags')
+        const tagsContainer = document.querySelector('.tags');
         tagsContainer.innerHTML = '<button class="add-tag-button" onclick="openAddTagModal()">Adicionar Tag</button>';
 
         for (const tag of tags){ 
@@ -362,6 +362,7 @@ async function createTable() {
         updateCell.innerHTML = "<button onclick='updateRow(this)'>Atualizar</button>";
         let removeCell = row.insertCell(5);
         removeCell.innerHTML = "<button onclick='removeRow(this)'>Remover</button>";
+  
 
         //cell1.textContent = ;
         if (!topico.nome){
@@ -379,7 +380,13 @@ async function createTable() {
         else {
             cell4.innerHTML = `<input type='text' value='${topico.datas[0]}'/>`
         }
-        //console.log(cell1.childNodes[0].value);
+
+        cell1.childNodes[0].classList.add("celula-topico");
+        cell2.childNodes[0].classList.add("celula-topico");
+        //cell3.childNodes[0].classList.add("celula-topico");
+        cell4.childNodes[0].classList.add("celula-topico");
+        updateCell.childNodes[0].classList.add("botao-topico");
+        removeCell.childNodes[0].classList.add("botao-topico");
     }
 }
 
@@ -455,6 +462,13 @@ async function addRow() {
     //cell1.textContent = ;
     cell1.innerHTML = `<input type='text''/>`
     cell2.innerHTML = `<input type='text' value='não iniciado'/>`;cell4.innerHTML = `<input type='text' value=''/>`;
+
+    cell1.childNodes[0].classList.add("celula-topico");
+    cell2.childNodes[0].classList.add("celula-topico");
+    //cell3.childNodes[0].classList.add("celula-topico");
+    cell4.childNodes[0].classList.add("celula-topico");
+    updateCell.childNodes[0].classList.add("botao-topico");
+    removeCell.childNodes[0].classList.add("botao-topico");
 }
 
 // Função para editar célula

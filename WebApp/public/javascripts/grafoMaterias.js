@@ -205,8 +205,8 @@ async function obterMateriasBackEnd(){
 ]*/
 
 const listaMaterias = await obterMateriasBackEnd();
-console.log("Testando");
-console.log(listaMaterias);
+console.log("Aqui está chamando o grafo no backend")
+console.log("Aqui:", listaMaterias);
 
 const arestas = criarListaDeArestas(listaMaterias);
 export const grafoMaterias = construirGrafo(arestas);
@@ -265,11 +265,17 @@ const simulation = d3.forceSimulation(nodes)
     .force("y", d3.forceY());
 
 // Cria o container SVG
-const svg = d3.select("body").append("svg") //não funcionava com d3.create("svg"), descobrir o movito
+const svg = d3.select("#graph-container").append("svg")
     .attr("width", width)
     .attr("height", height)
     .attr("viewBox", [-width / 2, -height / 2, width, height])
     .attr("style", "max-width: 100%; height: auto;");
+
+/*const svg = d3.select("body").append("svg") //não funcionava com d3.create("svg"), descobrir o movito
+    .attr("width", width)
+    .attr("height", height)
+    .attr("viewBox", [-width / 2, -height / 2, width, height])
+    .attr("style", "max-width: 100%; height: auto;");*/
 
 // Adiciona uma linha para cada aresta e um círculo para cada nó
 const link = svg.append("g")
