@@ -82,27 +82,47 @@
           </button>
 
           <dialog class="adicionar_mat">
-            <button
-              onclick="closeAddMateriaModal()"
-              class="fechar-modal-adicionar"
-            >
-              <i class="bi bi-x"></i>
-            </button>
 
-            <div class="titulo-adicionar">
-              <h1 class="titulo-ad">Adicionar Matéria</h1>
-            </div>
-            <form class="form-adicionar">
-              <label class="nome-materia">Digite o nome da matéria:</label>
-              <input
-                type="text"
-                id="nome-materia"
-                placeholder="Digite aqui"
-                class="input-materia"
-              />
-              <button type="submit" class="botao-salvar">ADICIONAR</button>
-            </form>
-          </dialog>
+                    <button onclick="closeAddMateriaModal()" class="fechar-modal-adicionar"> 
+                        <i class="bi bi-x"></i>
+                    </button>
+
+                    <div class="titulo-adicionar">
+                        <h1 class="titulo-ad"> Adicionar Matéria </h1>
+                    </div>
+                    <form class="form-adicionar">
+                        <label class="nome-materia">Digite o nome da matéria:</label>
+                        <input type="text" id="nome-materia" placeholder="Digite aqui" class="input-materia">
+                    </form>
+                    
+                    <div class="conteiner-datas">
+                        
+                        <div class="data-inicio">
+                            <form class="form-adicionar">
+                                <label class="titulo-inicio">Data de Inicio:</label>
+                                <input type="date" placeholder="Digite aqui" class="input-materia">
+                            </form>
+                        </div>
+                        <div class="data-fim">
+                            <form class="form-adicionar">
+                                <label class="titulo-fim">Data de Fim:</label>
+                                <input type="date" placeholder="Digite aqui" class="input-materia">
+                            </form>
+                        </div>
+
+                    </div>
+                    <div class="origem-adicionar">
+                        <div class="titulo-origem">
+                            <h1 class="titulo-origem"> Origem: </h1>
+                        </div>
+                        <form class="form-adicionar">
+                            <input type="text" class="input-or" placeholder="Digite aqui" class="input-materia">
+                        </form>
+                    </div>
+
+                    <button type="submit" class="botao-salvar">ADICIONAR</button>
+                    
+                </dialog>
         </li>
       </ul>
     </nav>
