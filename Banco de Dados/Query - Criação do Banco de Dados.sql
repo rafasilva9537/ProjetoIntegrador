@@ -41,7 +41,7 @@ CREATE TABLE Topico(
 	nome VARCHAR(250),
 	-- definir como número em vez de palavra abre a possibilidade de analisar médias e fazer outros cálculos
 	desempenho NUMERIC(3,1) CHECK(desempenho >= 0 and desempenho <= 10),
-	progresso VARCHAR CHECK(progresso IN('não iniciado', 'em andamento', 'finalizado')), -- delimita as três opções
+	progresso VARCHAR DEFAULT 'não iniciado' CHECK(progresso IN('não iniciado', 'em andamento', 'finalizado')), -- delimita as três opções
 	PRIMARY KEY(id_topico),
 	FOREIGN KEY(id_materia) REFERENCES Materia(id_materia) ON DELETE CASCADE
 );
@@ -98,6 +98,9 @@ VALUES (1, 'Tipo de Variáveis', 7.3, 'em andamento'), (2, 'Funções', 8, 'não
 --Cálculo 2
 INSERT INTO Topico(id_materia, nome, desempenho, progresso)
 VALUES (2, 'Derivada Parcial', 9, 'não iniciado');
+-- Linguagem Rust
+INSERT INTO Topico(id_materia, nome, desempenho)
+VALUES (4, 'CPU Pipeline', 9);
 
 
 -- Topico_Data
@@ -105,3 +108,12 @@ VALUES (2, 'Derivada Parcial', 9, 'não iniciado');
 -- Tópicos de Linguagem C e Cálculo 2
 INSERT INTO Topico_Data VALUES(1, '2024-04-23'), (1, '2024-04-24');
 INSERT INTO Topico_Data VALUES(2, '2024-04-25');
+
+--Teste de Update
+--UPDATE Topico
+--SET nome = 'Arrays', progresso = 'não iniciado', desempenho = 10
+--WHERE id_topico = 1 AND id_materia = 1
+--RETURNING *
+
+--SELECT * FROM topico
+--ORDER BY topico.id_materia

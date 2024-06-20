@@ -42,8 +42,8 @@ export const criarTopico = async (req, res) => {
         text: `INSERT INTO Topico(id_materia, nome, desempenho, progresso)  VALUES ($1, $2, $3, $4) RETURNING *`,
         values: [req.body.id_materia, req.body.nome, req.body.desempenho, req.body.progresso]
       }
-      console.log();
       const resultado = await pool.query(queryCriarTopico);
+      console.log("BackEnd Topico Criado: ", resultado.rows[0]);
       res.status(200).json(resultado.rows[0]);
     } catch (error) {
       res.status(500).json({ error: error.message });
@@ -56,16 +56,18 @@ export const atualizarTopico = async (req, res) => {
     try {
       const queryAtualizarTopico = {
         text: `UPDATE Topico
-               SET nome = $1, descricao = $2, id_materia = $3
-               WHERE id_topico = $4
+               SET nome = $1, progresso = $2, desempenho = $3
+               WHERE id_topico = $4 AND id_materia = $5
                RETURNING *`,
         values: [
           req.body.nome,
-          req.body.descricao,
-          req.body.id_materia,
+          req.body.progresso,
+          req.body.desempenho,
           req.body.id_topico,
+          req.body.id_materia
         ],
       };
+      console.log("Body:", queryAtualizarTopico.values);
   
       const resultado = await pool.query(queryAtualizarTopico);
       res.status(200).json(resultado.rows[0]);

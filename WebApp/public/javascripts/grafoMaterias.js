@@ -8,7 +8,6 @@ class Grafo {
     }
 
     criarAresta(noA, noB){
-        //melhorar error handling
         const nosExistem = (this.grafo.has(noA)) && (this.grafo.has(noB));
         if(!nosExistem) {
             console.error("Nós não existem");
@@ -30,7 +29,6 @@ class Grafo {
     }
 
     deletarAresta(noA, noB){
-        //melhorar error handling
         const nosExistem = (this.grafo.has(noA)) && (this.grafo.has(noB));
         if(!nosExistem) {
             console.error("Nós não existem");

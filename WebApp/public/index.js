@@ -397,14 +397,6 @@ async function criaTopicoBackEnd(idMateria){
         console.log(error);
     }
 }
-
-async function obterTopicoDeMateriaBackEnd(){
-    try{
-        const response = await axios.post(`/materias/`)
-    } catch(error){
-        console.log(error);
-    }
-}
 // Contador global para IDs da linha
 let rowIdCounter = 1;
 
@@ -421,8 +413,7 @@ async function addRow() {
     }*/
 
     const materiaId = (titulo.id).slice(7);
-    const topicoAuxiliar = await criaTopicoBackEnd(materiaId);
-    const topico = await obterTopicosBackEnd(topicoAuxiliar.id_materia);
+    const topico = await criaTopicoBackEnd(materiaId);
     console.log("Topico criado:", topico);
 
     let table = document.getElementById("myTable");
@@ -470,6 +461,7 @@ async function addRow() {
 
     cell2.innerHTML = `<input type='text' value='Não iniciado'/>`;
     
+    topico.datas = []
     if (!topico.datas[0]) {
         cell4.innerHTML = `<input type='text' value=''/>`;
     }
@@ -496,30 +488,34 @@ function removeRow(button) {
     document.getElementById("myTable").deleteRow(row.rowIndex);
 }
 
+async function atualizarTopicoBackEnd(topicoAtualizado){
+    try{
+        const response = await axios.put(`/materias/${topicoAtualizado.id_materia}/topicos`, topicoAtualizado);
+        return response.data;
+    } catch(error){
+        console.log(error);
+    }
+}
+
 async function updateRow(button) {
-    aw
+    const idMateria = (titulo.id).slice(7);
+    const row = button.parentNode.parentNode;
+    const idTopico = row.id;
 
-    let row = button.parentNode.parentNode;
-    console.log(row.id)
-    console.log(row.childNodes[0].childNodes[0].value);
-    console.log(row.childNodes[1].childNodes[0].value);
-    console.log(row.childNodes[3].childNodes[0].value);
+    const novoNome = row.childNodes[0].childNodes[0].value;
+    const novoProgresso = row.childNodes[1].childNodes[0].value;
+    const novaData = row.childNodes[3].childNodes[0].value; //falta implementar
 
-    if (!topico.nome){
-        cell1.innerHTML = `<input type='text''/>`;
-    }
-    else{
-        cell1.innerHTML = `<input type='text' value='${topico.nome}'/>`;
+    const topicoAtualizado = {
+        nome: novoNome,
+        progresso: novoProgresso,
+        desempenho: 10,
+        id_topico: idTopico,
+        id_materia: idMateria
     }
 
-    cell2.innerHTML = `<input type='text' value='Não iniciado'/>`;
-    
-    if (!topico.datas[0]) {
-        cell4.innerHTML = `<input type='text' value=''/>`;
-    }
-    else {
-        cell4.innerHTML = `<input type='text' value='${topico.datas[0]}'/>`
-    }
+    await atualizarTopicoBackEnd(topicoAtualizado);
+    console.log(topicoAtualizado);
 }
 
 // Função para atualizar classificação por estrelas
