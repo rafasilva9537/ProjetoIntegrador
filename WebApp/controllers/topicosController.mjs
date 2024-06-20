@@ -82,9 +82,11 @@ export const deletarTopico = async (req, res) => {
   try {
     const queryDeletarTopico = {
       text: `DELETE FROM Topico WHERE id_topico = $1 AND id_materia = $2 RETURNING *`,
-      values: [req.body.id_topico, req.body.id_materia]
+      values: [req.body.id_topico, req.params.id]
     }
 
+    console.log("Deletando tópico ...");
+    console.log(queryDeletarTopico.values)
     const resultado = await pool.query(queryDeletarTopico);
     res.status(200).json(resultado.rows[0]);
   } catch (error) {
@@ -107,6 +109,6 @@ export const inserirDataEmTopico = async(req, res) => {
 
     await pool.query(queryInserirData);
   } catch {
-    res.status(500).json({ error: error.message })
+    res.status(500).json({ error: error.message });
   }
 }

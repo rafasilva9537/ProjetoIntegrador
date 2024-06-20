@@ -149,7 +149,7 @@ function construirGrafo(listaArestas){
 
 async function obterMateriasBackEnd(){
     try{
-        const response = await axios.get("conexoes-materias");
+        const response = await axios.get("conexoes-materias/dadosGrafo");
         return response.data;
     } catch(error){
         console.log(error);
@@ -205,6 +205,8 @@ async function obterMateriasBackEnd(){
 ]*/
 
 const listaMaterias = await obterMateriasBackEnd();
+console.log("Testando");
+console.log(listaMaterias);
 
 const arestas = criarListaDeArestas(listaMaterias);
 export const grafoMaterias = construirGrafo(arestas);

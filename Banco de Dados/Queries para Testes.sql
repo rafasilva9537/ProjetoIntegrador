@@ -16,7 +16,7 @@ INNER JOIN Topico
 INNER JOIN Materia
 	ON Materia.id_materia = Topico.id_materia
 
-SELECT Topico_Data.id_topico, ARRAY_AGG(Topico_Data.data), Topico.nome, Topico.desempenho, Topico.progresso, Materia.nome
+SELECT Topico_Data.id_topico, ARRAY_AGG(Topico_Data.data) AS datas, Topico.nome, Topico.desempenho, Topico.progresso, Materia.nome
 FROM Topico_Data
 INNER JOIN Topico
 	ON Topico_Data.id_topico = Topico.id_topico

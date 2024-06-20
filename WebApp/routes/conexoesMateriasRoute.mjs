@@ -8,17 +8,10 @@ const __dirname = path.dirname(__filename);
 
 const router = express.Router();
 
-router.get('/', conexoesMateriasController.visualizarConexoes);
-
-
-//router.use(express.json());
-//router.use(express.urlencoded({ extended: false }));
-//router.use(express.static(path.join(__dirname, '../public'), { index: 'grafoMaterias.html'}));
-
-router.use(express.json());
-router.use(express.urlencoded({ extended: false }));
-// app.use(cookieParser());
-router.use(express.static(path.join(__dirname, 'public')));
+router.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '../public/grafoMaterias.html'));
+});
+router.get('/dadosGrafo', conexoesMateriasController.visualizarConexoes);
 
 
 export default router;

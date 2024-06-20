@@ -470,18 +470,19 @@ function editCell(cell) {
 
 // Função para remover linha
 async function removeRow(button) {
+    const row = button.parentNode.parentNode;
+    console.log("Id botão:", row.id);
+    const idTopico = row.id;
+    const idMateria = (titulo.id).slice(7);
+
     try{
         await axios.delete(`/materias/${idMateria}/topicos`,
-            {
-
-            }
+            { data: { id_topico: idTopico } }
         );
     } catch(error){
-        console.log(error)
+        console.log(error);
     }
 
-    const row = button.parentNode.parentNode;
-    console.log(row.id)
     document.getElementById("myTable").deleteRow(row.rowIndex);
 }
 

@@ -21,7 +21,8 @@ export const visualizarConexoes = async(req, res, next) => {
       `
       const resultado = await pool.query(queryAgruparMateriasPorTag);
 
-      res.status(200).json(resultado.rows).sendFile(path.join(__dirname, '/index.html'));
+      res.status(200).json(resultado.rows);
+      //console.log(__dirname);
 
       //agora, em vez de res.json(), será usado axios?
       } 
