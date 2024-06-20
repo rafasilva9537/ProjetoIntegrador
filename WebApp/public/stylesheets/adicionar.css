@@ -1,9 +1,9 @@
 .adicionar_mat{
-    height: 250px;
+    height: 550px;
     width: 500px;
     border-radius: 10%;
     left: 600px;
-    top: 220px;
+    top: 150px;
 }
 
 .botao-salvar {
@@ -13,7 +13,7 @@
     background-color: rgb(104, 0, 201);
     color: white;
     padding-left: 90px;
-    margin-top: 20px;
+    margin-top: 90px;
     margin-left: 130px;
     border: none;
     border-radius: 30px;
@@ -80,3 +80,38 @@
     margin-left: 32%;
 }
 
+.conteiner-datas {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
+.data-inicio, .data-fim{
+    border: 2px solid black;
+    padding: 20px;
+    display: grid;
+}
+
+.titulo-inicio, .titulo-fim{
+    margin-left: 25%;
+    font-weight: bold;
+}
+
+.origem-adicionar{
+    display: flex;
+    justify-content: space-between;
+    margin: 40px 0;
+}
+
+.titulo-origem{
+    font-weight: bold;
+    margin-left: 20%;
+}
+
+.input-or{
+    border-radius: 5px;
+    margin-right: 60px;
+    margin-top: 3px;
+    font-size: 95%;
+    padding: 5px;
+}
