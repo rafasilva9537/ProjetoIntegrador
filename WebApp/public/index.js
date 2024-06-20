@@ -326,7 +326,14 @@ async function createTable() {
 
     const table = document.getElementById("myTable");
     //apagar tabela para chamar outra, senão dados da tabela antiga se mesclam com dados da nova
-    table.innerHTML = "";
+    table.innerHTML = `
+              <tr>
+              <th>Tópico</th>
+              <th>Progresso</th>
+              <th>Desempenho</th>
+              <th>Data</th>
+              </tr>
+    `;
 
     for (const topico of dadosTopicos) {
         let row = table.insertRow(-1); // Insere no final da tabela
@@ -378,13 +385,18 @@ async function createTable() {
             cell4.innerHTML = `<input type='text' value=''/>`;
         }
         else {
-            cell4.innerHTML = `<input type='text' value='${topico.datas[0]}'/>`
+            topico.datas[0] = new Date(topico.datas[0]);
+            const dia = topico.datas[0].getDay();
+            const mes = topico.datas[0].getMonth();
+            const ano = topico.datas[0].getFullYear();
+
+            cell4.innerHTML = `<input type='text' value='${dia.toString().padStart(2, 0)}/${mes.toString().padStart(2, 0)}/${ano.toString().padStart(2, 0)}'/>`;
         }
 
-        cell1.childNodes[0].classList.add("celula-topico");
-        cell2.childNodes[0].classList.add("celula-topico");
-        //cell3.childNodes[0].classList.add("celula-topico");
-        cell4.childNodes[0].classList.add("celula-topico");
+        cell1.childNodes[0].classList.add("input-topico");
+        cell2.childNodes[0].classList.add("input-topico");
+        cell4.childNodes[0].classList.add("input-topico");
+        cell4.childNodes[0].classList.add("data-topico");
         updateCell.childNodes[0].classList.add("botao-topico");
         removeCell.childNodes[0].classList.add("botao-topico");
     }
@@ -463,10 +475,9 @@ async function addRow() {
     cell1.innerHTML = `<input type='text''/>`
     cell2.innerHTML = `<input type='text' value='não iniciado'/>`;cell4.innerHTML = `<input type='text' value=''/>`;
 
-    cell1.childNodes[0].classList.add("celula-topico");
-    cell2.childNodes[0].classList.add("celula-topico");
-    //cell3.childNodes[0].classList.add("celula-topico");
-    cell4.childNodes[0].classList.add("celula-topico");
+    cell1.childNodes[0].classList.add("input-topico");
+    cell2.childNodes[0].classList.add("input-topico");
+    cell4.childNodes[0].classList.add("input-topico");
     updateCell.childNodes[0].classList.add("botao-topico");
     removeCell.childNodes[0].classList.add("botao-topico");
 }
@@ -516,12 +527,12 @@ async function updateRow(button) {
 
     const novoNome = row.childNodes[0].childNodes[0].value;
     const novoProgresso = row.childNodes[1].childNodes[0].value;
-    const novaData = row.childNodes[3].childNodes[0].value; //falta implementar
+    const novaData = row.childNodes[3].childNodes[0].value;
 
     const topicoAtualizado = {
         nome: novoNome,
         progresso: novoProgresso,
-        desempenho: 10,
+        desempenho: 0,
         id_topico: idTopico,
         id_materia: idMateria
     }
