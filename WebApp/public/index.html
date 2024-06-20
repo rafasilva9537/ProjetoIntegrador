@@ -63,10 +63,10 @@
         </li>
 
         <li class="item-menu">
-          <a href="grafoMaterias.html">
+          <a href="grafoMaterias.html" class="pentagono">
             <button class="botão">
               <span class="icone">
-                <i class="bi bi-person-circle"></i>
+                <i class="bi bi-pentagon"></i>
               </span>
               <span class="texto"> GRAFO </span>
             </button>
@@ -196,23 +196,22 @@
           <div onclick="openinfsdia()" class="dias"></div>
         </dialog>
 
-        <dialog id="popup" class="popup">
-          <div class="fundo-infs">
-            <p id="infoDia"></p>
-            <button id="salvar-Popup">
-              <i class="bi bi-hand-thumbs-up-fill"></i>
-            </button>
-            <button id="cancelar-Popup">
-              <i class="bi bi-hand-thumbs-down-fill"></i>
-            </button>
-          </div>
-          <div class="infodetalhes">
-            <p>Derivada direcional</p>
-          </div>
-          <div class="infodetalhes">
-            <p>Arvores AVL</p>
-          </div>
-        </dialog>
+         </dialog>
+
+            <dialog id="popup" class="popup">
+
+                <div class="fundo-infs">
+                    <p id="infoDia"></p>
+                    <button id="salvar-Popup"> <i class="bi bi-hand-thumbs-up-fill"></i> </button>
+                    <button id="cancelar-Popup"> <i class="bi bi-hand-thumbs-down-fill"></i> </button>
+                </div>
+                <div class="materia-dia">
+                    <span class="materia-do-dia">
+                        Título
+                    </span>
+                </div>
+
+            </dialog>
       </section>
 
       <button onclick="openregistroModal()" class="abrir-registro">
