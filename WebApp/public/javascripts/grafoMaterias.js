@@ -44,11 +44,11 @@ class Grafo {
             return;
         }
 
-        let indexA = this.grafo.get(noA).indexOf(noA);
-        this.grafo.get(noA).splice(indexA, 1);
+        let indexA = this.grafo.get(noB).indexOf(noA);
+        this.grafo.get(noB).splice(indexA, 1);
 
-        let indexB = this.grafo.get(noB).indexOf(noB);
-        this.grafo.get(noB).splice(indexB, 1);
+        let indexB = this.grafo.get(noA).indexOf(noB);
+        this.grafo.get(noA).splice(indexB, 1);
     }
 
     deletarNo(no){
